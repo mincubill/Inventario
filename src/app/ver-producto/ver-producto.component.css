@@ -1,0 +1,30 @@
+table
+{
+    width: 80%;
+    float: right;
+}
+
+.left-menu
+{
+    width: 15%;
+    float: left;
+}
+
+.left-menu a 
+{
+    text-decoration: none;
+}
+
+.left-menu li
+{
+    list-style: none;
+    text-align: center;
+    padding: 10px 0px 10px 0px;
+    background-color: #E2E2E2; 
+    color: black;
+}
+
+.left-menu li:hover
+{
+    background-color: #CFCFCF;
+}
