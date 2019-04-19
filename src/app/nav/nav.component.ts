@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor() { }
+  ///Nombre del usuario que debe llegar desde la base de datos
+  ///Cuando el usuario este logeado
+  NombreUsuario = undefined;
+  constructor() 
+  {
+  }
 
-  ngOnInit() {
+  ngOnInit() 
+  {
   }
 
 }

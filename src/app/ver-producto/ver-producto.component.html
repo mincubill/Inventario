@@ -10,38 +10,17 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Balon Futbol</td>
-      <td>10</td>
-      <td>7</td>
-      <td>3</td>
+    <!--Se utiliza la directiva ngFor para recorrer la lista de productos que llegan desde la base de datos-->
+    <tr *ngFor="let Producto of Productos">
+      <th scope="row">{{Producto.id}}</th>
+      <td>{{Producto.nombre}}</td>
+      <td>{{Producto.total}}</td>
+      <td>{{Producto.disponible}}</td>
+      <td>{{Producto.prestado}}</td>
       <td>
-        <a>Editar</a> &nbsp;
-        <a>Quitar</a>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Balon Basketbol</td>
-      <td>8</td>
-      <td>7</td>
-      <td>1</td>
-      <td>
-        <a>Editar</a> &nbsp;
-        <a>Quitar</a>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Raqueta ping-pong</td>
-      <td>20</td>
-      <td>12</td>
-      <td>8</td>
-      <td>
-        <a>Editar</a> &nbsp;
-        <a>Quitar</a>
-      </td>
+          <a><i class="fas fa-edit"></i></a> &nbsp;
+          <a><i class="fas fa-trash-alt"></i></a>
+        </td>
     </tr>
   </tbody>
 </table>
