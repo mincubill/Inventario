@@ -1,6 +1,7 @@
 <div class="left-menu">
   <ul>
-    <a href="#"><li>Ingresar</li></a>
+    <br>
+    <a routerLink="/AgregarProducto"><li>Ingresar</li></a>
     <a href="#"><li>Movimientos</li></a>
   </ul>
 </div>
@@ -24,8 +25,8 @@
       <td>{{Producto.disponible}}</td>
       <td>{{Producto.prestado}}</td>
       <td>
-          <a><i class="fas fa-edit"></i></a> &nbsp;
-          <a><i class="fas fa-trash-alt"></i></a>
+          <a><i class="fas fa-edit" (click)="EditarProducto(Producto.id)"></i></a> &nbsp;
+          <a><i class="fas fa-trash-alt" (click)="QuitarProducto(Producto.id)"></i></a>
         </td>
     </tr>
   </tbody>
