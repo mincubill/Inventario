@@ -1,10 +1,27 @@
 <div class="left-menu">
-  <ul>
-    <br>
-    <a routerLink="/AgregarProducto"><li>Ingresar</li></a>
-    <a href="#"><li>Movimientos</li></a>
-  </ul>
+    <a routerLink="/AgregarProducto" class="bg-light list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-start align-items-center">
+            <span class="menu-collapsed">Ingresar Producto</span>    
+        </div>
+    </a>
+    <!-- Ver como dejar abierto por defecto -->
+    <a href="#submenu1" data-toggle="collapse" aria-expanded="false" class="bg-light list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-start align-items-center">
+            <span class="menu-collapsed">Movimientos</span>
+            <span class="submenu-icon ml-auto"></span>
+        </div>
+    </a>
+    <div id='submenu1' class="collapse sidebar-submenu">
+        <a routerLink="/IngresarStock" class="list-group-item list-group-item-action bg-ligt text-black">
+            <span class="menu-collapsed">Ingresar stock</span>
+        </a>
+        <a routerLink="/SacarStock" class="list-group-item list-group-item-action bg-ligt text-black">
+            <span class="menu-collapsed">Sacar stock</span>
+        </a>
+    </div>
 </div>
+
+<!-- Tabla con productos -->
 <table class="table table-hover">
   <thead>
     <tr>
@@ -31,3 +48,8 @@
     </tr>
   </tbody>
 </table>
+
+
+
+
+
