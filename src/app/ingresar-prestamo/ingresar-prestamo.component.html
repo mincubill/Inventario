@@ -1,9 +1,12 @@
-<form [formGroup] >
+<form [formGroup] (ngSubmit)="AgregarPrestamo()">
     <div class='form-group col-sm-6'> 
-        <label>RUT: </label>
-        <input type="text"  class="form-control" required>
-        <label>Producto:</label>
-        <input type="text"  class="form-control">
-        <input type="submit" class="btn btn-primary" value="Guardar"> 
+        <label for="rut">Rut:</label>
+        <input type="text" id="rut" class="form-control" required>
+        <label for="producto"></label>
+        <select name="producto" id="producto">
+            <option *ngFor="let producto of Productos" value={{producto.id}}>{{producto.nombre}}</option>
+        </select>
+        <br/>
+        <input type="submit" class="btn btn-primary" value="Guardar">
     </div>
 </form>

@@ -12,6 +12,7 @@ export class VerProductoComponent implements OnInit {
   ///Con una estructura parecida
   Productos = [];
   ProductoTemp = {};
+  
   constructor(private data : DataManagerService) 
   {
 
@@ -25,16 +26,16 @@ export class VerProductoComponent implements OnInit {
   {
     this.Productos = this.data.ObtenerProductos();
   }
+
   EditarProducto(id)
   {
     this.ProductoTemp = this.data.ObtenerProducto(id);
     console.log(this.ProductoTemp);
   }
+
   QuitarProducto(id)
   {
     this.data.QuitarProducto(id);
     this.CargarProductos();
   }
-
-
 }
