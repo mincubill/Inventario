@@ -9,15 +9,17 @@ import { FormBuilder, NgControlStatus, FormGroup } from '@angular/forms';
 })
 export class IngresarPrestamoComponent implements OnInit {
 
-  /*Debjo Crear el formulario para ingresar prestamos utilizando como referencia
-    el formulario de agregar producto para de esta manera tomar el rut y tomar 
-    la id del producto seleccionado en el select*/
+  
   Productos = [];
-  ProductoTemp = {};
-  ProductoForm: FormGroup;
+  PrestamoForm: FormGroup;
   constructor(private data : DataManagerService, private formBuilder: FormBuilder) 
   {
-
+    this.PrestamoForm = this.formBuilder.group(
+      {
+        rut: [''],
+        producto: ['']
+      }
+    );
   }
 
   ngOnInit() {
@@ -31,5 +33,15 @@ export class IngresarPrestamoComponent implements OnInit {
 
   AgregarPrestamo()
   {
+    // this.data.AgregarPrestamo(
+    // {
+    //   rut: this.PrestamoForm.controls.rut.value,
+    //   producto: this.PrestamoForm.controls.producto.value
+    // });
+    console.log(
+      {
+        rut: this.PrestamoForm.controls.rut.value,
+        producto: this.PrestamoForm.controls.producto.value
+      });
   }
 }

@@ -8,7 +8,7 @@ export class DataManagerService {
   Productos = [{id:1, nombre:'Balon Futbol', total:10, disponible:7, prestado:3},
               {id:2, nombre:'Balon Basketbol', total:8, disponible:7, prestado:1},
               {id:3, nombre:'Raqueta Ping-Pong', total:20, disponible:12, prestado:8}];
-  ProductoTemp = {};
+  Prestamos = [];
   constructor() { }
 
   ObtenerProductos()
@@ -76,5 +76,10 @@ export class DataManagerService {
     })
     let index = this.Productos.indexOf(temp[0]);
     this.Productos.splice(index, 1);
+  }
+
+  AgregarPrestamo (Prestamo)
+  {
+    this.Prestamos.push(Prestamo);
   }
 }
