@@ -33,15 +33,10 @@ export class IngresarPrestamoComponent implements OnInit {
 
   AgregarPrestamo()
   {
-    // this.data.AgregarPrestamo(
-    // {
-    //   rut: this.PrestamoForm.controls.rut.value,
-    //   producto: this.PrestamoForm.controls.producto.value
-    // });
-    console.log(
-      {
-        rut: this.PrestamoForm.controls.rut.value,
-        producto: this.PrestamoForm.controls.producto.value
-      });
+    this.data.AgregarPrestamo(
+    {
+      rut: this.PrestamoForm.controls.rut.value,
+      producto: this.PrestamoForm.controls.producto.value
+    });
   }
 }
