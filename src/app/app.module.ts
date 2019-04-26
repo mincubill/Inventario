@@ -14,6 +14,7 @@ import { IngresarPrestamoComponent } from './ingresar-prestamo/ingresar-prestamo
 import { IngresarDevolucionComponent } from './ingresar-devolucion/ingresar-devolucion.component';
 import { LoginComponent } from './login/login.component';
 import { VerPrestamoComponent } from './ver-prestamo/ver-prestamo.component';
+import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { VerPrestamoComponent } from './ver-prestamo/ver-prestamo.component';
     IngresarPrestamoComponent,
     IngresarDevolucionComponent,
     LoginComponent,
-    VerPrestamoComponent
+    VerPrestamoComponent,
+    PerfilUsuarioComponent
   ],
   imports: [
     BrowserModule,
