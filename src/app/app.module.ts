@@ -13,6 +13,7 @@ import { SacarStockComponent } from './sacar-stock/sacar-stock.component';
 import { IngresarPrestamoComponent } from './ingresar-prestamo/ingresar-prestamo.component';
 import { IngresarDevolucionComponent } from './ingresar-devolucion/ingresar-devolucion.component';
 import { LoginComponent } from './login/login.component';
+import { VerPrestamoComponent } from './ver-prestamo/ver-prestamo.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { LoginComponent } from './login/login.component';
     SacarStockComponent,
     IngresarPrestamoComponent,
     IngresarDevolucionComponent,
-    LoginComponent
+    LoginComponent,
+    VerPrestamoComponent
   ],
   imports: [
     BrowserModule,

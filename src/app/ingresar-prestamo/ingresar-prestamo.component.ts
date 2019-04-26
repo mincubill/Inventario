@@ -35,8 +35,11 @@ export class IngresarPrestamoComponent implements OnInit {
   {
     this.data.AgregarPrestamo(
     {
+      id: 1,
       rut: this.PrestamoForm.controls.rut.value,
-      producto: this.PrestamoForm.controls.producto.value
+      producto: this.PrestamoForm.controls.producto.value,
+      cantidad: 1,
     });
+    console.log(this.data.ObtenerPrestamos())
   }
 }

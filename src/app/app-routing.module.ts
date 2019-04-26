@@ -7,6 +7,7 @@ import { SacarStockComponent } from './sacar-stock/sacar-stock.component';
 import { IngresarPrestamoComponent } from './ingresar-prestamo/ingresar-prestamo.component'; 
 import { IngresarDevolucionComponent } from './ingresar-devolucion/ingresar-devolucion.component'; 
 import { LoginComponent } from './login/login.component';
+import { VerPrestamoComponent} from './ver-prestamo/ver-prestamo.component';
 
 const routes: Routes = [
   {path: 'AgregarProducto', component:AgregarProductoComponent},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'IngresarPrestamo', component:IngresarPrestamoComponent},
   {path: 'IngresarDevolucion', component:IngresarDevolucionComponent},
   {path: 'Login', component:LoginComponent},
+  {path: 'VerPrestamo', component:VerPrestamoComponent},
 ];
 
 @NgModule({

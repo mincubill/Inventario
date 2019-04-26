@@ -82,4 +82,9 @@ export class DataManagerService {
   {
     this.Prestamos.push(Prestamo);
   }
+
+  ObtenerPrestamos()
+  {
+    return this.Prestamos;
+  }
 }
