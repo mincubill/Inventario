@@ -8,7 +8,7 @@ import { FormBuilder, NgControlStatus, FormGroup } from '@angular/forms';
   styleUrls: ['./agregar-producto.component.css']
 })
 export class AgregarProductoComponent implements OnInit {
-
+  ///Objeto temporal para almacenar los datos de los txt que estan en 
   ProductoTemp = 
   {
     nombre: "",

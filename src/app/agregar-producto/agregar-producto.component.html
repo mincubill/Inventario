@@ -1,14 +1,22 @@
 <form [formGroup]="ProductoForm" (ngSubmit)="AgregarProducto()">
   <div class="form-group col-sm-6">
-    <label for="Nombre">Nombre:</label>
-    <input type="text" formControlName="nombre" class="form-control" id="Nombre">
-    <label for="Descripcion">Descripción:</label>
-    <input type="text" formControlName="descripcion" class="form-control" id="Descripcion">
-    <label for="Categoria">Categoría:</label>
-    <input type="text" formControlName="categoria" class="form-control" id="Categoria">
-    <label for="Cantidad">Cantidad:</label>
-    <input type="number" formControlName="total" class="form-control" id="Cantidad">
-    <br/>
+    <label for="nombre">
+      Nombre:
+    </label>
+    <input type="text" formControlName="nombre" class="form-control" id="nombre">
+    <label for="descripcion">
+      Descripción:
+    </label>
+    <input type="text" formControlName="descripcion" class="form-control" id="descripcion">
+    <label for="categoria">
+      Categoría:
+    </label>
+    <input type="text" formControlName="categoria" class="form-control" id="categoria">
+    <label for="cantidad">
+      Cantidad:
+    </label>
+    <input type="number" formControlName="total" class="form-control" id="cantidad">
+    <br>
     <input type="submit" class="btn btn-primary" value="Guardar">
   </div>
 </form>

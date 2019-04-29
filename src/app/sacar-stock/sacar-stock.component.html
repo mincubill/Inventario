@@ -1,15 +1,25 @@
 <form [formGroup]>
+  <!--Utilizar directiva ngIf para traer los productos y editar su stcok-->
     <div class='form-group col-sm-6'>
-      
-      <label>Producto:</label>
+      <label>
+        Producto:
+      </label>
       <select name="" id="" class="form-control">
-        <option value="">Balon de futbol</option>
-        <option value="">Balon de Basketbol</option>
-        <option value="">Raqueta ping-pong</option>
+        <option value="">
+          Balon de futbol
+        </option>
+        <option value="">
+          Balon de Basketbol
+        </option>
+        <option value="">
+          Raqueta ping-pong
+        </option>
       </select>
-      <label for="">Cantidad a dar de baja:</label>
+      <label for="">
+        Cantidad a dar de baja:
+      </label>
       <input type="number"  class="form-control">
-      
+      <br>
       <input type="submit" class="btn btn-primary" value="Guardar"> 
     </div>
   </form>

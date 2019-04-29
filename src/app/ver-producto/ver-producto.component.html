@@ -1,55 +1,100 @@
+<!--Menu posicionado a la izquierda para el manejo de datos relacionado a productos-->
 <div class="left-menu">
-    <a routerLink="/AgregarProducto" class="bg-light list-group-item list-group-item-action">
-        <div class="d-flex w-100 justify-content-start align-items-center">
-            <span class="menu-collapsed">Ingresar Producto</span>    
-        </div>
-    </a>
-    <!-- Ver como dejar abierto por defecto -->
-    <a href="#submenu1" data-toggle="collapse" aria-expanded="false" class="bg-light list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-start align-items-center">
-            <span class="menu-collapsed">Movimientos</span>
-            <span class="submenu-icon ml-auto"></span>
-        </div>
-    </a>
-    <div id='submenu1' class="collapse sidebar-submenu">
-        <a routerLink="/IngresarStock" class="list-group-item list-group-item-action bg-ligt text-black">
-            <span class="menu-collapsed">Ingresar stock</span>
-        </a>
-        <a routerLink="/SacarStock" class="list-group-item list-group-item-action bg-ligt text-black">
-            <span class="menu-collapsed">Sacar stock</span>
-        </a>
+  <!--
+    Directiva routerLink que redirecciona a la pagina para agregar productos
+  -->
+  <a routerLink="/AgregarProducto" class="bg-light list-group-item list-group-item-action">
+    <div class="d-flex w-100 justify-content-start align-items-center">
+      <span class="menu-collapsed">
+        Ingresar Producto
+      </span>    
     </div>
+  </a>
+  <!-- Ver como dejar abierto por defecto -->
+  <!--
+    Boton que despliega un sub-menu que te permite modificar los datos de los productos (Su stock)
+  -->
+  <a href="#submenu1" data-toggle="collapse" aria-expanded="false" 
+    class="bg-light list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-start align-items-center">
+      <span class="menu-collapsed">Movimientos</span>
+      <span class="submenu-icon ml-auto"></span>
+    </div>
+  </a>
+  <div id="submenu1" class="collapse sidebar-submenu">
+    <!--
+      Directiva routerLink que redirecciona a la pagina para ingresar stock de un producto
+    -->
+    <a routerLink="/IngresarStock" class="list-group-item list-group-item-action bg-ligt text-black">
+      <span class="menu-collapsed">
+        Ingresar stock
+      </span>
+    </a>
+    <!--
+      Directiva routerLink que redirecciona a la pagina para sacar stock de un producto
+    -->
+    <a routerLink="/SacarStock" class="list-group-item list-group-item-action bg-ligt text-black">
+      <span class="menu-collapsed">
+        Sacar stock
+      </span>
+    </a>
+  </div>
 </div>
 
 <!-- Tabla con productos -->
 <table class="table table-hover">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Cantidad total</th>
-      <th scope="col">Cantidad disponible</th>
-      <th scope="col">Cantidad prestados</th>
-      <th scope="col">Acciones</th>
+      <th scope="col">
+        #
+      </th>
+      <th scope="col">
+        Nombre
+      </th>
+      <th scope="col">
+        Cantidad total
+      </th>
+      <th scope="col">
+        Cantidad disponible
+      </th>
+      <th scope="col">
+        Cantidad prestados
+      </th>
+      <th scope="col">
+        Acciones
+      </th>
     </tr>
   </thead>
   <tbody>
-    <!--Se utiliza la directiva ngFor para recorrer la lista de productos que llegan desde la base de datos-->
+    <!--
+      Se utiliza la directiva ngFor para recorrer la lista de productos que llegan 
+      desde la base de datos
+    -->
     <tr *ngFor="let Producto of Productos">
-      <th scope="row">{{Producto.id}}</th>
-      <td>{{Producto.nombre}}</td>
-      <td>{{Producto.total}}</td>
-      <td>{{Producto.disponible}}</td>
-      <td>{{Producto.prestado}}</td>
+      <th scope="row">
+        {{Producto.id}}
+      </th>
       <td>
-          <a><i class="fas fa-edit" (click)="EditarProducto(Producto.id)"></i></a> &nbsp;
-          <a><i class="fas fa-trash-alt" (click)="QuitarProducto(Producto.id)"></i></a>
-        </td>
+        {{Producto.nombre}}
+      </td>
+      <td>
+        {{Producto.total}}
+      </td>
+      <td>
+        {{Producto.disponible}}
+      </td>
+      <td>
+        {{Producto.prestado}}
+      </td>
+      <td>
+        <a>
+          <i class="fas fa-edit" (click)="EditarProducto(Producto.id)"></i>
+        </a> 
+        &nbsp;
+        <a>
+          <i class="fas fa-trash-alt" (click)="QuitarProducto(Producto.id)"></i>
+        </a>
+      </td>
     </tr>
   </tbody>
 </table>
-
-
-
-
-

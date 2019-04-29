@@ -1,19 +1,44 @@
-<!-- Tabla con productos -->
 <table class="table table-hover">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Rut</th>
-      <th scope="col">Producto</th>
-      <th scope="col">Cantidad</th>
+      <th scope="col">
+        #
+      </th>
+      <th scope="col">
+        Rut
+      </th>
+      <th scope="col">
+        Producto
+      </th>
+      <th scope="col">
+        Cantidad
+      </th>
     </tr>
   </thead>
   <tbody>
+    <!--
+      Directiva de angular (ngFor) que recorre la lista de prestamos y la despliega
+    -->
     <tr *ngFor="let Prestamo of Prestamos">
-      <th scope="row">{{Prestamo.id}}</th>
-      <th>{{Prestamo.rut}}</th>
-      <th>{{Prestamo.producto}}</th>
-      <th>{{Prestamo.cantidad}}</th>
+      <!--Muestra la id del prestamo-->
+      <th scope="row">
+        {{Prestamo.id}}
+      </th>
+
+      <!--Muestra el rut de la persona asociado al prestamo ( El estudiante que solicito el material )-->
+      <th>
+        {{Prestamo.rut}}
+      </th>
+
+      <!--Muestra el producto que fue prestado-->
+      <th>
+        {{Prestamo.producto}}
+      </th>
+
+      <!--Muestra la cantidad de material prestado-->
+      <th>
+        {{Prestamo.cantidad}}
+      </th>
     </tr>
   </tbody>
 </table>

@@ -40,6 +40,5 @@ export class IngresarPrestamoComponent implements OnInit {
       producto: this.PrestamoForm.controls.producto.value,
       cantidad: 1,
     });
-    console.log(this.data.ObtenerPrestamos())
   }
 }
