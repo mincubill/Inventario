@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataManagerService } from '../data-manager.service'
+import { FormBuilder, NgControlStatus, FormGroup } from '@angular/forms';  
 
 @Component({
   selector: 'app-ingresar-devolucion',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IngresarDevolucionComponent implements OnInit {
 
-  constructor() { }
+  Productos = [];
+  IngresarDevolucionForm : FormGroup;
+
+  constructor(private data : DataManagerService, private formBuilder: FormBuilder) { 
+    this.IngresarDevolucionForm = formBuilder.group(
+      {
+        rut: [''],
+        producto: ['']
+      }
+    );
+  }
 
   ngOnInit() {
+    this.CargarProductos();
+  }
+
+  CargarProductos() {
+    this.Productos = this.data.ObtenerProductos();
   }
 
 }

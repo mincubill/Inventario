@@ -12,7 +12,9 @@
                 Se utiliza una directiva de angular (ngFor) para cargar los productos en un 
                 select y de esta manera para que el usuario los pueda ingresar
             -->
-            <option *ngFor="let producto of Productos" value={{producto.id}}>{{producto.nombre}}</option>
+            <option *ngFor="let producto of Productos" value={{producto.id}}>
+                {{producto.nombre}}
+            </option>
         </select>
         <br/>
         <input type="submit" class="btn btn-primary" value="Guardar">
