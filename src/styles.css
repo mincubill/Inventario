@@ -5,27 +5,20 @@
 }
 
 body {
-    font-family: 'Myriad';
-    font-size: 1em;
-    background-color: #00263e;
+    background-color: #fbfbfb;
     display: block;
     position: relative;
-    color: #818990;
 }
 
 body::after {
-    content: '';
+    content: "";
     opacity: 0.9;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -1;  
+    z-index: -1;
 }
 
-/*
-    Nota mental, el css base no se aplica al que esta en el main.
-    Segun yo, es porque el contenido se renderea despues entonces los 
-    estilos css principal no se vuelven a aplicar.
-*/
+html {
+    font-family: 'Myriad';
+    font-size: 1em;
+    min-height: 100%;
+}
+

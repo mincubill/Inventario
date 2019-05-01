@@ -2,26 +2,15 @@
     Colores institucionales que mas se usaran
     amarillo: #ffb81c
     azul: #00263e
-    lomo: #818990
+    plomo: #818990
 */
-.footer {
-    margin-top: 10px;
-    clear: both;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
 
-.footer i {
-    font-size: 40px;
+.footer {
+    clear: both;
+    text-align: center;
+    padding: 15px;
 }
 
 .main {
-    margin: 20px;
     padding: 10px;
-}
-
-.RedesSociales {
-    width: 16%;
-    float: right;
 }
