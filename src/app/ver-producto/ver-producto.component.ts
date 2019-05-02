@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataManagerService } from '../data-manager.service'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ver-producto',
@@ -13,7 +14,7 @@ export class VerProductoComponent implements OnInit {
   Productos = [];
   ProductoTemp = {};
   
-  constructor(private data : DataManagerService) 
+  constructor(private data : DataManagerService, private router:Router) 
   {
 
   }
@@ -30,7 +31,7 @@ export class VerProductoComponent implements OnInit {
   EditarProducto(id)
   {
     this.ProductoTemp = this.data.ObtenerProducto(id);
-    console.log(this.ProductoTemp);
+    this.router.navigate(["AgregarProducto"]);
   }
 
   QuitarProducto(id)

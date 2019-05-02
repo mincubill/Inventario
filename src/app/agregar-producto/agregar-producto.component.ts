@@ -15,10 +15,10 @@ export class AgregarProductoComponent implements OnInit {
     categoria: "",
     total: 0,
   }
+  temp = {}
 
   ProductoForm: FormGroup;
-  constructor ( private data : DataManagerService, private formBuilder: FormBuilder ) 
-  { 
+  constructor ( private data : DataManagerService, private formBuilder: FormBuilder )   { 
     this.ProductoForm = this.formBuilder.group ({
         nombre: [''],
         descripcion: [''],
@@ -26,6 +26,8 @@ export class AgregarProductoComponent implements OnInit {
         total: [''],
       }
     )
+    this.temp = this.data.tempProducto;
+    console.log(this.temp);
   }
 
   ngOnInit() {

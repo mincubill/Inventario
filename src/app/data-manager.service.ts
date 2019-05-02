@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ngDevModeResetPerfCounters } from '@angular/core/src/render3/ng_dev_mode';
+import { element } from '@angular/core/src/render3';
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +11,8 @@ export class DataManagerService {
               {id:2, nombre:'Balon Basketbol', total:8, disponible:7, prestado:1},
               {id:3, nombre:'Raqueta Ping-Pong', total:20, disponible:12, prestado:8}];
   Prestamos = [];
+  tempProducto = {};
+
   constructor() { }
 
   ObtenerProductos()
@@ -18,7 +22,15 @@ export class DataManagerService {
 
   AgregarProducto(producto)
   {
-    this.Productos.push(producto);
+    let id = this.Productos.length;
+    let tempProd = {
+      id: id+1,
+      nombre: producto.nombre,
+      total: producto.total,
+      disponible: producto.total,
+      prestado: 0
+      }
+    this.Productos.push(tempProd);
   }
 
   ObtenerProducto(id)
@@ -86,5 +98,11 @@ export class DataManagerService {
   ObtenerPrestamos()
   {
     return this.Prestamos;
+  }
+
+  CargarTemporal(producto)
+  {
+    this.tempProducto = producto;
+    console.log(this.tempProducto);
   }
 }
