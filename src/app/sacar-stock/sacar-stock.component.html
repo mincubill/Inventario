@@ -1,23 +1,25 @@
-<form [formGroup]="SacarStockForm">
+<form [formGroup]="SacarStockForm" class="row">
+  <div class="col-sm-3"></div>
   <!--Utilizar directiva ngfor para traer los productos y editar su stcok-->
-    <div class='form-group col-sm-6'>
-      <label>
-        Producto:
-      </label>
-      <select name="producto" id="producto" class="form-control" formControlName="producto">
-          <!--
-              Se utiliza una directiva de angular (ngFor) para cargar los productos en un 
-              select y de esta manera para que el usuario los pueda ingresar
-          -->
-          <option *ngFor="let producto of Productos" value={{producto.id}}>
-              {{producto.nombre}}
-          </option>
-      </select>
-      <label for="cantidad">
-        Cantidad a dar de baja:
-      </label>
-      <input type="number"  class="form-control" name="cantidad" id="cantidad" formControlName="cantidad">
-      <br>
-      <input type="submit" class="btn btn-primary" value="Guardar"> 
-    </div>
-  </form>
+  <div id="SacarStockForm" class='form-group col-sm-6'>
+    <label>
+      Producto:
+    </label>
+    <select name="producto" id="producto" class="form-control" formControlName="producto">
+        <!--
+            Se utiliza una directiva de angular (ngFor) para cargar los productos en un 
+            select y de esta manera para que el usuario los pueda ingresar
+        -->
+        <option *ngFor="let producto of Productos" value={{producto.id}}>
+            {{producto.nombre}}
+        </option>
+    </select>
+    <label for="cantidad">
+      Cantidad a dar de baja:
+    </label>
+    <input type="number"  class="form-control" name="cantidad" id="cantidad" formControlName="cantidad">
+    <br>
+    <input type="submit" class="btn btn-warning" value="Guardar"> 
+  </div>
+  <div class="col-sm-3"></div>
+</form>

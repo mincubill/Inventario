@@ -1,5 +1,6 @@
-<form [formGroup]="IngresarStockForm">
-  <div class='form-group col-sm-6'>
+<form [formGroup]="IngresarStockForm" class="row">
+  <div class="col-sm-3"></div>  
+  <div id="AgregarStockForm" class='form-group col-sm-6'>
     <label>
       Producto:
     </label>
@@ -17,6 +18,7 @@
     </label>
     <input type="number"  class="form-control" formControlName="cantidad" name="cantidad" id="cantidad">
     <br>
-    <input type="submit" class="btn btn-primary" value="Guardar"> 
+    <input type="submit" class="btn btn-warning" value="Guardar"> 
   </div>
+  <div class="col-sm-3"></div>
 </form>

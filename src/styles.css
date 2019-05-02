@@ -5,9 +5,10 @@
 }
 
 body {
-    background-color: #fbfbfb;
+    background-color: #00263e;
     display: block;
     position: relative;
+    color: #102848;
 }
 
 body::after {

@@ -42,9 +42,10 @@
 </div>
 
 <!-- Tabla con productos -->
+
 <table class="table table-hover">
-  <thead>
-    <tr>
+  <thead class="thead-light">
+    <tr class="table-light">
       <th scope="col">
         #
       </th>
@@ -65,12 +66,12 @@
       </th>
     </tr>
   </thead>
-  <tbody>
+  <tbody >
     <!--
       Se utiliza la directiva ngFor para recorrer la lista de productos que llegan 
       desde la base de datos
     -->
-    <tr *ngFor="let Producto of Productos">
+    <tr *ngFor="let Producto of Productos" class="table-light">
       <th scope="row">
         {{Producto.id}}
       </th>
@@ -98,3 +99,4 @@
     </tr>
   </tbody>
 </table>
+
