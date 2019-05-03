@@ -3,9 +3,9 @@
     <div class="fadeIn first">
       <img src="assets/img/loginIcon.png" id="icon" alt="User Icon" />
     </div>
-    <form [formGroup]>
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-      <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
+    <form [formGroup]="LoginForm">
+      <input type="text" id="username" class="fadeIn second" name="login" placeholder="username" formControlName="username">
+      <input type="text" id="password" class="fadeIn third" name="login" placeholder="password" formControlName="password">
       <input type="submit" class="fadeIn fourth" value="Log In">
     </form>
     <div id="formFooter">

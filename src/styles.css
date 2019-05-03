@@ -8,18 +8,11 @@ body {
     background-color: #00263e;
     display: block;
     position: relative;
-    color: #102848;
-}
-
-body::after {
-    content: "";
-    opacity: 0.9;
-    z-index: -1;
-}
-
-html {
     font-family: 'Myriad';
-    font-size: 1em;
-    min-height: 100%;
+    font-size: 16px;
+}
+
+.h1 {
+    text-align: center;
 }
 

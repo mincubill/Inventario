@@ -22,6 +22,15 @@
             <a class="dropdown-item" routerLink="/VerProducto">
               Ver Productos
             </a>
+            <a class="dropdown-item" routerLink="/AgregarProducto">
+              Ingresar producto
+            </a>
+            <a class="dropdown-item" routerLink="/IngresarStock">
+              Ingresar stock
+            </a>
+            <a class="dropdown-item" routerLink="/SacarStock">
+              Sacar stock
+            </a>
           </div>
         </li>
         <li class="nav-item dropdown">
@@ -61,7 +70,7 @@
     *ngIf="NombreUsuario==undefined; else elseBlock">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="/Login">
+        <a class="nav-link" routerLink="/Login">
           Iniciar sesion
         </a>
       </li>
