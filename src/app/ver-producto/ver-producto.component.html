@@ -1,45 +1,4 @@
-<!--Menu posicionado a la izquierda para el manejo de datos relacionado a productos-->
-<div class="left-menu">
-  <!--
-    Directiva routerLink que redirecciona a la pagina para agregar productos
-  -->
-  <a routerLink="/AgregarProducto" class="bg-dark list-group-item list-group-item-action">
-    <div class="d-flex w-100 justify-content-start align-items-center">
-      <span class="menu-collapsed text-white">
-        Ingresar Producto
-      </span>    
-    </div>
-  </a>
-  <!-- Ver como dejar abierto por defecto -->
-  <!--
-    Boton que despliega un sub-menu que te permite modificar los datos de los productos (Su stock)
-  -->
-  <a href="#submenu1" data-toggle="collapse" aria-expanded="false" 
-    class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-start align-items-center">
-      <span class="menu-collapsed text-white">Movimientos</span>
-      <span class="submenu-icon ml-auto"></span>
-    </div>
-  </a>
-  <div id="submenu1" class="collapse sidebar-submenu">
-    <!--
-      Directiva routerLink que redirecciona a la pagina para ingresar stock de un producto
-    -->
-    <a routerLink="/IngresarStock" class="list-group-item list-group-item-action bg-dark text-white">
-      <span class="menu-collapsed">
-        Ingresar stock
-      </span>
-    </a>
-    <!--
-      Directiva routerLink que redirecciona a la pagina para sacar stock de un producto
-    -->
-    <a routerLink="/SacarStock" class="list-group-item list-group-item-action bg-dark text-white">
-      <span class="menu-collapsed">
-        Sacar stock
-      </span>
-    </a>
-  </div>
-</div>
+<h1 class="h1">Inventario de productos</h1>
 
 <!-- Tabla con productos -->
 <table class="table table-hover">

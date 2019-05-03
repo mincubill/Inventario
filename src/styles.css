@@ -8,17 +8,16 @@ body {
     background-color: #fbfbfb;
     display: block;
     position: relative;
-}
-
-body::after {
-    content: "";
-    opacity: 0.9;
-    z-index: -1;
+    font-family: 'Myriad';
+    font-size: 1em;
 }
 
 html {
-    font-family: 'Myriad';
-    font-size: 1em;
+    
     min-height: 100%;
+}
+
+.h1 {
+    text-align: center;
 }
 
