@@ -4,12 +4,20 @@
     src: url(assets/fonts/MYRIAD-REGULAR/MYRIAD-REGULAR/MyriadPro-Regular.otf)
 }
 
+* {
+    max-width: 100%;
+}
+
 body {
     background-color: #00263e;
     display: block;
     position: relative;
     font-family: 'Myriad';
     font-size: 16px;
+}
+
+html {
+    min-height: 100%;
 }
 
 .h1 {
