@@ -1,6 +1,6 @@
 <table class="table table-hover">
-  <thead>
-    <tr>
+  <thead class="thead-light">
+    <tr class="table-light">
       <th scope="col">
         #
       </th>
@@ -19,7 +19,7 @@
     <!--
       Directiva de angular (ngFor) que recorre la lista de prestamos y la despliega
     -->
-    <tr *ngFor="let Prestamo of Prestamos">
+    <tr *ngFor="let Prestamo of Prestamos" class="table-light">
       <!--Muestra la id del prestamo-->
       <th scope="row">
         {{Prestamo.id}}
