@@ -15,6 +15,8 @@ import { IngresarDevolucionComponent } from './ingresar-devolucion/ingresar-devo
 import { LoginComponent } from './login/login.component';
 import { VerPrestamoComponent } from './ver-prestamo/ver-prestamo.component';
 import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
+import { RetiroProductosComponent } from './retiro-productos/retiro-productos.component';
+import { RegistroComponent } from './registro/registro.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.componen
     IngresarDevolucionComponent,
     LoginComponent,
     VerPrestamoComponent,
-    PerfilUsuarioComponent
+    PerfilUsuarioComponent,
+    RetiroProductosComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,
