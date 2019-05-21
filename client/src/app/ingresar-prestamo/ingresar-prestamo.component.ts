@@ -65,12 +65,6 @@ export class IngresarPrestamoComponent implements OnInit {
 
   ///Ingresa el prestamo a la base de datos
   AgregarPrestamo() {
-    this.data.AgregarPrestamo(
-    {
-      id: 1,
-      rut: this.PrestamoForm.controls.rut.value,
-      producto: this.PrestamoForm.controls.producto.value,
-      cantidad: 1,
-    });
+    //Agregar prestamo a la base de datos
   }
 }
