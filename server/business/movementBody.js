@@ -23,12 +23,12 @@ const getMovementBodys = function(req, res){
     });
 };
 
-const getMovementBodyByHeader = function(req, res){
+const getMovementBodysByHeader = function(req, res){
     let movementBody =
     {
         header: parseInt(req.body.header)
     }
-    movementBodyDao.getMovementBodyByHeader(movementBody).then((success) => {
+    movementBodyDao.getMovementBodysByHeader(movementBody).then((success) => {
         console.log(success.toString());
         res.send(success.toString());
     }).catch((error) => {
@@ -40,5 +40,5 @@ const getMovementBodyByHeader = function(req, res){
 
 
 module.exports.createMovementBody = createMovementBody;
-module.exports.getMovementBodyByHeader = getMovementBodyByHeader;
+module.exports.getMovementBodysByHeader = getMovementBodysByHeader;
 module.exports.getMovementBodys = getMovementBodys;

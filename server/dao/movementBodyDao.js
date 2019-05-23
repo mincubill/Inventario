@@ -30,7 +30,7 @@ const getMovementBodys = function(){
     });
 };
 
-const getMovementBodyByHeader = function(movementBody){
+const getMovementBodysByHeader = function(movementBody){
     let query = "SELECT * FROM MOVEMENT_BODY WHERE HEADER = ?";
     return new Promise((resolve, reject) => {
         con.query(query, [movementBody.product,movementBody.header], (error, result, fields) => {
@@ -46,7 +46,7 @@ const getMovementBodyByHeader = function(movementBody){
 };
 
 module.exports.createMovementBody = createMovementBody;
-module.exports.getMovementBodyByHeader = getMovementBodyByHeader;
+module.exports.getMovementBodysByHeader = getMovementBodysByHeader;
 module.exports.getMovementBodys = getMovementBodys;
 
 
