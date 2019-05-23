@@ -8,5 +8,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 //middleware(app);
 router(app);
+console.log("/***************** localhost:"+PORT.toString()+" (web service inventario citt) **********************\\");
 app.listen(PORT);
 
