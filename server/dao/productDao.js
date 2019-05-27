@@ -70,7 +70,7 @@ const getProducts = function(){
                 return;
             }
             let keys = Object.keys(result[0]);
-            resolve(result[0][keys[0]]); 
+            resolve(result[1]); 
         });
     });
 };

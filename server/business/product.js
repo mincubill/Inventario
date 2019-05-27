@@ -9,12 +9,13 @@ const createProduct = function(req, res){
         price: req.body.price,
         store: req.body.store
     };
-    productDao.createProduct(product).then((success) => {
-        console.log(success.toString());
-        res.send(success.toString());
-    }).catch((error) => {
-        console.log(error);
-    });
+    console.log(product);
+    // productDao.createProduct(product).then((success) => {
+    //     console.log(success.toString());
+    //     res.send(success.toString());
+    // }).catch((error) => {
+    //     console.log(error);
+    // });
 };
 
 const updateProduct = function(req, res){
@@ -66,7 +67,7 @@ const updateStockProduct = function(req, res){
 const getProducts = function(req, res){
     productDao.getProducts().then((success) => {
         console.log(success.toString());
-        res.send(success.toString());
+        res.send(success);
     }).catch((error) => {
         console.log(error);
     });

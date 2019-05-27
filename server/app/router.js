@@ -39,6 +39,7 @@ module.exports = function(app)
     });
 
     app.post("/createProduct", (req, res) => {
+        console.log('Llega al servidor');
         product.createProduct(req, res);
     });
 
