@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DataManagerService } from '../data-manager.service'
+import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog'
+import { PopupComponent, PopupModel } from '../popup/popup.component';
+
+import { DataManagerService } from '../data-manager.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,8 +17,7 @@ export class VerProductoComponent implements OnInit {
   Productos = [];
   ProductoTemp = {};
   
-  constructor(private data : DataManagerService, private router:Router) 
-  {
+  constructor(private data : DataManagerService, private router:Router, public dialog: MatDialog)  {
 
   }
 
@@ -38,5 +40,20 @@ export class VerProductoComponent implements OnInit {
   {
     this.data.QuitarProducto(id);
     this.CargarProductos();
+  }
+
+  confirmDialog(id) {
+    const dialogData = new PopupModel("Confirmacion", "Eliminar producto seleccionado?");
+    const dialogRef = this.dialog.open(PopupComponent, {
+      
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if(res == true)
+      {
+        this.QuitarProducto(id);
+      }
+    });
   }
 }
