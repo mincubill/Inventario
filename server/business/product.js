@@ -72,10 +72,24 @@ const getProducts = function(req, res){
     });
 };
 
+const getProductsByStorage = function(req, res){
+    let product = 
+    {
+        storage : parseInt(req.body.storage)
+    }
+    productDao.getProductsByStorage(product).then((success) => {
+        console.log(success.toString());
+        res.send(success);
+    }).catch((error) => {
+        console.log(error);
+    });
+};
+
 module.exports.createProduct = createProduct;
 module.exports.updateProduct = updateProduct;
 module.exports.updateStatusProduct = updateStatusProduct;
 module.exports.updateStockProduct = updateStockProduct;
 module.exports.getProducts = getProducts;
+module.exports.getProductsByStorage = getProductsByStorage;
 
 

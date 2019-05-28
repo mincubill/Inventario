@@ -75,10 +75,27 @@ const getProducts = function(){
     });
 };
 
+const getProductsByStorage = function(product){
+    let query = "SELECT * FROM PRODUCT WHERE PRODUCT.STORE = ? ";
+    return new Promise((resolve, reject) => {
+        con.query(query, [product.storage],(error, result, fields) => {
+            if(error){
+                console.log(error);
+                reject(error);
+                return;
+            }
+            let keys = Object.keys(result[0]);
+           
+            resolve(result); 
+        });
+    });
+};
+
 module.exports.createProduct = createProduct;
 module.exports.updateProduct = updateProduct;
 module.exports.updateStatusProduct = updateStatusProduct;
 module.exports.updateStockProduct = updateStockProduct;
 module.exports.getProducts = getProducts;
+module.exports.getProductsByStorage = getProductsByStorage;
 
 

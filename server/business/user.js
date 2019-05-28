@@ -8,7 +8,7 @@ const login = function(req, res){
     };
     userDao.login(user).then((success) => {
         console.log(success.toString());
-        res.send(success.toString());
+        res.send(success);
     }).catch((error) => {
         console.log(error);
     });
