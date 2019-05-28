@@ -1,7 +1,4 @@
 <h1 class="h1">Inventario de productos</h1>
-
-<!-- Tabla con productos -->
-
 <table class="table table-hover">
   <thead class="thead-light">
     <tr class="table-light">
@@ -38,21 +35,21 @@
         {{Producto.NAME}}
       </td>
       <td>
-        {{Producto.DESCRIPTION}}
+        {{Producto.STOCK}}
       </td>
       <td>
-        {{Producto.STATUS}}
+        {{Producto.AVAILABLE}}
       </td>
       <td>
-        {{Producto.prestado}}
+        {{Producto.BORROWED}}
       </td>
       <td>
         <a>
-          <i class="fas fa-edit" (click)="EditarProducto(Producto.id)"></i>
+          <i class="fas fa-edit" (click)="EditarProducto(Producto.ID)"></i>
         </a> 
         &nbsp;
         <a>
-          <i class="fas fa-trash-alt" (click)="confirmDialog(Producto.id)"></i>
+          <i class="fas fa-trash-alt" (click)="confirmDialog(Producto.ID)"></i>
         </a>
       </td>
     </tr>

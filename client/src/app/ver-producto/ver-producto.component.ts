@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog'
 import { PopupComponent, PopupModel } from '../popup/popup.component';
-
-import { DataManagerService } from '../data-manager.service';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-ver-producto',
@@ -16,7 +15,7 @@ export class VerProductoComponent implements OnInit {
   ///Con una estructura parecida
   Productos = [];
   
-  constructor(private router:Router, public dialog: MatDialog)  {
+  constructor(private router:Router, public dialog: MatDialog, private http : HttpClient)  {
 
   }
 
@@ -24,8 +23,16 @@ export class VerProductoComponent implements OnInit {
     this.CargarProductos();
   }
 
-  CargarProductos()
-  {
+  CargarProductos () {
+    //Cambiar storage
+    this.http.post('http://127.0.0.1:3000/getProductsByStorageStats', {
+      storage: 1
+    }).subscribe( ( res : any[] ) => {
+      this.Productos = res;
+    },
+    ( error ) => {
+      console.log( error );
+    });
   }
 
   EditarProducto(id)
@@ -34,8 +41,18 @@ export class VerProductoComponent implements OnInit {
 
   QuitarProducto(id)
   {
-    this.data.QuitarProducto(id);
-    this.CargarProductos();
+    this.http.post('http://127.0.0.1:3000/', {
+      id: id,
+      status: 0
+    }).subscribe( ( res : any ) => {
+      if(+res == 1) {
+        alert('Eliminado Exitosamente');
+        this.CargarProductos();
+      }
+    },
+    ( error ) => {
+      console.log( error );
+    });
   }
 
   confirmDialog(id) {
@@ -46,7 +63,7 @@ export class VerProductoComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(res => {
-      if(res == true)
+      if(res)
       {
         this.QuitarProducto(id);
       }

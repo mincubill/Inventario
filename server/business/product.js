@@ -71,11 +71,8 @@ const getProducts = function(req, res){
 };
 
 const getProductsByStorage = function(req, res){
-    let product = 
-    {
-        storage : parseInt(req.body.storage)
-    }
-    productDao.getProductsByStorage(product).then((success) => {
+    let storage = req.body.storage;
+    productDao.getProductsByStorage(storage).then((success) => {
         res.send(success);
     }).catch((error) => {
         console.log(error);

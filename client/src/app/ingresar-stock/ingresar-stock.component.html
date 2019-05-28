@@ -1,5 +1,5 @@
 <h1 class="h1">Ingresar Stock</h1>
-<form [formGroup]="IngresarStockForm" class="row">
+<form [formGroup]="IngresarStockForm" (ngSubmit)="AgregarStock()" class="row">
   <div class="col-sm-3"></div>  
   <div id="AgregarStockForm" class='form-group col-sm-6'>
     <label>
@@ -10,8 +10,8 @@
             Se utiliza una directiva de angular (ngFor) para cargar los productos en un 
             select y de esta manera para que el usuario los pueda ingresar
         -->
-        <option *ngFor="let producto of Productos" value={{producto.id}}>
-          {{producto.nombre}}
+        <option *ngFor="let Producto of Productos" value={{Producto.ID}}>
+          {{Producto.NAME}}
         </option>
     </select>
     <label for="cantidad">
