@@ -3,7 +3,8 @@ const con = require("../dao/connection.js");
 const createProduct = function(product) {
     let query = "select FN_CREATE_PRODUCT(?,?,?,?,?)";
     return new Promise((resolve, reject) => {
-        con.query(query, [product.name,product.description,product.stock,product.price,product.store], (error, result, fields) => {
+        con.query(query, [product.name, product.description, product.stock, 
+                          product.price, product.store], (error, result, fields) => {
             if(error){
                 console.log(error);
                 reject(error);
@@ -69,8 +70,7 @@ const getProducts = function(){
                 reject(error);
                 return;
             }
-            let keys = Object.keys(result[0]);
-            resolve(result[1]); 
+            resolve(result); 
         });
     });
 };
@@ -90,6 +90,7 @@ const getProductsByStorage = function(product){
         });
     });
 };
+
 
 module.exports.createProduct = createProduct;
 module.exports.updateProduct = updateProduct;

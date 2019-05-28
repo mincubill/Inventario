@@ -32,7 +32,6 @@ export class AgregarProductoComponent implements OnInit {
   }
 
   AgregarProducto() {
-    let output : boolean;
     this.http.post('http://127.0.0.1:3000/createProduct', {
       name: this.AgregarForm.controls.nombre.value,
       description: this.AgregarForm.controls.descripcion.value,
@@ -40,18 +39,12 @@ export class AgregarProductoComponent implements OnInit {
       price: this.AgregarForm.controls.precio.value,
       store: 1
     }).subscribe( (res : any) => {
-      if(+res == 1) {
-        output = true;
-      }
-      else {
-        output = false;
-      }
+      this.agregado = +res == 1 ? true : false;
     }, 
     (error) => {
       console.log(error);
-      output = false;
+      this.agregado = false;
     }); 
-    return output;
   }
 
   LimpiarCampos ()  {
@@ -71,7 +64,7 @@ export class AgregarProductoComponent implements OnInit {
     dialogRef.afterClosed().subscribe(res => {
       if(res)
       {
-        this.agregado = this.AgregarProducto();
+        this.AgregarProducto();
         this.LimpiarCampos();
       }
     });
