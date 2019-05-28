@@ -1,6 +1,6 @@
 const con = require("../dao/connection.js");
 
-const createProduct = function(product){
+const createProduct = function(product) {
     let query = "select FN_CREATE_PRODUCT(?,?,?,?,?)";
     return new Promise((resolve, reject) => {
         con.query(query, [product.name,product.description,product.stock,product.price,product.store], (error, result, fields) => {

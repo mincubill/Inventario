@@ -1,21 +1,18 @@
 const productDao = require("../dao/productDao.js");
 
 const createProduct = function(req, res){
-    let product = 
-    {
+    let product = {
         name: req.body.name,
         description: req.body.description,
         stock: req.body.stock,
         price: req.body.price,
         store: req.body.store
     };
-    console.log(product);
-    // productDao.createProduct(product).then((success) => {
-    //     console.log(success.toString());
-    //     res.send(success.toString());
-    // }).catch((error) => {
-    //     console.log(error);
-    // });
+    productDao.createProduct(product).then((success) => {
+        res.send(success.toString());
+    }).catch((error) => {
+        console.log(error);
+    });
 };
 
 const updateProduct = function(req, res){

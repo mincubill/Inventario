@@ -7,7 +7,7 @@ const movementBody = require("../business/movementBody");
 module.exports = function(app)
 {
     app.get("/", (req, res) => {
-        res.send("Bienvenido a Webservice del Inventario citt");
+        res.send("[{Bienvenido a Webservice del Inventario citt}]");
     });
 
     app.post("/login", (req, res) => {
