@@ -314,24 +314,3 @@ DO
 UPDATE MOVEMENT_HEADER SET 
 DEBT = DATEDIFF(SYSDATE(), ADDDATE(MOVEMENT_HEADER.DATE_BEGIN, INTERVAL MOVEMENT_HEADER.DAYS DAY))*300 
 WHERE  ADDDATE(MOVEMENT_HEADER.DATE_BEGIN, INTERVAL MOVEMENT_HEADER.DAYS DAY) < SYSDATE()
-
-/*INSERTS*/
-
-
-/*carreras*/
-INSERT INTO CAREER VALUES(1,'ingenieria informatica');
-INSERT INTO CAREER VALUES(2,'ingenieria en administracio de recursos humanos');
-
-/*usuario*/
-INSERT INTO USERS VALUES(187329973,'jorge corvalan','corvalan mendez','higlord','higlord@gmail.com',3,1,1,'+56985067877','andes 3755 casa 25','123');
-
-/*test*/
-SELECT FN_CREATE_USER(18732998,'JORGE CORVALAN','corvalan mendez','higlord','higlord@gmail.com',1,'+569785067877','andes 3755 casa 25','1875');
-
-/*test store procedure*/
-CALL SP_LOGIN('higlord','123',@name,@type);
-SELECT @name,@type;
-
-/*productos*/
-INSERT INTO PRODUCT (name,DESCRIPTION,STATUS,STOCK,price,STORE) VALUES ('pelota','es una pelota',1,10,30000,1);
-INSERT INTO PRODUCT (name,DESCRIPTION,STATUS,STOCK,price,STORE) VALUES ('pelota2','es una pelota',1,10,30000,1);

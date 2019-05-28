@@ -76,9 +76,17 @@ const getProductsByStorage = function(req, res){
         storage : parseInt(req.body.storage)
     }
     productDao.getProductsByStorage(product).then((success) => {
-        console.log(success.toString());
         res.send(success);
     }).catch((error) => {
+        console.log(error);
+    });
+};
+
+const getProductsByStorageStats = function (req, res) {
+    let storage = req.body.storage;
+    productDao.getProductsByStorageStats(storage).then( (success) => {
+        res.send(success);
+    }).catch( (error) => {
         console.log(error);
     });
 };
@@ -89,5 +97,6 @@ module.exports.updateStatusProduct = updateStatusProduct;
 module.exports.updateStockProduct = updateStockProduct;
 module.exports.getProducts = getProducts;
 module.exports.getProductsByStorage = getProductsByStorage;
+module.exports.getProductsByStorageStats = getProductsByStorageStats;
 
 

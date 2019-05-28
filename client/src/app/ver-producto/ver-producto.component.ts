@@ -15,9 +15,8 @@ export class VerProductoComponent implements OnInit {
   ///Lista con datos duros para probar el ngFor, estos datos deben llegar desde la base de datos
   ///Con una estructura parecida
   Productos = [];
-  ProductoTemp = {};
   
-  constructor(private data : DataManagerService, private router:Router, public dialog: MatDialog)  {
+  constructor(private router:Router, public dialog: MatDialog)  {
 
   }
 
@@ -27,13 +26,10 @@ export class VerProductoComponent implements OnInit {
 
   CargarProductos()
   {
-    this.Productos = this.data.ObtenerProductos();
   }
 
   EditarProducto(id)
   {
-    this.ProductoTemp = this.data.ObtenerProducto(id);
-    this.router.navigate(["AgregarProducto"]);
   }
 
   QuitarProducto(id)

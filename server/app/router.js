@@ -62,6 +62,10 @@ module.exports = function(app)
         product.getProductsByStorage(req, res);
     });
 
+    app.post("/getProductsByStorageStats", (req, res) => {
+        product.getProductsByStorageStats(req, res);
+    });
+
     app.post("/createMovementHeader", (req, res) => {
         movementHeader.createMovementHeader(req, res);
     });
