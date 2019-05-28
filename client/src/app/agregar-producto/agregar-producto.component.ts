@@ -33,31 +33,24 @@ export class AgregarProductoComponent implements OnInit {
 
   AgregarProducto() {
     let output : boolean;
-    // this.http.post('http://127.0.0.1:3000/createProduct', {
-    //   name: this.AgregarForm.controls.nombre.value,
-    //   description: this.AgregarForm.controls.descripcion.value,
-    //   stock: this.AgregarForm.controls.total.value,
-    //   price: this.AgregarForm.controls.precio.value,
-    //   store: 1
-    // }).subscribe( (res : any) => {
-    //   if(+res == 1) {
-    //     output = true;
-    //   }
-    //   else {
-    //     output = false;
-    //   }
-    // }, 
-    // (error) => {
-    //   console.log(error);
-    //   output = false;
-    // }); 
-    // console.log(output);
-    this.http.get('http://127.0.0.1:3000/').subscribe( (res : any) => {
-      alert(res);
+    this.http.post('http://127.0.0.1:3000/createProduct', {
+      name: this.AgregarForm.controls.nombre.value,
+      description: this.AgregarForm.controls.descripcion.value,
+      stock: this.AgregarForm.controls.total.value,
+      price: this.AgregarForm.controls.precio.value,
+      store: 1
+    }).subscribe( (res : any) => {
+      if(+res == 1) {
+        output = true;
+      }
+      else {
+        output = false;
+      }
     }, 
     (error) => {
       console.log(error);
-    });
+      output = false;
+    }); 
     return output;
   }
 
