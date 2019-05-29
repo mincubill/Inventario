@@ -40,7 +40,7 @@ CREATE TABLE MOVEMENT_HEADER
     DATE_BEGIN  DATE NOT NULL,
 	DATE_END	DATE NULL,
 	DAYS		INT NOT NULL,
-    USER_M      INT NULL, 
+    USER_M      INT NOT NULL, 
 	DEBT		INT NOT NULL,	
 	DESCRIPTION VARCHAR(255),
 	STATUS		INT NOT NULL,	/*0)prestado 1)devuelto*/
@@ -304,7 +304,7 @@ END
 /*habilitar eventos*/
 SET GLOBAL event_scheduler = ON;
 
-/*evento para deudas*/
+	/*evento para deudas*/
 
 CREATE EVENT `debts` 
 ON SCHEDULE 

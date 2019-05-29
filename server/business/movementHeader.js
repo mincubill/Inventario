@@ -1,16 +1,40 @@
 const movementHeaderDao = require("../dao/movementHeaderDao.js");
+const movementBodyDao = require("../dao/movementBodyDao.js");
 
 const createMovementHeader = function(req, res){
     let movementHeader = 
     {
         dateBegin: req.body.dateBegin,
-        dateEnd: req.body.dateEnd,
         description: req.body.description,
         days: parseInt(req.body.days),
         user: parseInt(req.body.user)
     };
     movementHeaderDao.createMovementHeader(movementHeader).then((success) => {
-        console.log(success.toString());
+        if (success == 1)
+        {
+            movementHeaderDao.getLatestId().then((success) => {
+                let movementHeaderId = success;
+                let products = req.body.products;
+                products.forEach(p => {
+                    let movementBody = 
+                    {
+                        product : p.proId,
+                        header: movementHeaderId,
+                        quantity: p.quantity
+                    }
+                    movementBodyDao.createMovementBody(movementBody).then((success) => {
+                        
+                    }).catch((error) => {
+                        console.log(error);
+                    });
+                   
+               });
+            }).catch((error) => {
+                console.log(error);
+            });
+
+        }
+
         res.send(success.toString());
     }).catch((error) => {
         console.log(error);
@@ -20,9 +44,10 @@ const createMovementHeader = function(req, res){
 const changeStatusMovementHeader = function(req, res){
     let movementHeader = 
     {
-        id: parserInt(req.body.id),
-        status: parserInt(req.body.status)
+        id: parseInt(req.body.id),
+        status: parseInt(req.body.status)
     };
+    console.log(movementHeader)
     movementHeaderDao.changeStatusMovementHeader(movementHeader).then((success) => {
         console.log(success.toString());
         res.send(success.toString());
