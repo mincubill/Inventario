@@ -1,9 +1,9 @@
 const con = require("../dao/connection.js");
 
 const createMovementHeader = function(movementHeader){
-    let query = "select FN_CREATE_MOVEMENT_HEADER(?,?,?,?,?)";
+    let query = "select FN_CREATE_MOVEMENT_HEADER(?,?,?,?)";
     return new Promise((resolve, reject) => {
-        con.query(query, [movementHeader.dateBegin,movementHeader.dateEnd,movementHeader.description,movementHeader.days,movementHeader.user], (error, result, fields) => {
+        con.query(query, [movementHeader.dateBegin,movementHeader.description,movementHeader.days,movementHeader.user], (error, result, fields) => {
             if(error){
                 console.log(error);
                 reject(error);
@@ -40,6 +40,21 @@ const getMovementHeaders = function(){
                 return;
             }
             resolve(result); 
+        });
+    });
+};
+
+const getLatestId = function(){
+    let query = "SELECT MAX(ID) FROM MOVEMENT_HEADER";
+    return new Promise((resolve, reject) => {
+        con.query(query, (error, result, fields) => {
+            if(error){
+                console.log(error);
+                reject(error);
+                return;
+            }
+            let keys = Object.keys(result[0]);
+            resolve(result[0][keys[0]]); 
         });
     });
 };
@@ -91,3 +106,4 @@ module.exports.getMovementHeaders = getMovementHeaders;
 module.exports.getMovementHeadersByUser = getMovementHeadersByUser;
 module.exports.getMovementHeaderById = getMovementHeaderById;
 module.exports.getMovementHeaderWithDebt = getMovementHeaderWithDebt;
+module.exports.getLatestId = getLatestId;

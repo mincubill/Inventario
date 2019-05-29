@@ -1,9 +1,9 @@
 const con = require("../dao/connection.js");
 
 const createMovementBody = function(movementBody){
-    let query = "select FN_CREATE_MOVEMENT_BODY(?,?)";
+    let query = "select FN_CREATE_MOVEMENT_BODY(?,?,?)";
     return new Promise((resolve, reject) => {
-        con.query(query, [movementBody.product,movementBody.header], (error, result, fields) => {
+        con.query(query, [movementBody.product,movementBody.header,movementBody.quantity], (error, result, fields) => {
             if(error){
                 console.log(error);
                 reject(error);
@@ -44,6 +44,7 @@ const getMovementBodysByHeader = function(movementBody){
         });
     });
 };
+
 
 module.exports.createMovementBody = createMovementBody;
 module.exports.getMovementBodysByHeader = getMovementBodysByHeader;
