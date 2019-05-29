@@ -24,10 +24,10 @@ export class SacarStockComponent implements OnInit {
   }
 
   CargarProductos() {
-    this.http.post('', {
-
-    }).subscribe( () => {
-
+    this.http.post('http://127.0.0.1:3000/getProductsByStorage', {
+      storage: 1
+    }).subscribe( ( res : any[] ) => {
+      this.Productos = res;
     },
     ( error ) => {
       console.log( error );
@@ -35,6 +35,24 @@ export class SacarStockComponent implements OnInit {
   }
 
   SacarProducto () {
-    
-  }
-}
+    this.http.post('http://127.0.0.1:3000/updateStockProduct', {
+      id: this.SacarStockForm.controls.producto.value,
+      stock: this.SacarStockForm.controls.cantidad.value
+    }).subscribe( ( res : any ) => {
+      alert('Actualizado correctamente');
+    },
+    ( error ) => {
+      console.log(error);
+    });
+  };
+
+
+
+  ProductChanged (e) {
+    this.Productos.forEach( p => {
+      if ( p.ID == e) {
+        this.SacarStockForm.controls.cantidad.setValue(p.STOCK);
+      }
+    });
+  } 
+};

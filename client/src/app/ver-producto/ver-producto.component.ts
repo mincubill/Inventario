@@ -31,9 +31,16 @@ export class VerProductoComponent implements OnInit {
       storage: 1
     }).subscribe( ( res : any[] ) => {
       this.Productos = res;
+      this.EliminarNull(this.Productos);
     },
     ( error ) => {
       console.log( error );
+    });
+  }
+
+  EliminarNull(productos) {
+    productos.forEach( p => {
+      p.BORROWED = p.BORROWED != null ? p.BORROWED : 0;
     });
   }
 

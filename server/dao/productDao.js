@@ -90,7 +90,7 @@ const getProductsByStorage = function( storage ){
 };
 
 const getProductsByStorageStats = function ( storage ) {
-    let query = "select product.ID, product.NAME as NAME, product.STOCK as STOCK, product.STOCK - sum(movement_body.CANT) as AVAILABLE, sum(movement_body.CANT) as BORROWED from product left join movement_body on movement_body.PRODUCT_M = product.ID join movement_header on movement_header.ID = movement_body.HEADER where movement_header.STATUS = 0 and product.STORE = ? and product.STATUS = 1 group by product.NAME, product.STOCK";
+    let query = "select product.ID, product.NAME, product.STOCK, product.AVAILABLESTOCK, movement.BORROWED from (select movement_body.PRODUCT_M as producto, sum(movement_body.QUANTITY) as BORROWED from movement_body join movement_header on movement_body.HEADER = movement_header.ID where movement_header.STATUS = 0 group by movement_body.PRODUCT_M) as movement RIGHT join (select product.ID as ID, product.NAME as NAME, product.STOCK as STOCK, product.AVAILABLESTOCK as AVAILABLESTOCK, product.STATUS as STATUS, product.STORE as STORE from product) as product on movement.producto = product.ID where product.STORE = ? and product.STATUS = 1";
     return new Promise( (resolve, reject) => {
         con.query(query, [storage], (error, result, fields) => {
             if(error) {

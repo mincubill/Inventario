@@ -5,7 +5,7 @@
     <label for="producto">
       Producto:
     </label>
-    <select name="producto" id="producto" class="form-control">
+    <select name="producto" id="producto" class="form-control" formControlName="producto" (change)="ProductChanged($event.target.value)">  
         <!--
             Se utiliza una directiva de angular (ngFor) para cargar los productos en un 
             select y de esta manera para que el usuario los pueda ingresar
@@ -17,7 +17,7 @@
     <label for="cantidad">
       Cantidad:
     </label>
-    <input type="number"  class="form-control" name="cantidad" id="cantidad" >
+    <input type="number"  class="form-control" name="cantidad" id="cantidad" formControlName="cantidad" max={{SacarStockForm.controls.cantidad.value}}>
     <br>
     <input type="submit" class="btn btn-warning" value="Guardar"> 
   </div>
