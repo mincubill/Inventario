@@ -34,7 +34,7 @@ const updateProduct = function(product){
 const updateStatusProduct = function(product){
     let query = "select FN_UPDATE_STATUS_PRODUCT(?,?)";
     return new Promise((resolve, reject) => {
-        con.query(query, [product.id,product.status], (error, result, fields) => {
+        con.query(query, [product.id, product.status], (error, result, fields) => {
             if(error){
                 console.log(error);
                 reject(error);
@@ -76,7 +76,7 @@ const getProducts = function(){
 };
 
 const getProductsByStorage = function( storage ){
-    let query = "SELECT * FROM PRODUCT WHERE PRODUCT.STORE = ? ";
+    let query = "SELECT * FROM PRODUCT WHERE PRODUCT.STORE = ? and product.STATUS = 1";
     return new Promise((resolve, reject) => {
         con.query(query, [storage],(error, result, fields) => {
             if(error){
@@ -90,7 +90,7 @@ const getProductsByStorage = function( storage ){
 };
 
 const getProductsByStorageStats = function ( storage ) {
-    let query = "select product.ID, product.NAME as NAME, product.STOCK as STOCK, product.STOCK - sum(movement_body.CANT) as AVAILABLE, sum(movement_body.CANT) as BORROWED from product left join movement_body on movement_body.PRODUCT_M = product.ID join movement_header on movement_header.ID = movement_body.HEADER where movement_header.STATUS = 0 and product.STORE = ? group by product.NAME, product.STOCK";
+    let query = "select product.ID, product.NAME as NAME, product.STOCK as STOCK, product.STOCK - sum(movement_body.CANT) as AVAILABLE, sum(movement_body.CANT) as BORROWED from product left join movement_body on movement_body.PRODUCT_M = product.ID join movement_header on movement_header.ID = movement_body.HEADER where movement_header.STATUS = 0 and product.STORE = ? and product.STATUS = 1 group by product.NAME, product.STOCK";
     return new Promise( (resolve, reject) => {
         con.query(query, [storage], (error, result, fields) => {
             if(error) {

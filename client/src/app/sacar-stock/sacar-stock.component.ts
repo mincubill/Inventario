@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DataManagerService } from '../data-manager.service'
-import { FormBuilder, NgControlStatus, FormGroup } from '@angular/forms';  
+import { FormBuilder, NgControlStatus, FormGroup } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-sacar-stock',
@@ -9,24 +9,32 @@ import { FormBuilder, NgControlStatus, FormGroup } from '@angular/forms';
 })
 export class SacarStockComponent implements OnInit {
 
+  SacarStockForm : FormGroup;
   Productos = [];
-  SacarStockForm: FormGroup;
-  constructor(private data : DataManagerService, private formBuilder: FormBuilder) { 
-    this.SacarStockForm = formBuilder.group(
-      {
-        producto: [''],
-        cantidad: [''],
-      }
-    );
+
+  constructor(private formBuilder: FormBuilder, private http : HttpClient) { 
+    this.SacarStockForm = this.formBuilder.group({
+      producto: [''],
+      cantidad: ['']
+    });
   }
 
   ngOnInit() {
     this.CargarProductos();
   }
 
-  CargarProductos()
-  {
-    this.Productos = this.data.ObtenerProductos();
+  CargarProductos() {
+    this.http.post('', {
+
+    }).subscribe( () => {
+
+    },
+    ( error ) => {
+      console.log( error );
+    });
   }
 
+  SacarProducto () {
+    
+  }
 }

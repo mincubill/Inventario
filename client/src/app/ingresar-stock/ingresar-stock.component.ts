@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DataManagerService } from '../data-manager.service'
 import { FormBuilder, NgControlStatus, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
@@ -26,8 +25,9 @@ export class IngresarStockComponent implements OnInit {
   }
 
   CargarProductos() {
-    this.http.post('', {
+    this.http.post('http://127.0.0.1:3000/getProductsByStorage', {
       //Cambiar el storage
+      //Crear un metodo que valide la cantidad sea superior al stock actual
       storage: 1
     }).subscribe( ( res : any[] ) => {
       this.Productos = res;
@@ -47,6 +47,14 @@ export class IngresarStockComponent implements OnInit {
     },
     ( error ) => {
       console.log(error);
+    });
+  }
+
+  ProductChanged(e) {
+    this.Productos.forEach( (p) => {
+      if(p.ID == e) {
+        this.IngresarStockForm.controls.cantidad.setValue(p.STOCK);
+      }
     });
   }
     

@@ -14,6 +14,8 @@ export class VerProductoComponent implements OnInit {
   ///Lista con datos duros para probar el ngFor, estos datos deben llegar desde la base de datos
   ///Con una estructura parecida
   Productos = [];
+  eliminado : boolean;
+  error : boolean;
   
   constructor(private router:Router, public dialog: MatDialog, private http : HttpClient)  {
 
@@ -41,16 +43,21 @@ export class VerProductoComponent implements OnInit {
 
   QuitarProducto(id)
   {
-    this.http.post('http://127.0.0.1:3000/', {
+    this.http.post('http://127.0.0.1:3000/updateStatusProduct', {
       id: id,
       status: 0
     }).subscribe( ( res : any ) => {
       if(+res == 1) {
-        alert('Eliminado Exitosamente');
+        this.eliminado = true;
         this.CargarProductos();
+      }
+      else
+      {
+        this.error = true;
       }
     },
     ( error ) => {
+      this.error = true;
       console.log( error );
     });
   }
