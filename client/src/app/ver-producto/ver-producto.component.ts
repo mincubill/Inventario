@@ -17,7 +17,7 @@ export class VerProductoComponent implements OnInit {
   eliminado : boolean;
   error : boolean;
   
-  constructor(private router:Router, public dialog: MatDialog, private http : HttpClient)  {
+  constructor(private router : Router, public dialog : MatDialog, private http : HttpClient)  {
 
   }
 
@@ -44,8 +44,9 @@ export class VerProductoComponent implements OnInit {
     });
   }
 
-  EditarProducto(id)
+  EditarProducto()
   {
+    this.router.navigateByUrl('ActualizarProducto');
   }
 
   QuitarProducto(id)
