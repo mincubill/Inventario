@@ -61,6 +61,20 @@ const updateStockProduct = function(product){
     });
 };
 
+const updateAvailableStockProducts = function(product){
+    let query = "UPDATE PRODUCT SET PRODUCT.AVAILABLESTOCK = PRODUCT.AVAILABLESTOCK + ? WHERE PRODUCT.ID = ? ";
+    return new Promise((resolve, reject) => {
+        con.query(query, [product.quantity,product.id],(error, result, fields) => {
+            if(error){
+                console.log(error);
+                reject(error);
+                return;
+            }
+            resolve(result); 
+        });
+    });
+};
+
 const getProducts = function(){
     let query = "SELECT * FROM PRODUCT";
     return new Promise((resolve, reject) => {
@@ -74,6 +88,21 @@ const getProducts = function(){
         });
     });
 };
+
+const getProductById = function(product){
+    let query = "SELECT * FROM PRODUCT WHERE PRODUCT.ID = ?";
+    return new Promise((resolve, reject) => {
+        con.query(query,[product.id], (error, result, fields) => {
+            if(error){
+                console.log(error);
+                reject(error);
+                return;
+            }
+            resolve(JSON.parse(JSON.stringify(result))); 
+        });
+    });
+};
+
 
 const getProductsByStorage = function( storage ){
     let query = "SELECT * FROM PRODUCT WHERE PRODUCT.STORE = ? and product.STATUS = 1";
@@ -110,5 +139,6 @@ module.exports.updateStockProduct = updateStockProduct;
 module.exports.getProducts = getProducts;
 module.exports.getProductsByStorage = getProductsByStorage;
 module.exports.getProductsByStorageStats = getProductsByStorageStats;
-
+module.exports.getProductById = getProductById;
+module.exports.updateAvailableStockProducts = updateAvailableStockProducts;
 

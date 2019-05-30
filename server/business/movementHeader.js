@@ -1,5 +1,6 @@
 const movementHeaderDao = require("../dao/movementHeaderDao.js");
 const movementBodyDao = require("../dao/movementBodyDao.js");
+const productDao = require("../dao/productDao.js");
 
 const createMovementHeader = function(req, res){
     let movementHeader = 
@@ -22,6 +23,7 @@ const createMovementHeader = function(req, res){
                         header: movementHeaderId,
                         quantity: p.quantity
                     }
+                    console.log(movementBody);
                     movementBodyDao.createMovementBody(movementBody).then((success) => {
                         
                     }).catch((error) => {
@@ -49,7 +51,70 @@ const changeStatusMovementHeader = function(req, res){
     };
     console.log(movementHeader)
     movementHeaderDao.changeStatusMovementHeader(movementHeader).then((success) => {
-        console.log(success.toString());
+        let movementBody = 
+        {
+            header: parseInt(req.body.id)
+        };
+        if(parseInt(req.body.status) == 1)
+        {
+           
+            movementBodyDao.getMovementBodysByHeader(movementBody).then((success) => {
+                let movementBodys = success;
+                movementBodys.forEach(p => {
+                    let product= 
+                    {
+                        id: p.PRODUCT_M
+                    };
+                    productDao.getProductById(product).then((success) => {
+                            let product = 
+                            {
+                                id: success[0].ID,
+                                quantity: p.QUANTITY
+                            };
+                            productDao.updateAvailableStockProducts(product).then((success) => {
+
+                            }).catch((error) => {
+                                console.log(error);
+                            });
+                    }).catch((error) => {
+                        console.log(error);
+                    });
+                    
+                });
+            }).catch((error) => {
+                console.log(error);
+            });
+        }
+        else
+        {
+            movementBodyDao.getMovementBodysByHeader(movementBody).then((success) => {
+                let movementBodys = success;
+                movementBodys.forEach(p => {
+                    let product = 
+                    {
+                        id: p.PRODUCT_M
+                    };
+                    productDao.getProductById(product).then((success) => {
+                            let product = 
+                            {
+                                id: success[0].ID,
+                                quantity: -p.QUANTITY
+                            }
+                            productDao.updateAvailableStockProducts(product).then((success) => {
+
+                            }).catch((error) => {
+                                console.log(error);
+                            });
+                    }).catch((error) => {
+                        console.log(error);
+                    });
+                    
+                });
+                
+            }).catch((error) => {
+                console.log(error);
+            });
+        }
         res.send(success.toString());
     }).catch((error) => {
         console.log(error);

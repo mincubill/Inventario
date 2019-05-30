@@ -1,4 +1,4 @@
-const movementBodyrDao = require("../dao/movementBodyDao.js");
+const movementBodyDao = require("../dao/movementBodyDao.js");
 
 const createMovementBody = function(req, res){
     let movementBody = 

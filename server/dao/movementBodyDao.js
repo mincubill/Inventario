@@ -33,14 +33,14 @@ const getMovementBodys = function(){
 const getMovementBodysByHeader = function(movementBody){
     let query = "SELECT * FROM MOVEMENT_BODY WHERE HEADER = ?";
     return new Promise((resolve, reject) => {
-        con.query(query, [movementBody.product,movementBody.header], (error, result, fields) => {
+        con.query(query, [movementBody.header], (error, result, fields) => {
             if(error){
                 console.log(error);
                 reject(error);
                 return;
             }
-            let keys = Object.keys(result[0]);
-            resolve(result[0][keys[0]]); 
+            console.log(JSON.parse(JSON.stringify(result)));
+            resolve(JSON.parse(JSON.stringify(result))); 
         });
     });
 };
