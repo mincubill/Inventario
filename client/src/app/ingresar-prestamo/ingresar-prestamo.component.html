@@ -56,16 +56,16 @@
                         <!-- Directiva que recorre el arreglo de productos en el inventario -->
                         <tr *ngFor="let Producto of Productos">
                             <th scope="row">
-                                {{Producto.nombre}}
+                                {{Producto.NAME}}
                             </th>
                             <td>
-                                {{Producto.total}}
+                                {{Producto.STOCK}}
                             </td>
                             <td>
-                                {{Producto.disponible}}
+                                {{Producto.AVAILABLESTOCK}}
                             </td>
                             <td>
-                                {{Producto.prestado}}
+                                {{Producto.BORROWED}}
                             </td>
                             <td>
                                 <!-- Funcion que es llamada cuando se hace click en el elemento i -->
@@ -107,10 +107,10 @@
                         <!-- Directiva que recorre la lista de productos a prestar -->
                         <tr *ngFor="let ProductoPrestado of ProductosPrestamos">
                             <th scope="row">
-                                {{ProductoPrestado.nombre}}
+                                {{ProductoPrestado.NAME}}
                             </th>
                             <td>
-                                {{ProductoPrestado.disponible}}
+                                {{ProductoPrestado.AVAILABLESTOCK}}
                             </td>
                             <td class="cantidad-producto">
                                 <i class="fas fa-plus"></i>

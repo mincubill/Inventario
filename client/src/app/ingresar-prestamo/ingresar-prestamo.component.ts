@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { DataManagerService } from '../data-manager.service'
-import { FormBuilder, NgControlStatus, FormGroup } from '@angular/forms';  
-import { AgregarProductoComponent } from '../agregar-producto/agregar-producto.component';
+import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog'
+import { FormBuilder, NgControlStatus, FormGroup } from '@angular/forms'; 
+import { PopupComponent, PopupModel } from '../popup/popup.component';
+import { HttpClient } from '@angular/common/http';
+import { TimeoutError } from 'rxjs';
+
 
 @Component({
   selector: 'app-ingresar-prestamo',
@@ -13,8 +16,12 @@ export class IngresarPrestamoComponent implements OnInit {
   
   Productos = [];
   ProductosPrestamos = [];
+  agregado : boolean;
+  error : boolean;
+  user : any;
   PrestamoForm: FormGroup;
-  constructor(private data : DataManagerService, private formBuilder: FormBuilder) 
+
+  constructor(private formBuilder : FormBuilder , public dialog : MatDialog, private http : HttpClient) 
   {
     this.PrestamoForm = this.formBuilder.group(
       {
@@ -33,7 +40,16 @@ export class IngresarPrestamoComponent implements OnInit {
   ///Funcion que carga los productos desde la base de datos
   CargarProductos()
   {
-    this.Productos = this.data.ObtenerProductos();
+    this.http.post('http://127.0.0.1:3000/getProductsByStorageStats', {
+      //Cambiar storage
+      storage: 1
+    }).subscribe( (res : any[] ) => {
+      this.Productos = res;
+      this.EliminarNull(this.Productos);
+    } 
+    , ( error ) => {
+      console.log( error );
+    });
   }
 
   ///Funcion que agrega 1 producto que llega por parametros a la lista de productos del inventario
@@ -66,5 +82,11 @@ export class IngresarPrestamoComponent implements OnInit {
   ///Ingresa el prestamo a la base de datos
   AgregarPrestamo() {
     //Agregar prestamo a la base de datos
+  }
+
+  EliminarNull(productos) {
+    productos.forEach( p => {
+      p.BORROWED = p.BORROWED != null ? p.BORROWED : 0;
+    });
   }
 }
