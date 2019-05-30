@@ -17,9 +17,9 @@ const createProduct = function(product) {
 };
 
 const updateProduct = function(product){
-    let query = "select FN_UPDATE_PRODUCT(?,?,?,?,?,?)";
+    let query = "select FN_UPDATE_PRODUCT(?,?,?,?,?)";
     return new Promise((resolve, reject) => {
-        con.query(query, [product.id,product.name,product.description,product.stock,product.price,product.store], (error, result, fields) => {
+        con.query(query, [product.id,product.name,product.description,product.price,product.store], (error, result, fields) => {
             if(error){
                 console.log(error);
                 reject(error);

@@ -21,12 +21,10 @@ const updateProduct = function(req, res){
         id: parseInt(req.body.id),
         name: req.body.name,
         description: req.body.description,
-        stock: req.body.stock,
         price: req.body.price,
         store: req.body.store
     };
     productDao.updateProduct(product).then((success) => {
-        console.log(success.toString());
         res.send(success.toString());
     }).catch((error) => {
         console.log(error);

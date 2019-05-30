@@ -1,0 +1,46 @@
+<h1 class="h1">
+  Editar Producto
+</h1>
+<form [formGroup]="ActualizarProductoForm" (ngSubmit)="confirmDialog()" class="row">
+  <div class="col-sm-3"></div>
+  <div id="ActualizarProductoForm" class="form-group panel panel-default col-sm-6">
+    <div class="panel-body">
+      <label for="producto">
+        Producto
+      </label>
+      <select class="custom-select my-1 mr-sm-2" id="producto" formControlName="producto" (change)="ProductoChanged($event.target.value)">
+        <option *ngFor="let Producto of Productos" value={{Producto.ID}} selected>
+          {{Producto.NAME}}
+        </option>
+      </select>
+      <label for="nombre">
+        Nombre:
+      </label>
+      <input type="text" formControlName="nombre" class="form-control" id="nombre">
+      <label for="descripcion">
+        Descripción:
+      </label>
+      <input type="text" formControlName="descripcion" class="form-control" id="descripcion" name="descripcion">
+      <label for="precio">
+        Precio unitario:
+      </label>
+      <input type="number" formControlName="precio" class="form-control" id="precio" name="precio">
+      <label for="inventario">
+          Inventario
+        </label>
+        <select class="custom-select my-1 mr-sm-2" id="inventario" formControlName="inventario">
+          <option value="1">
+            Bodega pañol
+          </option>
+          <option value="2">
+            Bodega punto
+          </option>
+        </select>
+      <br>
+      <div class="alert alert-success" role="alert" *ngIf="agregado">Producto Actualizado</div>
+      <div class="alert alert-success" role="alert" *ngIf="error">Ocurrio un error</div>
+      <input type="submit" class="btn btn-warning" value="Guardar">
+    </div>
+  </div>
+  <div class="col-sm-3"></div>
+</form>

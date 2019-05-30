@@ -21,6 +21,7 @@ import { RetiroProductosComponent } from './retiro-productos/retiro-productos.co
 import { RegistroComponent } from './registro/registro.component';
 import { PopupComponent } from './popup/popup.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ActualizarProductoComponent } from './actualizar-producto/actualizar-producto.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PerfilUsuarioComponent,
     RetiroProductosComponent,
     RegistroComponent,
-    PopupComponent
+    PopupComponent,
+    ActualizarProductoComponent
   ],
   imports: [
     BrowserModule,
