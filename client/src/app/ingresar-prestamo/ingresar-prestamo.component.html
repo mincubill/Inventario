@@ -4,22 +4,18 @@
         <div id="AgregarPrestamoForm" class="form-group col-sm-6">
             <!-- Formulario completo del alumno el cual traera un poco de su informacion personal
             y datos de contacto -->
-            <label for="rut">
-                Rut:
+            <label for="pedido">
+                Fecha de pedido
             </label>
-            <input type="text" id="rut" class="form-control" required formControlName="rut">
-            <label for="nombre">
-                Nombre
+            <input type="date" id="fechaPedido" class="form-control" required formControlName="fechaPedido" required>
+            <label for="descripcion">
+                Descripcion
             </label>
-            <input type="text" id="nombre" class="form-control" required formControlName="nombre">
-            <label for="apellido">
-                Apellido
+            <input type="text" id="descripcion" class="form-control" required formControlName="descripcion" >
+            <label for="dias">
+                Dias de prestamo
             </label>
-            <input type="text" id="apellido" class="form-control" required formControlName="apellido">
-            <label for="correo">
-                Correo
-            </label>
-            <input type="text" id="correo" class="form-control" required formControlName="correo">
+            <input type="number" id="dias" class="form-control" required formControlName="dias" required>
             <br>
             <div class="product-table">
                 <h2 class="ingresar-prestamo-h2">
@@ -113,9 +109,9 @@
                                 {{ProductoPrestado.AVAILABLESTOCK}}
                             </td>
                             <td class="cantidad-producto">
-                                <i class="fas fa-plus"></i>
-                                <input class="form-control" type="number" value="0">
-                                <i class="fas fa-minus"></i>
+                                <i class="fas fa-minus" (click)="DisminuirCantidad(ProductoPrestado.ID)"></i>
+                                <input class="form-control" type="number" formControlName="cantidad" disabled min="0">
+                                <i class="fas fa-plus" (click)="AumentarCantidad(ProductoPrestado.ID)"></i>
                             </td>
                             <td>
                                 <!-- Funcion que es llamada cuando se le hace click al icono para eliminar un producto del pedido -->
@@ -131,3 +127,5 @@
         </div>
     <div class="col-sm-3"></div>
 </form>
+<div class="alert alert-success" role="alert" *ngIf="agregado">Producto Agregado</div>
+<div class="alert alert-success" role="alert" *ngIf="error">Ocurrio un error</div>

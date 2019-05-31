@@ -16,6 +16,7 @@ export class IngresarPrestamoComponent implements OnInit {
   
   Productos = [];
   ProductosPrestamos = [];
+  CantidadProducto = [];
   agregado : boolean;
   error : boolean;
   user : any;
@@ -25,10 +26,10 @@ export class IngresarPrestamoComponent implements OnInit {
   {
     this.PrestamoForm = this.formBuilder.group(
       {
-        rut: [''],
-        nombre: [''],
-        apellido: [''],
-        correo: ['']
+        fechaPedido: [new Date().toISOString().substring(0, 10)],
+        descripcion: [''],
+        dias: [''],
+        cantidad: 0
       }
     );
   }
@@ -63,6 +64,7 @@ export class IngresarPrestamoComponent implements OnInit {
   //Y la elimina de la lista de productos del inventario
   AgregarProductoPedido(Producto) {
     this.ProductosPrestamos.push(Producto);
+    this.CantidadProducto.push({proId: Producto.ID, quantity: 0});
     this.EliminarProducto(Producto);
   }
 
@@ -70,6 +72,7 @@ export class IngresarPrestamoComponent implements OnInit {
   ///de la lista de productos para el pedido
   EliminarProductoPedido(Producto) {
     this.ProductosPrestamos.splice(this.ProductosPrestamos.indexOf(Producto), 1);
+    this.CantidadProducto.splice(this.CantidadProducto.indexOf({proId: Producto.ID}), 1);
   }
 
   ///Con indexOf consigue el index del producto que llega por parametros y con el .splice lo elimina
@@ -82,11 +85,71 @@ export class IngresarPrestamoComponent implements OnInit {
   ///Ingresa el prestamo a la base de datos
   AgregarPrestamo() {
     //Agregar prestamo a la base de datos
+    this.http.post('http://127.0.0.1:3000/createMovementHeader', {
+      dateBegin: this.PrestamoForm.controls.fechaPedido.value,
+      description: this.PrestamoForm.controls.descripcion.value,
+      days: this.PrestamoForm.controls.dias.value,
+      user: 19845227,
+      products: this.CantidadProducto
+    }).subscribe( ( res : any ) => {
+      this.agregado = true;
+      alert('Pedido agregado axitosamente');
+    },
+    ( error ) => {
+      console.log( error );
+      this.error = true;
+    });
   }
 
+  //Ingresa la cantidad en 1 de un producto para el pedido
+  AumentarCantidad (producto) {
+    this.CantidadProducto.forEach( ( p ) => {
+      if(p.proId == producto) {
+        p.quantity += 1;
+        this.PrestamoForm.controls.cantidad.setValue(p.quantity);
+        return;
+      }
+    });
+  }
+
+  //Disminuye la cantidad en 1 de un producto para el pedido
+  DisminuirCantidad (producto) {
+    this.CantidadProducto.forEach( ( p ) => {
+      if(p.proId == producto) {
+        p.quantity -= 1;
+        this.PrestamoForm.controls.cantidad.setValue(p.quantity);
+        return;
+      }
+    });
+  }
+
+  //Elimina los nulls del retorno de la base de datos
   EliminarNull(productos) {
     productos.forEach( p => {
       p.BORROWED = p.BORROWED != null ? p.BORROWED : 0;
     });
+  }
+
+  confirmDialog() {
+    const dialogData = new PopupModel('Confirmacion', '¿Guardar producto ingresado?');
+    const dialogRef = this.dialog.open(PopupComponent, {
+      
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if(res)
+      {
+        this.AgregarPrestamo();
+        this.LimpiarCampos();
+      }
+    });
+  };
+
+  LimpiarCampos() {
+    this.PrestamoForm.controls.fechaPedido.setValue('');
+    this.PrestamoForm.controls.descripcion.setValue('');
+    this.PrestamoForm.controls.dias.setValue('');
+    this.PrestamoForm.controls.cantidad.setValue('');
   }
 }
