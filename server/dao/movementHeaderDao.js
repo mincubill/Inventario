@@ -59,10 +59,10 @@ const getLatestId = function(){
     });
 };
 
-const getMovementHeadersByUser = function(movementHeader){
-    let query = "SELECT * FROM MOVEMENT_HEADER WHERE USER_M = ?";
+const getMovementHeadersByUser = function(user){
+    let query = "select movement_header.ID, movement_header.DATE_BEGIN, movement_header.DAYS, movement_header.USER_M, movement_header.DESCRIPTION ,(select count(movement_body.ID) FROM movement_body where movement_header.ID = movement_body.HEADER) as PRODUCTS, movement_header.DEBT from movement_header where movement_header.STATUS = 0 and movement_header.USER_M = ?";
     return new Promise((resolve, reject) => {
-        con.query(query,[movementHeader.user] ,(error, result, fields) => {
+        con.query(query,[user] ,(error, result, fields) => {
             if(error){
                 console.log(error);
                 reject(error);
@@ -74,9 +74,10 @@ const getMovementHeadersByUser = function(movementHeader){
 };
 
 const getMovementHeaderById = function(movementHeader){
-    let query = "SELECT * FROM MOVEMENT_HEADER WHERE ID = ?";
+    console.log(movementHeader);
+    let query = "select movement_header.ID, movement_header.DATE_BEGIN, movement_header.DAYS, movement_header.USER_M, movement_header.DESCRIPTION ,(select count(movement_body.ID) FROM movement_body where movement_header.ID = movement_body.HEADER) as PRODUCTS, movement_header.DEBT from movement_header where movement_header.STATUS = 0 and movement_header.ID = ?";
     return new Promise((resolve, reject) => {
-        con.query(query,[movementHeader.id] ,(error, result, fields) => {
+        con.query(query,[movementHeader] ,(error, result, fields) => {
             if(error){
                 console.log(error);
                 reject(error);

@@ -92,8 +92,10 @@ export class IngresarPrestamoComponent implements OnInit {
       user: 19845227,
       products: this.CantidadProducto
     }).subscribe( ( res : any ) => {
-      this.agregado = true;
-      alert('Pedido agregado axitosamente');
+      if(+res == 1) {
+        this.agregado = true;
+        alert('Pedido agregado axitosamente');
+      }
     },
     ( error ) => {
       console.log( error );

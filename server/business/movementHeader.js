@@ -49,7 +49,6 @@ const changeStatusMovementHeader = function(req, res){
         id: parseInt(req.body.id),
         status: parseInt(req.body.status)
     };
-    console.log(movementHeader)
     movementHeaderDao.changeStatusMovementHeader(movementHeader).then((success) => {
         let movementBody = 
         {
@@ -131,26 +130,18 @@ const getMovementHeaders = function(req, res){
 };
 
 const getMovementHeadersByUser = function(req, res){
-    let movementHeader = 
-    {
-        user: parserInt(req.body.user),
-    };
-    movementHeaderDao.getMovementHeadersByUser(movementHeader).then((success) => {
-        console.log(success.toString());
-        res.send(success.toString());
+    let user = parseInt(req.body.user);
+    movementHeaderDao.getMovementHeadersByUser(user).then((success) => {
+        res.send(success);
     }).catch((error) => {
         console.log(error);
     });
 };
 
 const getMovementHeaderById = function(req, res){
-    let movementHeader = 
-    {
-        id: parserInt(req.body.id),
-    };
-    movementHeaderDao.getMovementHeaderById(movementHeader).then((success) => {
-        console.log(success.toString());
-        res.send(success.toString());
+    let idMovementHeader = parseInt(req.body.idMovementHeader);
+    movementHeaderDao.getMovementHeaderById(idMovementHeader).then((success) => {
+        res.send(success);
     }).catch((error) => {
         console.log(error);
     });

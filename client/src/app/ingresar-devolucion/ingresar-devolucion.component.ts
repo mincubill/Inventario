@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { DataManagerService } from '../data-manager.service'
-import { FormBuilder, NgControlStatus, FormGroup } from '@angular/forms';  
+import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog'
+import { FormBuilder, NgControlStatus, FormGroup } from '@angular/forms'; 
+import { PopupComponent, PopupModel } from '../popup/popup.component';
+import { HttpClient } from '@angular/common/http';
+import { TimeoutError } from 'rxjs';
+
 
 @Component({
   selector: 'app-ingresar-devolucion',
@@ -9,24 +13,87 @@ import { FormBuilder, NgControlStatus, FormGroup } from '@angular/forms';
 })
 export class IngresarDevolucionComponent implements OnInit {
 
-  Productos = [];
-  IngresarDevolucionForm : FormGroup;
+  Prestamos = [];
+  BuscarPrestamoForm : FormGroup;
+  agregado : boolean;
+  error : boolean;
+  user : any;
 
-  constructor(private data : DataManagerService, private formBuilder: FormBuilder) { 
-    this.IngresarDevolucionForm = formBuilder.group(
-      {
-        rut: [''],
-        producto: ['']
-      }
-    );
+  constructor(private formBuilder : FormBuilder , public dialog : MatDialog, private http : HttpClient) { 
+    this.BuscarPrestamoForm = this.formBuilder.group({
+      prestamo: ['']
+    });
   }
 
   ngOnInit() {
-    this.CargarProductos();
+
   }
 
-  CargarProductos() {
-    this.Productos = this.data.ObtenerProductos();
+  BuscarPrestamo() {
+    if(this.BuscarPrestamoForm.controls.prestamo.value.split('-').length > 1) {
+      this.ConseguirPrestamosPorRut();
+    }
+    else {
+      this.ConseguirPrestamosPorCodigo();
+    }
   }
+
+  ConseguirPrestamosPorRut() {
+    this.http.post('http://127.0.0.1:3000/getMovementHeadersByUser', {
+      user: this.BuscarPrestamoForm.controls.prestamo.value.split('-')[0]
+    }).subscribe( ( res : any[] ) => {
+      this.Prestamos = res;
+    },
+    ( error ) => {
+      console.log( error );
+    });
+  };
+
+  ConseguirPrestamosPorCodigo() {
+    this.http.post('http://127.0.0.1:3000/getMovementHeaderById', {
+      idMovementHeader: this.BuscarPrestamoForm.controls.prestamo.value
+    }).subscribe( ( res : any[] ) => {
+      this.Prestamos = res;
+    },
+    ( error ) => {
+      console.log( error );
+    });
+  }
+
+  IngresarDevolucion( idPrestamo ) {
+    this.http.post('http://127.0.0.1:3000/changeStatusMovementHeader', {
+      id: idPrestamo,
+      status: 1
+    }).subscribe( ( res : any ) => {
+      if(+res == 1) {
+        this.agregado = true;
+      }
+    },
+    ( error ) => {
+      console.log( error );
+      this.error = true;
+    });
+  }
+
+  ConfirmDialog( idPrestamo ) {
+    const dialogData = new PopupModel('Confirmacion', 'Seguro que desea realizar la devolución?');
+    const dialogRef = this.dialog.open(PopupComponent, {
+      
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if(res)
+      {
+        this.IngresarDevolucion( idPrestamo );
+        this.LimpiarCampos();
+      }
+    });
+  }
+
+  LimpiarCampos() {
+    this.Prestamos = [];
+    this.BuscarPrestamoForm.controls.prestamo.setValue('');
+  };
 
 }
