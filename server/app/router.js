@@ -2,6 +2,7 @@ const user = require("../business/user");
 const product = require("../business/product");
 const movementHeader = require("../business/movementHeader");
 const movementBody = require("../business/movementBody");
+const stadistics = require("../business/stadistics");
 
 
 module.exports = function(app)
@@ -100,5 +101,13 @@ module.exports = function(app)
 
     app.post("/getMovementBodysByHeader", (req, res) => {
         movementBody.getMovementBodysByHeader(req, res);
+    });
+
+    app.get("/loans", (req, res) => {
+        stadistics.loans(req, res);
+    });
+
+    app.get("/defaulter", (req, res) => {
+        stadistics.defaulter(req, res);
     });
 }

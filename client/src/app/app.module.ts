@@ -22,6 +22,7 @@ import { RegistroComponent } from './registro/registro.component';
 import { PopupComponent } from './popup/popup.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ActualizarProductoComponent } from './actualizar-producto/actualizar-producto.component';
+import { EstadisticasComponent } from './estadisticas/estadisticas.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ActualizarProductoComponent } from './actualizar-producto/actualizar-pr
     RetiroProductosComponent,
     RegistroComponent,
     PopupComponent,
-    ActualizarProductoComponent
+    ActualizarProductoComponent,
+    EstadisticasComponent
   ],
   imports: [
     BrowserModule,
