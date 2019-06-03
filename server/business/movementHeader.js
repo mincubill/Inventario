@@ -122,8 +122,7 @@ const changeStatusMovementHeader = function(req, res){
 
 const getMovementHeaders = function(req, res){
     movementHeaderDao.getMovementHeaders().then((success) => {
-        console.log(success.toString());
-        res.send(success.toString());
+        res.send(success);
     }).catch((error) => {
         console.log(error);
     });

@@ -31,7 +31,7 @@ const changeStatusMovementHeader = function(movementHeader){
 };
 
 const getMovementHeaders = function(){
-    let query = "SELECT * FROM MOVEMENT_HEADER";
+    let query = "select movement_header.ID, movement_header.DATE_BEGIN, movement_header.DAYS, movement_header.USER_M, movement_header.DESCRIPTION ,(select count(movement_body.ID) FROM movement_body where movement_header.ID = movement_body.HEADER) as PRODUCTS, movement_header.DEBT from movement_header where movement_header.STATUS = 0 ORDER BY movement_header.DATE_BEGIN desc";
     return new Promise((resolve, reject) => {
         con.query(query, (error, result, fields) => {
             if(error){
