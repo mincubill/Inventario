@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataManagerService } from '../data-manager.service'
 import { FormBuilder, NgControlStatus, FormGroup } from '@angular/forms';  
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import { FormBuilder, NgControlStatus, FormGroup } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   LoginForm: FormGroup;
-  constructor( private data : DataManagerService, private formBuilder: FormBuilder ) { 
+  constructor( private data : DataManagerService, private formBuilder: FormBuilder, private http : HttpClient) { 
     this.LoginForm = this.formBuilder.group({
       username: [''],
       password: [''],
@@ -18,6 +19,29 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  Login()
+  {
+    this.http.post('http://127.0.0.1:3000/login', {
+      username: this.LoginForm.controls.username.value,
+      password: this.LoginForm.controls.password.value
+    }).subscribe( ( res : any ) => 
+    {
+      if(res[0] != null && res[0] != undefined) 
+      {
+        localStorage.setItem('name', res[0].NAME);
+        localStorage.setItem('type', res[0].TYPE);        
+      }
+      else
+      {
+        alert('Usuario o contraseña incorrectos');
+      }
+    },
+    (error) =>
+    {
+      console.log(error);
+    });
   }
 
 }
