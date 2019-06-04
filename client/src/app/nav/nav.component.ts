@@ -25,7 +25,8 @@ export class NavComponent implements OnInit {
     localStorage.removeItem('rut');    
     localStorage.removeItem('name');
     localStorage.removeItem('type');
-    this.router.navigate(['']);
+    location.href = '';
+    // this.router.navigate(['']);
   }
 
 

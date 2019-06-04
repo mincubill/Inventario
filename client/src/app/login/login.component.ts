@@ -27,12 +27,14 @@ export class LoginComponent implements OnInit {
     this.http.post( 'http://127.0.0.1:3000/login', {      
       username: this.LoginForm.controls.username.value,
       password: this.LoginForm.controls.password.value      
-    }).subscribe( ( res : any ) => {      
+    }).subscribe( ( res : any ) => {
+      console.log(res);
       if(  res != null && res != undefined ) {        
         localStorage.setItem( 'rut', res.RUT );
         localStorage.setItem( 'name', res.NAME );
         localStorage.setItem( 'type', res.TYPE ); 
-        this.router.navigate(['']);
+        // this.router.navigate(['']);
+        location.href = '';
       }
       else {
         alert( 'Usuario o contraseña incorrectos' );

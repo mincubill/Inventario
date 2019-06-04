@@ -6,10 +6,7 @@ const login = function(req, res){
         userName: req.body.username,
         pass: req.body.password
     };
-    console.log(user.userName);
-    console.log(user.pass);
     userDao.login(user.userName, user.pass).then((success) => {
-        console.log(success.toString());
         res.send(success);
     }).catch((error) => {
         console.log(error);

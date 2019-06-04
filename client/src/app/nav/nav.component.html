@@ -74,11 +74,11 @@
           Iniciar sesion
         </a>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
           <a class="nav-link" routerLink="/Registro">
-            Resgistrarse
+            Registrarse
           </a>
-        </li>
+        </li> -->
     </ul>
   </div>
   <ng-template #elseBlock>
@@ -87,11 +87,14 @@
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <a routerLink="/PerfilUsuario">
-            Bienvenido {{usuario.username}}
+            Bienvenido {{usuario}}
           </a>
         </li>
+        &nbsp;&nbsp;
         <li class="nav-item">            
-            <button (click)="LogOut()" class="glyphicon glyphicon-off">Cerrar sesion</button>                
+          <a class="btn btn-info btn-lg" (click)="LogOut()">
+            <i class="fas fa-sign-out-alt"></i> Cerrar Sesion
+          </a>         
         </li>
       </ul>
     </div>
