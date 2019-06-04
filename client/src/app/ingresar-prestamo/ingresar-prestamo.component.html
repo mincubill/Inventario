@@ -127,9 +127,9 @@
                 </table>
             </div>
             <br>
+            <div class="alert alert-success" role="alert" *ngIf="agregado">Prestamo realizado correctamente</div>
+            <div class="alert alert-success" role="alert" *ngIf="error">Ocurrio un error</div>
             <input type="submit" class="btn btn-warning" value="Guardar">
         </div>
     <div class="col-sm-3"></div>
 </form>
-<div class="alert alert-success" role="alert" *ngIf="agregado">Producto Agregado</div>
-<div class="alert alert-success" role="alert" *ngIf="error">Ocurrio un error</div>

@@ -25,6 +25,6 @@ export class VerPrestamoComponent implements OnInit {
   }
 
   PerfilUsuario() {
-    this.router.navigateByUrl('PerfilUsuario');
+    // this.router.navigateByUrl('PerfilUsuario');
   }
 }

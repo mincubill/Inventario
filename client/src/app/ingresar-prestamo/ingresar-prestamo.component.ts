@@ -95,7 +95,7 @@ export class IngresarPrestamoComponent implements OnInit {
     }).subscribe( ( res : any ) => {
       if(+res == 1) {
         this.agregado = true;
-        alert('Pedido agregado axitosamente');
+        this.LimpiarCampos();
       }
     },
     ( error ) => {
@@ -150,6 +150,9 @@ export class IngresarPrestamoComponent implements OnInit {
   };
 
   LimpiarCampos() {
+    this.ngOnInit();
+    this.ProductosPrestamos = [];
+    this.CantidadProducto = [];
     this.PrestamoForm.controls.fechaPedido.setValue('');
     this.PrestamoForm.controls.descripcion.setValue('');
     this.PrestamoForm.controls.dias.setValue('');
