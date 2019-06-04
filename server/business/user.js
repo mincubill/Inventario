@@ -3,11 +3,10 @@ const userDao = require("../dao/userDao.js");
 const login = function(req, res){
     let user = 
     {
-        userName: req.body.userName,
-        pass: req.body.pass
+        userName: req.body.username,
+        pass: req.body.password
     };
-    userDao.login(user).then((success) => {
-        console.log(success.toString());
+    userDao.login(user.userName, user.pass).then((success) => {
         res.send(success);
     }).catch((error) => {
         console.log(error);
