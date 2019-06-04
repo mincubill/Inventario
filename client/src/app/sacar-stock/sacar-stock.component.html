@@ -1,4 +1,4 @@
-<h1 class="h1"></h1>
+<h1 class="h1">Sacar stock a un producto</h1>
 <form [formGroup]="SacarStockForm" (ngSubmit)="SacarProducto()" class="row">
   <div class="col-sm-3"></div>  
   <div id="SacarStockForm" class='form-group col-sm-6'>
@@ -17,7 +17,7 @@
     <label for="cantidad">
       Cantidad:
     </label>
-    <input type="number"  class="form-control" name="cantidad" id="cantidad" formControlName="cantidad" max={{SacarStockForm.controls.cantidad.value}}>
+    <input type="number"  class="form-control" name="cantidad" id="cantidad" formControlName="cantidad" max={{SacarStockForm.controls.cantidad.value}} placeholder="Ingrese la nueva cantidad de stock del producto">
     <br>
     <input type="submit" class="btn btn-warning" value="Guardar"> 
   </div>

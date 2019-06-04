@@ -1,5 +1,5 @@
 <h1 class="h1">
-  Editar Producto
+  Editar datos del producto roducto
 </h1>
 <form [formGroup]="ActualizarProductoForm" (ngSubmit)="confirmDialog()" class="row">
   <div class="col-sm-3"></div>
@@ -9,26 +9,26 @@
         Producto
       </label>
       <select class="custom-select my-1 mr-sm-2" id="producto" formControlName="producto" (change)="ProductoChanged($event.target.value)">
-        <option *ngFor="let Producto of Productos" value={{Producto.ID}} selected>
+        <option *ngFor="let Producto of Productos" value={{Producto.ID}}>
           {{Producto.NAME}}
         </option>
       </select>
       <label for="nombre">
         Nombre:
       </label>
-      <input type="text" formControlName="nombre" class="form-control" id="nombre">
+      <input type="text" formControlName="nombre" class="form-control" id="nombre" placeholder="Ingresar nombre del producto">
       <label for="descripcion">
         Descripción:
       </label>
-      <input type="text" formControlName="descripcion" class="form-control" id="descripcion" name="descripcion">
+      <input type="text" formControlName="descripcion" class="form-control" id="descripcion" name="descripcion" placeholder="Ingresar descripcion del producto">
       <label for="precio">
         Precio unitario:
       </label>
-      <input type="number" formControlName="precio" class="form-control" id="precio" name="precio">
+      <input type="number" formControlName="precio" class="form-control" id="precio" name="precio" placeholder="Ingresar precio unitario del producto">
       <label for="inventario">
           Inventario
         </label>
-        <select class="custom-select my-1 mr-sm-2" id="inventario" formControlName="inventario">
+        <select class="custom-select my-1 mr-sm-2" id="inventario" formControlName="inventario" required>
           <option value="1">
             Bodega pañol
           </option>

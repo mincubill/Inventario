@@ -90,7 +90,7 @@ export class IngresarPrestamoComponent implements OnInit {
       dateBegin: this.PrestamoForm.controls.fechaPedido.value,
       description: this.PrestamoForm.controls.descripcion.value,
       days: this.PrestamoForm.controls.dias.value,
-      user: this.PrestamoForm.controls.rut.value,
+      user: this.PrestamoForm.controls.rut.value.toString().replace(/[.*+?^${}()|[\]\\]/g, ''),
       products: this.CantidadProducto
     }).subscribe( ( res : any ) => {
       if(+res == 1) {
@@ -153,6 +153,7 @@ export class IngresarPrestamoComponent implements OnInit {
     this.ngOnInit();
     this.ProductosPrestamos = [];
     this.CantidadProducto = [];
+    this.PrestamoForm.controls.rut.setValue('');
     this.PrestamoForm.controls.fechaPedido.setValue('');
     this.PrestamoForm.controls.descripcion.setValue('');
     this.PrestamoForm.controls.dias.setValue('');

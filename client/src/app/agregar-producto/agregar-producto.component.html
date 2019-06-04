@@ -1,5 +1,5 @@
 <h1 class="h1">
-  Agregar producto
+  Agregar producto al inventario
 </h1>
 <form [formGroup]="AgregarForm" (ngSubmit)="confirmDialog()" class="row">
   <div class="col-sm-3"></div>
@@ -8,19 +8,19 @@
       <label for="nombre">
         Nombre:
       </label>
-      <input type="text" formControlName="nombre" class="form-control" id="nombre">
+      <input type="text" formControlName="nombre" class="form-control" id="nombre" placeholder="Ingresar nombre del producto">
       <label for="descripcion">
         Descripción:
       </label>
-      <input type="text" formControlName="descripcion" class="form-control" id="descripcion" name="descripcion">
+      <input type="text" formControlName="descripcion" class="form-control" id="descripcion" name="descripcion" placeholder="Ingresar una breve descripcion del producto">
       <label for="cantidad">
         Cantidad:
       </label>
-      <input type="number" formControlName="total" class="form-control" id="cantidad" name="cantidad">
+      <input type="number" formControlName="total" class="form-control" id="cantidad" name="cantidad" placeholder="Ingresar la cantidad de productos a ingresar">
       <label for="precio">
         Precio unitario:
       </label>
-      <input type="number" formControlName="precio" class="form-control" id="precio" name="precio">
+      <input type="number" formControlName="precio" class="form-control" id="precio" name="precio" placeholder="Ingresar el valor unitario del producto">
       <br>
       <div class="alert alert-success" role="alert" *ngIf="agregado">Producto Agregado</div>
       <div class="alert alert-success" role="alert" *ngIf="error">Ocurrio un error</div>

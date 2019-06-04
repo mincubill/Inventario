@@ -1,4 +1,4 @@
-<h1 class="h1">Ingresar Stock</h1>
+<h1 class="h1">Ingresar Stock a un producto</h1>
 <form [formGroup]="IngresarStockForm" (ngSubmit)="AgregarStock()" class="row">
   <div class="col-sm-3"></div>  
   <div id="AgregarStockForm" class='form-group col-sm-6'>
@@ -17,7 +17,7 @@
     <label for="cantidad">
       Cantidad:
     </label>
-    <input type="number"  class="form-control" formControlName="cantidad" name="cantidad" id="cantidad" min={{IngresarStockForm.controls.cantidad.value}}>
+    <input type="number"  class="form-control" formControlName="cantidad" name="cantidad" id="cantidad" min={{IngresarStockForm.controls.cantidad.value}} placeholder="Ingresar la nueva cantidad de stock del producto">
     <br>
     <input type="submit" class="btn btn-warning" value="Guardar"> 
   </div>
