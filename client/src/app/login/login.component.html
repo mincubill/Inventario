@@ -5,9 +5,15 @@
     </div>
     <form [formGroup]="LoginForm" (ngSubmit)="Login()">
       <input type="text" id="username" class="fadeIn second" name="login" placeholder="Usuario" formControlName="username">
-      <input type="text" id="password" class="fadeIn third" name="login" placeholder="Contraseña" formControlName="password">
+      <input type="password" id="password" class="fadeIn third" name="login" placeholder="Contraseña" formControlName="password">
       <input type="submit" class="fadeIn fourth" value="Log In">
-    </form>
+
+      <div *ngIf="validador" class="alert alert-danger ">
+        <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
+        <strong>Nombre o contraseña incorrectos</strong> Intente nuevamente
+      </div>
+    </form>    
+
     <div id="formFooter">
       <a class="underlineHover" href="#">
         ¿Olvidaste tu contraseña?
