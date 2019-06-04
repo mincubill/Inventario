@@ -1,9 +1,9 @@
 const con = require("../dao/connection.js");
 
-const login = function(user){
+const login = function(userName, pass){
     let query = "call SP_LOGIN(?,?)";
     return new Promise((resolve, reject) => {
-        con.query(query, [user.userName,user.pass], (error, result, fields) => {
+        con.query(query, [userName, pass], (error, result, fields) => {
             if(error){
                 console.log(error);
                 reject(error);

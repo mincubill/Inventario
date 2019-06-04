@@ -3,7 +3,7 @@
     <div class="fadeIn first">
       <img src="assets/img/loginIcon.png" id="icon" alt="User Icon" />
     </div>
-    <form [formGroup]="LoginForm">
+    <form [formGroup]="LoginForm" (ngSubmit)="Login()">
       <input type="text" id="username" class="fadeIn second" name="login" placeholder="Usuario" formControlName="username">
       <input type="text" id="password" class="fadeIn third" name="login" placeholder="Contraseña" formControlName="password">
       <input type="submit" class="fadeIn fourth" value="Log In">
