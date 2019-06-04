@@ -74,7 +74,6 @@ const getMovementHeadersByUser = function(user){
 };
 
 const getMovementHeaderById = function(movementHeader){
-    console.log(movementHeader);
     let query = "select movement_header.ID, movement_header.DATE_BEGIN, movement_header.DAYS, movement_header.USER_M, movement_header.DESCRIPTION ,(select count(movement_body.ID) FROM movement_body where movement_header.ID = movement_body.HEADER) as PRODUCTS, movement_header.DEBT from movement_header where movement_header.STATUS = 0 and movement_header.ID = ?";
     return new Promise((resolve, reject) => {
         con.query(query,[movementHeader] ,(error, result, fields) => {

@@ -23,7 +23,6 @@ const createMovementHeader = function(req, res){
                         header: movementHeaderId,
                         quantity: p.quantity
                     }
-                    console.log(movementBody);
                     movementBodyDao.createMovementBody(movementBody).then((success) => {
                         
                     }).catch((error) => {
@@ -148,7 +147,6 @@ const getMovementHeaderById = function(req, res){
 
 const getMovementHeaderWithDebt = function(req, res){
     movementHeaderDao.getMovementHeaderWithDebt().then((success) => {
-        console.log(success.toString());
         res.send(success.toString());
     }).catch((error) => {
         console.log(error);

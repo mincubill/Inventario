@@ -26,6 +26,7 @@ export class IngresarPrestamoComponent implements OnInit {
   {
     this.PrestamoForm = this.formBuilder.group(
       {
+        rut: [''],
         fechaPedido: [new Date().toISOString().substring(0, 10)],
         descripcion: [''],
         dias: [''],
@@ -89,7 +90,7 @@ export class IngresarPrestamoComponent implements OnInit {
       dateBegin: this.PrestamoForm.controls.fechaPedido.value,
       description: this.PrestamoForm.controls.descripcion.value,
       days: this.PrestamoForm.controls.dias.value,
-      user: 19845227,
+      user: this.PrestamoForm.controls.rut.value,
       products: this.CantidadProducto
     }).subscribe( ( res : any ) => {
       if(+res == 1) {

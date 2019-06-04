@@ -47,6 +47,7 @@ export class IngresarDevolucionComponent implements OnInit {
     ( error ) => {
       console.log( error );
     });
+    this.LimpiarCampos();
   };
 
   ConseguirPrestamosPorCodigo() {
@@ -58,6 +59,7 @@ export class IngresarDevolucionComponent implements OnInit {
     ( error ) => {
       console.log( error );
     });
+    this.LimpiarCampos();
   }
 
   IngresarDevolucion( idPrestamo ) {
@@ -67,6 +69,7 @@ export class IngresarDevolucionComponent implements OnInit {
     }).subscribe( ( res : any ) => {
       if(+res == 1) {
         this.agregado = true;
+        this.RemoverPrestamoLocal(idPrestamo);
       }
     },
     ( error ) => {
@@ -86,13 +89,20 @@ export class IngresarDevolucionComponent implements OnInit {
       if(res)
       {
         this.IngresarDevolucion( idPrestamo );
-        this.LimpiarCampos();
+      }
+    });
+  };
+
+  RemoverPrestamoLocal(idPrestamo) {
+    this.Prestamos.forEach( ( p ) => {
+      if(p.ID == idPrestamo) {
+        this.Prestamos.splice(this.Prestamos.indexOf(p), 1);
+        return;
       }
     });
   }
 
   LimpiarCampos() {
-    this.Prestamos = [];
     this.BuscarPrestamoForm.controls.prestamo.setValue('');
   };
 
