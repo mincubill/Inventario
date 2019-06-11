@@ -1,7 +1,7 @@
-const   app = require("express")(),
+ const   app = require("express")(),
         bodyParser = require("body-parser"),
         router = require("./app/router.js"),
-        middleware = require("./app/middleware.js")
+        middleware = require("./app/middleware.js"),
         PORT = 3000;
 
 app.use(bodyParser.json());

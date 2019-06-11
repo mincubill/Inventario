@@ -3,6 +3,7 @@ const product = require("../business/product");
 const movementHeader = require("../business/movementHeader");
 const movementBody = require("../business/movementBody");
 const stadistics = require("../business/stadistics");
+const email = require("../business/mailer");
 
 
 module.exports = function(app)
@@ -109,5 +110,9 @@ module.exports = function(app)
 
     app.get("/defaulter", (req, res) => {
         stadistics.defaulter(req, res);
+    });
+
+    app.get("/testemail",(req,res) => {
+        email.sendEmail(req,res);
     });
 }
