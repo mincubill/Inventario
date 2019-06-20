@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog'
-import { FormBuilder, NgControlStatus, FormGroup } from '@angular/forms'; 
+import { FormBuilder, NgControlStatus, FormGroup, Validators } from '@angular/forms'; 
 import { PopupComponent, PopupModel } from '../popup/popup.component';
 import { HttpClient } from '@angular/common/http';
 import { TimeoutError } from 'rxjs';
@@ -26,11 +26,11 @@ export class IngresarPrestamoComponent implements OnInit {
   {
     this.PrestamoForm = this.formBuilder.group(
       {
-        rut: [''],
-        fechaPedido: [new Date().toISOString().substring(0, 10)],
-        descripcion: [''],
-        dias: [''],
-        cantidad: 0
+        rut: ['', [Validators.required]],
+        fechaPedido: [new Date().toISOString().substring(0, 10), [Validators.required]],
+        descripcion: ['', [Validators.required]],
+        dias: ['', [Validators.required, Validators.min(0)]],
+        cantidad: [0]
       }
     );
   }
@@ -86,22 +86,27 @@ export class IngresarPrestamoComponent implements OnInit {
   ///Ingresa el prestamo a la base de datos
   AgregarPrestamo() {
     //Agregar prestamo a la base de datos
-    this.http.post('http://127.0.0.1:3000/createMovementHeader', {
-      dateBegin: this.PrestamoForm.controls.fechaPedido.value,
-      description: this.PrestamoForm.controls.descripcion.value,
-      days: this.PrestamoForm.controls.dias.value,
-      user: this.PrestamoForm.controls.rut.value.toString().replace(/[.*+?^${}()|[\]\\]/g, ''),
-      products: this.CantidadProducto
-    }).subscribe( ( res : any ) => {
-      if(+res == 1) {
-        this.agregado = true;
-        this.LimpiarCampos();
-      }
-    },
-    ( error ) => {
-      console.log( error );
-      this.error = true;
-    });
+    if(this.PrestamoForm.valid) {
+      this.http.post('http://127.0.0.1:3000/createMovementHeader', {
+        dateBegin: this.PrestamoForm.controls.fechaPedido.value,
+        description: this.PrestamoForm.controls.descripcion.value,
+        days: this.PrestamoForm.controls.dias.value,
+        user: this.PrestamoForm.controls.rut.value.toString().replace(/[.*+?^${}()|[\]\\]/g, ''),
+        products: this.CantidadProducto
+      }).subscribe( ( res : any ) => {
+        if(+res == 1) {
+          this.agregado = true;
+          this.LimpiarCampos();
+        }
+      },
+      ( error ) => {
+        console.log( error );
+        this.error = true;
+      });
+    }
+    else {
+      alert('Faltan campos por llenar');
+    }
   }
 
   //Ingresa la cantidad en 1 de un producto para el pedido
