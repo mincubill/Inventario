@@ -17,6 +17,7 @@ export class IngresarDevolucionComponent implements OnInit {
   BuscarPrestamoForm : FormGroup;
   agregado : boolean;
   error : boolean;
+  validacion : boolean;
   user : any;
 
   constructor(private formBuilder : FormBuilder , public dialog : MatDialog, private http : HttpClient) { 
@@ -30,11 +31,18 @@ export class IngresarDevolucionComponent implements OnInit {
   }
 
   BuscarPrestamo() {
-    if(this.BuscarPrestamoForm.controls.prestamo.value.split('-').length > 1) {
-      this.ConseguirPrestamosPorRut();
+    this.validacion = false;
+    if(this.BuscarPrestamoForm.controls.prestamo.value.length > 0) {
+      if(this.BuscarPrestamoForm.controls.prestamo.value.split('-').length > 1) {
+        this.ConseguirPrestamosPorRut();
+      }
+      else {
+        this.ConseguirPrestamosPorCodigo();
+      }
+      this.validacion = false;
     }
     else {
-      this.ConseguirPrestamosPorCodigo();
+      this.validacion = true;
     }
   }
 
