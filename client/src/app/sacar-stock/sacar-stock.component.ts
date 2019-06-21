@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, NgControlStatus, FormGroup } from '@angular/forms';
+import { FormBuilder, NgControlStatus, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -15,7 +15,7 @@ export class SacarStockComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private http : HttpClient) { 
     this.SacarStockForm = this.formBuilder.group({
       producto: [''],
-      cantidad: ['']
+      cantidad: [0, [Validators.required, Validators.min(1)]]
     });
   }
 
@@ -28,6 +28,8 @@ export class SacarStockComponent implements OnInit {
       storage: 1
     }).subscribe( ( res : any[] ) => {
       this.Productos = res;
+      this.SacarStockForm.controls.producto.setValue(this.Productos[0].ID);
+      this.ProductChanged(this.Productos[0].ID);
     },
     ( error ) => {
       console.log( error );
@@ -35,15 +37,17 @@ export class SacarStockComponent implements OnInit {
   }
 
   SacarProducto () {
-    this.http.post('http://127.0.0.1:3000/updateStockProduct', {
-      id: this.SacarStockForm.controls.producto.value,
-      stock: this.SacarStockForm.controls.cantidad.value
-    }).subscribe( ( res : any ) => {
-      alert('Actualizado correctamente');
-    },
-    ( error ) => {
-      console.log(error);
-    });
+    if(!this.SacarStockForm.invalid) {
+      this.http.post('http://127.0.0.1:3000/updateStockProduct', {
+        id: this.SacarStockForm.controls.producto.value,
+        stock: this.SacarStockForm.controls.cantidad.value
+      }).subscribe( ( res : any ) => {
+        alert('Actualizado correctamente');
+      },
+      ( error ) => {
+        console.log(error);
+      });
+    } 
   };
 
 
