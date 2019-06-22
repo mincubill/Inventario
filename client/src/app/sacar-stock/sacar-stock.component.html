@@ -14,10 +14,20 @@
           {{Producto.NAME}}
         </option>
     </select>
+    <br>
+    <div class="alert alert-danger" role="alert" *ngIf="SacarStockForm.controls.producto.errors != null">
+      Campo obligatorio
+    </div>
+
+
     <label for="cantidad">
       Cantidad:
     </label>
     <input type="number"  class="form-control" name="cantidad" id="cantidad" formControlName="cantidad" max={{SacarStockForm.controls.cantidad.value}} placeholder="Ingrese la nueva cantidad de stock del producto">
+    <br>
+    <div class="alert alert-danger" role="alert" *ngIf="SacarStockForm.controls.cantidad.errors != null">
+      Campo obligatorio
+    </div>
     <br>
     <input type="submit" class="btn btn-warning" value="Guardar"> 
   </div>

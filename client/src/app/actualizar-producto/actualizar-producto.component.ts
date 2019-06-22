@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog'
-import { FormBuilder, NgControlStatus, FormGroup } from '@angular/forms'; 
+import { FormBuilder, NgControlStatus, FormGroup, Validators } from '@angular/forms'; 
 import { PopupComponent, PopupModel } from '../popup/popup.component';
 import { HttpClient } from '@angular/common/http';
 import { TimeoutError } from 'rxjs';
@@ -17,12 +17,12 @@ export class ActualizarProductoComponent implements OnInit {
   Productos = [];
   ActualizarProductoForm : FormGroup;
   constructor(private formBuilder : FormBuilder , public dialog : MatDialog, private http : HttpClient) { 
-    this.ActualizarProductoForm = formBuilder.group({
-      producto: [''],
-      nombre: [''],
-      descripcion: [''],
-      precio: [''],
-      inventario: [''],
+    this.ActualizarProductoForm = this.formBuilder.group({
+      producto: ['', [Validators.required]],
+      nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      descripcion: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      precio: ['', [Validators.required, Validators.min(0)]],
+      inventario: [1, [Validators.required]],
     });
   }
 
@@ -35,6 +35,8 @@ export class ActualizarProductoComponent implements OnInit {
       storage: 1
     }).subscribe( ( res : any[] ) => {
       this.Productos = res;
+      this.ActualizarProductoForm.controls.producto.setValue(this.Productos[0].ID);
+      this.ProductoChanged(this.Productos[0].ID);
     },
     ( error ) => {
       console.log( error );
@@ -43,22 +45,30 @@ export class ActualizarProductoComponent implements OnInit {
 
   
   ActualizarProductos() {
-    this.http.post('http://127.0.0.1:3000/updateProduct', {
-      id: this.ActualizarProductoForm.controls.producto.value,
-      name: this.ActualizarProductoForm.controls.nombre.value,
-      description: this.ActualizarProductoForm.controls.descripcion.value,
-      price: this.ActualizarProductoForm.controls.precio.value,
-      store: this.ActualizarProductoForm.controls.inventario.value
-    }).subscribe( ( res : any ) => {
-      if(+res == 1) 
-      this.agregado = true;
-      else  
+    this.error, this.agregado = false;
+    if(!this.ActualizarProductoForm.invalid) {
+      this.http.post('http://127.0.0.1:3000/updateProduct', {
+        id: this.ActualizarProductoForm.controls.producto.value,
+        name: this.ActualizarProductoForm.controls.nombre.value,
+        description: this.ActualizarProductoForm.controls.descripcion.value,
+        price: this.ActualizarProductoForm.controls.precio.value,
+        store: this.ActualizarProductoForm.controls.inventario.value
+      }).subscribe( ( res : any ) => {
+        if(+res == 1) {
+          this.agregado = true;
+          this.LimpiarCampos();
+        }
+        else  
+        this.error = true;
+      },
+      ( error ) => {
+        console.log( error );
+        this.error = true;
+      });
+    }
+    else {
       this.error = true;
-    },
-    ( error ) => {
-      console.log( error );
-      this.error = true;
-    });
+    }
   }
 
   ProductoChanged(e) {
@@ -91,7 +101,7 @@ export class ActualizarProductoComponent implements OnInit {
       if(res)
       {
         this.ActualizarProductos();
-        this.LimpiarCampos();
+        
       }
     });
   }

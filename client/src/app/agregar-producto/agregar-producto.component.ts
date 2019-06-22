@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog'
-import { FormBuilder, NgControlStatus, FormGroup } from '@angular/forms'; 
+import { FormBuilder, NgControlStatus, FormGroup, Validators } from '@angular/forms'; 
 import { PopupComponent, PopupModel } from '../popup/popup.component';
 import { HttpClient } from '@angular/common/http';
 import { TimeoutError } from 'rxjs';
@@ -19,10 +19,10 @@ export class AgregarProductoComponent implements OnInit {
 
   constructor (private formBuilder : FormBuilder , public dialog : MatDialog, private http : HttpClient) { 
     this.AgregarForm = this.formBuilder.group ({
-        nombre: [''],
-        descripcion: [''],
-        total: [''],
-        precio: ['']
+        nombre: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+        descripcion: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+        total: ['', [Validators.required, Validators.min(1)]],
+        precio: ['', [Validators.required, Validators.min(0)]]
       }
     );
   }
@@ -32,19 +32,25 @@ export class AgregarProductoComponent implements OnInit {
   }
 
   AgregarProducto() {
-    this.http.post('http://127.0.0.1:3000/createProduct', {
-      name: this.AgregarForm.controls.nombre.value,
-      description: this.AgregarForm.controls.descripcion.value,
-      stock: this.AgregarForm.controls.total.value,
-      price: this.AgregarForm.controls.precio.value,
-      store: 1
-    }).subscribe( (res : any) => {
-      this.agregado = +res == 1 ? true : false;
-    }, 
-    (error) => {
-      console.log(error);
-      this.agregado = false;
-    }); 
+    if(!this.AgregarForm.invalid) {
+      this.http.post('http://127.0.0.1:3000/createProduct', {
+        name: this.AgregarForm.controls.nombre.value,
+        description: this.AgregarForm.controls.descripcion.value,
+        stock: this.AgregarForm.controls.total.value,
+        price: this.AgregarForm.controls.precio.value,
+        store: 1
+      }).subscribe( (res : any) => {
+        this.agregado = + res == 1 ? true : false;
+        this.LimpiarCampos();
+      }, 
+      (error) => {
+        console.log(error);
+        this.agregado = false;
+      });   
+    }
+    else {
+      this.error = true;
+    }
   }
 
   LimpiarCampos ()  {
@@ -55,6 +61,8 @@ export class AgregarProductoComponent implements OnInit {
   }
 
   confirmDialog() {
+    this.error = false;
+    this.error = false;
     const dialogData = new PopupModel('Confirmacion', '¿Guardar producto ingresado?');
     const dialogRef = this.dialog.open(PopupComponent, {
       
@@ -65,7 +73,6 @@ export class AgregarProductoComponent implements OnInit {
       if(res)
       {
         this.AgregarProducto();
-        this.LimpiarCampos();
       }
     });
   }
