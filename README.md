@@ -10,6 +10,6 @@ Para ejecutar la aplicacion debe estar instalado NodeJS (https://nodejs.org/es/)
 - Abrir consola en carpta server y ejecutar npm install
 
 #Ejecucion
-- Editar conexion a DB en server > dao > connection.js con los datos solicitados
+- Editar credenciales de conexion a DB en server > dao > connection.js con los datos solicitados
 - abrir consola en carpeta server y ejecutar node server.js
 - abrir consola en carpeta client y ejecutar ng serve -o
