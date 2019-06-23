@@ -90,7 +90,6 @@ const getUserByRut = function(req, res){
         rut: parseInt(req.body.rut),
     };
     userDao.getUserByRut(user).then((success) => {
-        console.log(success.toString());
         res.send(success.toString());
     }).catch((error) => {
         console.log(error);

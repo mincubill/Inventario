@@ -1,16 +1,46 @@
-<div>
-  <div>
-    <img src="assets/img/userPhoto.svg" alt="User photo">
+<div class="perfil-container">
+  <div class="foto-perfil-container">
+    <img src="./assets/img/userPhoto.svg" alt="Imagen de perfil" class="foto-perfil">
   </div>
-  <div class="perfil-user">
-    <p>
-      Nombre: {{user.nombre}}
-    </p>
-    <p>
-      Apellido: {{user.apellido}}
-    </p>
-    <p>
-      Correo: {{user.correo}}
-    </p>
+  <div class="informacion-personal-container">
+    <p>Rut alumno: {{user.rut}}</p>
+    <p>Nombre alumno: {{user.nombre}}</p>
+    <p>Nombre de usuario: {{user.nombreUsuario}}</p>
+    <p>Correo del alumno: {{user.correo}}</p>
+    <p>Carrera del alumno: {{user.carrera}}</p>
+    <p>Telefono de contacto: {{user.telefono}}</p>
+    <p>Direccion del alumno: {{user.direccion}}</p>
+  </div>
+  <div class="pedidos-personal-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Larry</td>
+          <td>the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

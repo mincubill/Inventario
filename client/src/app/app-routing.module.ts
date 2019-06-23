@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'IngresarDevolucion', component: IngresarDevolucionComponent },
   { path: 'Login', component: LoginComponent },
   { path: 'VerPrestamo', component: VerPrestamoComponent },
-  { path: 'PerfilUsuario', component: PerfilUsuarioComponent },
+  { path: 'PerfilUsuario/:rut', component: PerfilUsuarioComponent },
   { path: '', component: RetiroProductosComponent },
   { path: 'Registro', component: RegistroComponent },
   { path: 'ActualizarProducto', component: ActualizarProductoComponent },
