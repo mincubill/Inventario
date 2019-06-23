@@ -87,7 +87,7 @@ export class IngresarDevolucionComponent implements OnInit {
   }
 
   ConfirmDialog( idPrestamo ) {
-    const dialogData = new PopupModel('Confirmacion', 'Seguro que desea realizar la devolución?');
+    const dialogData = new PopupModel('Confirmacion', 'Seguro que desea realizar la devolución?', 'question');
     const dialogRef = this.dialog.open(PopupComponent, {
       
       data: dialogData

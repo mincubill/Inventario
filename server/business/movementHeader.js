@@ -147,7 +147,8 @@ const getMovementHeaderById = function(req, res){
 
 const getMovementHeaderWithDebt = function(req, res){
     movementHeaderDao.getMovementHeaderWithDebt().then((success) => {
-        res.send(success.toString());
+        res.send(success);
+        console.log(success)
     }).catch((error) => {
         console.log(error);
     });

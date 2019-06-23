@@ -31,5 +31,21 @@ const defaulter = function () {
     });
 };
 
+const getDebts = function () {
+    let query = "SELECT u.RUT, u.NAME, u.LASTNAME, h.DEBT FROM movement_header h JOIN users u on h.user_m = u.RUT WHERE DEBT > 0 ";
+    return new Promise((resolve, reject) => {
+        con.query(query,(error, result, fields) => {
+            if(error){
+                console.log(error);
+                reject(error);
+                return;
+            }
+            resolve(result);
+            console.log(result);
+        });
+    });
+};
+
 module.exports.loans = loans;
 module.exports.defaulter = defaulter;
+module.exports.getDebts = getDebts;

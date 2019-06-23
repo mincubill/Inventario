@@ -71,7 +71,7 @@ export class VerProductoComponent implements OnInit {
   }
 
   confirmDialog(id) {
-    const dialogData = new PopupModel("Confirmacion", "Eliminar producto seleccionado?");
+    const dialogData = new PopupModel('Confirmacion', 'Eliminar producto seleccionado?', '');
     const dialogRef = this.dialog.open(PopupComponent, {
       
       data: dialogData

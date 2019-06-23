@@ -87,7 +87,7 @@ module.exports = function(app)
         movementHeader.getMovementHeaderById(req, res);
     });
 
-    app.post("/getMovementHeaderWithDebt", (req, res) => {
+    app.get("/getMovementHeaderWithDebt", (req, res) => {
         movementHeader.getMovementHeaderWithDebt(req, res);
     });
 
@@ -110,4 +110,6 @@ module.exports = function(app)
     app.get("/defaulter", (req, res) => {
         stadistics.defaulter(req, res);
     });
+
+    
 }

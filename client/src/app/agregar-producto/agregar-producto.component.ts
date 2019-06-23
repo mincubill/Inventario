@@ -22,7 +22,8 @@ export class AgregarProductoComponent implements OnInit {
         nombre: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
         descripcion: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
         total: ['', [Validators.required, Validators.min(1)]],
-        precio: ['', [Validators.required, Validators.min(0)]]
+        precio: ['', [Validators.required, Validators.min(0)]],
+        bodega: [''],
       }
     );
   }
@@ -38,7 +39,7 @@ export class AgregarProductoComponent implements OnInit {
         description: this.AgregarForm.controls.descripcion.value,
         stock: this.AgregarForm.controls.total.value,
         price: this.AgregarForm.controls.precio.value,
-        store: 1
+        store: this.AgregarForm.controls.bodega.value
       }).subscribe( (res : any) => {
         this.agregado = + res == 1 ? true : false;
         this.LimpiarCampos();
@@ -63,7 +64,7 @@ export class AgregarProductoComponent implements OnInit {
   confirmDialog() {
     this.error = false;
     this.error = false;
-    const dialogData = new PopupModel('Confirmacion', '¿Guardar producto ingresado?');
+    const dialogData = new PopupModel('Confirmacion', '¿Guardar producto ingresado?', 'question');
     const dialogRef = this.dialog.open(PopupComponent, {
       
       data: dialogData

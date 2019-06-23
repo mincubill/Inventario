@@ -9,11 +9,13 @@ import { Component, OnInit, Inject } from '@angular/core';
 export class PopupComponent implements OnInit {
   title: string;
   message: string;
+  type: string;
 
   constructor(public dialogRef: MatDialogRef<PopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: PopupComponent) { 
       this.title = data.title;
       this.message = data.message;
+      this.type = data.type;
     }
 
   ngOnInit() {
@@ -31,7 +33,7 @@ export class PopupComponent implements OnInit {
 
 export class PopupModel {
 
-  constructor(public title: string, public message: string){
+  constructor(public title: string, public message: string, public type: string){
 
   }
 }

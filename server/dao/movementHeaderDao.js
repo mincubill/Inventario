@@ -88,7 +88,7 @@ const getMovementHeaderById = function(movementHeader){
 };
 
 const getMovementHeaderWithDebt = function(){
-    let query = "SELECT * FROM MOVEMENT_HEADER WHERE DEBT > 0";
+    let query = "SELECT u.RUT, u.NAME, u.LASTNAME, h.DEBT FROM movement_header h JOIN users u on h.user_m = u.RUT WHERE DEBT > 0";
     return new Promise((resolve, reject) => {
         con.query(query,(error, result, fields) => {
             if(error){

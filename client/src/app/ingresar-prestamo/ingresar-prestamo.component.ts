@@ -150,7 +150,7 @@ export class IngresarPrestamoComponent implements OnInit {
   }
 
   confirmDialog() {
-    const dialogData = new PopupModel('Confirmacion', '¿Guardar producto ingresado?');
+    const dialogData = new PopupModel('Confirmacion', '¿Guardar producto ingresado?', 'question');
     const dialogRef = this.dialog.open(PopupComponent, {
       
       data: dialogData

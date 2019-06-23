@@ -1,0 +1,8 @@
+<div class="alert alert-danger" role="alert"> 
+  <p>
+    Alumnos moroso:
+  </p>
+  <ul *ngFor="let moroso of Morosos">
+      <li>Alumnor RUT: {{moroso.RUT}} debe: ${{moroso.DEBT}}</li>
+  </ul>
+</div>
