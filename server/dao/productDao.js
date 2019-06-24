@@ -132,6 +132,34 @@ const getProductsByStorageStats = function ( storage ) {
     });
 };
 
+const getProductsWithLowStock = function(){
+    let query = "SELECT * FROM PRODUCT where stock < 5";
+    return new Promise((resolve, reject) => {
+        con.query(query, (error, result, fields) => {
+            if(error){
+                console.log(error);
+                reject(error);
+                return;
+            }
+            resolve(result); 
+        });
+    });
+}
+
+const getProductsWithLowStockByStorage = function( storage ){
+    let query = "SELECT * FROM PRODUCT WHERE PRODUCT.STORE = ? and product.STATUS = 1 and product.STOCK < 5";
+    return new Promise((resolve, reject) => {
+        con.query(query, [storage],(error, result, fields) => {
+            if(error){
+                console.log(error);
+                reject(error);
+                return;
+            }
+            resolve(result); 
+        });
+    });
+}
+
 module.exports.createProduct = createProduct;
 module.exports.updateProduct = updateProduct;
 module.exports.updateStatusProduct = updateStatusProduct;
