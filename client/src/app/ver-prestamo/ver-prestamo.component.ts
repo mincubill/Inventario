@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DataManagerService } from '../data-manager.service'
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-ver-prestamo',
@@ -9,11 +11,20 @@ import { DataManagerService } from '../data-manager.service'
 export class VerPrestamoComponent implements OnInit {
 
   Prestamos = [];
-  constructor(private data: DataManagerService) { }
+  constructor( private http : HttpClient, private router : Router ) { 
 
-  ngOnInit() {
-    console.log(this.data.ObtenerPrestamos());
-    this.Prestamos = this.data.ObtenerPrestamos();
   }
 
+  ngOnInit() {
+    this.http.get('http://127.0.0.1:3000/getMovementHeaders').subscribe( ( res : any[] ) => {
+      this.Prestamos = res;
+    },
+    ( error ) => {
+      console.log( error );
+    });
+  }
+
+  PerfilUsuario(rutUsuario) {
+    this.router.navigate(['/PerfilUsuario', rutUsuario]);
+  }
 }

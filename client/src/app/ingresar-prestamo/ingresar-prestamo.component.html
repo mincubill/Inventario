@@ -1,25 +1,47 @@
 <h1 class="h1">Prestamo</h1>
-<form [formGroup]="PrestamoForm" (ngSubmit)="AgregarPrestamo()" class="row">
+<form [formGroup]="PrestamoForm" (ngSubmit)="confirmDialog()" class="row">
     <div class="col-sm-3"></div>
         <div id="AgregarPrestamoForm" class="form-group col-sm-6">
             <!-- Formulario completo del alumno el cual traera un poco de su informacion personal
             y datos de contacto -->
             <label for="rut">
-                Rut:
+                Rut
             </label>
-            <input type="text" id="rut" class="form-control" required formControlName="rut">
-            <label for="nombre">
-                Nombre
+            <input type="text" id="rut" class="form-control" required formControlName="rut" placeholder="Ingresar rut de la persona que solicita el material">
+            <br>
+            <div class="alert alert-danger" role="alert" *ngIf="PrestamoForm.controls.rut.errors != null">
+                Campo obligatorio
+            </div>
+            
+
+            <label for="pedido">
+                Fecha de pedido
             </label>
-            <input type="text" id="nombre" class="form-control" required formControlName="nombre">
-            <label for="apellido">
-                Apellido
+            <input type="date" id="fechaPedido" class="form-control" required formControlName="fechaPedido" placeholder="Ingresar fecha de prestamo del material">
+            <br>
+            <div class="alert alert-danger" role="alert" *ngIf="PrestamoForm.controls.fechaPedido.errors != null">
+                Campo obligatorio
+            </div>  
+
+
+            <label for="descripcion">
+                Descripcion
             </label>
-            <input type="text" id="apellido" class="form-control" required formControlName="apellido">
-            <label for="correo">
-                Correo
+            <input type="text" id="descripcion" class="form-control" required formControlName="descripcion" placeholder="Ingresar una breve descripcion del pedido">
+            <br>
+            <div class="alert alert-danger" role="alert" *ngIf="PrestamoForm.controls.descripcion.errors != null">
+                Campo obligatorio
+            </div>
+
+            <label for="dias">
+                Dias de prestamo
             </label>
-            <input type="text" id="correo" class="form-control" required formControlName="correo">
+            <input type="number" id="dias" class="form-control" required formControlName="dias" placeholder="Ingresar los dias del prestamo">
+            <br>
+            <div class="alert alert-danger" role="alert" *ngIf="PrestamoForm.controls.dias.errors != null">
+                Campo obligatorio
+            </div>
+
             <br>
             <div class="product-table">
                 <h2 class="ingresar-prestamo-h2">
@@ -56,16 +78,16 @@
                         <!-- Directiva que recorre el arreglo de productos en el inventario -->
                         <tr *ngFor="let Producto of Productos">
                             <th scope="row">
-                                {{Producto.nombre}}
+                                {{Producto.NAME}}
                             </th>
                             <td>
-                                {{Producto.total}}
+                                {{Producto.STOCK}}
                             </td>
                             <td>
-                                {{Producto.disponible}}
+                                {{Producto.AVAILABLESTOCK}}
                             </td>
                             <td>
-                                {{Producto.prestado}}
+                                {{Producto.BORROWED}}
                             </td>
                             <td>
                                 <!-- Funcion que es llamada cuando se hace click en el elemento i -->
@@ -107,15 +129,15 @@
                         <!-- Directiva que recorre la lista de productos a prestar -->
                         <tr *ngFor="let ProductoPrestado of ProductosPrestamos">
                             <th scope="row">
-                                {{ProductoPrestado.nombre}}
+                                {{ProductoPrestado.NAME}}
                             </th>
                             <td>
-                                {{ProductoPrestado.disponible}}
+                                {{ProductoPrestado.AVAILABLESTOCK}}
                             </td>
                             <td class="cantidad-producto">
-                                <i class="fas fa-plus"></i>
-                                <input class="form-control" type="number" value="0">
-                                <i class="fas fa-minus"></i>
+                                <i class="fas fa-minus" (click)="DisminuirCantidad(ProductoPrestado.ID)"></i>
+                                <input class="form-control" type="number" value={{ProductoPrestado.QUANTITY}}>
+                                <i class="fas fa-plus" (click)="AumentarCantidad(ProductoPrestado.ID)"></i>
                             </td>
                             <td>
                                 <!-- Funcion que es llamada cuando se le hace click al icono para eliminar un producto del pedido -->
@@ -127,6 +149,12 @@
                 </table>
             </div>
             <br>
+            <div class="alert alert-danger" role="alert" *ngIf="ProductosPrestamos.length == 0">
+                Debe agregar productos a la lista
+            </div>
+            <br>
+            <div class="alert alert-success" role="alert" *ngIf="agregado">Prestamo realizado correctamente</div>
+            <div class="alert alert-warning" role="alert" *ngIf="error">Ocurrio un error</div>
             <input type="submit" class="btn btn-warning" value="Guardar">
         </div>
     <div class="col-sm-3"></div>

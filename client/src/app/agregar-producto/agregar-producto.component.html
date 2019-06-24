@@ -1,27 +1,53 @@
-<h1 class="h1">Agregar producto</h1>
-<form [formGroup]="ProductoForm" (ngSubmit)="AgregarProducto()" class="row">
+<h1 class="h1">
+  Agregar producto al inventario
+</h1>
+<form [formGroup]="AgregarForm" (ngSubmit)="confirmDialog()" class="row">
   <div class="col-sm-3"></div>
   <div id="AgregarProductoForm" class="form-group panel panel-default col-sm-6">
     <div class="panel-body">
       <label for="nombre">
         Nombre:
       </label>
-      <input type="text" formControlName="nombre" class="form-control" id="nombre">
+      <input type="text" formControlName="nombre" class="form-control" id="nombre" placeholder="Ingresar nombre del producto">
+      <br>
+      <div class="alert alert-danger" role="alert" *ngIf="AgregarForm.controls.nombre.errors != null">
+        Campo obligatorio
+      </div>
+
+
       <label for="descripcion">
         Descripción:
       </label>
-      <input type="text" formControlName="descripcion" class="form-control" id="descripcion">
-      <label for="categoria">
-        Categoría:
-      </label>
-      <input type="text" formControlName="categoria" class="form-control" id="categoria">
+      <input type="text" formControlName="descripcion" class="form-control" id="descripcion" name="descripcion" placeholder="Ingresar una breve descripcion del producto">
+      <br>
+      <div class="alert alert-danger" role="alert" *ngIf="this.AgregarForm.controls.descripcion.errors != null">
+        Campo obligatorio
+      </div>
+
       <label for="cantidad">
         Cantidad:
       </label>
-      <input type="number" formControlName="total" class="form-control" id="cantidad">
+      <input type="number" formControlName="total" class="form-control" id="cantidad" name="cantidad" placeholder="Ingresar la cantidad de productos a ingresar">
       <br>
+      <div class="alert alert-danger" role="alert" *ngIf="AgregarForm.controls.total.errors != null">
+        Campo obligatorio
+      </div>
+
+      <label for="precio">
+        Precio unitario:
+      </label>
+      <input type="number" formControlName="precio" class="form-control" id="precio" name="precio" placeholder="Ingresar el valor unitario del producto">
+      <br>
+      <div class="alert alert-danger" role="alert" *ngIf="AgregarForm.controls.precio.errors != null">
+        Campo obligatorio
+      </div>
+
+      <br>
+      <div class="alert alert-success" role="alert" *ngIf="agregado">Producto Agregado</div>
+      <div class="alert alert-danger" role="alert" *ngIf="error">Ocurrio un error</div>
       <input type="submit" class="btn btn-warning" value="Guardar">
     </div>
   </div>
   <div class="col-sm-3"></div>
 </form>
+<br>

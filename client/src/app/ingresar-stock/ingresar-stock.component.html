@@ -1,23 +1,31 @@
-<h1 class="h1">Ingresar Stock</h1>
-<form [formGroup]="IngresarStockForm" class="row">
+<h1 class="h1">Ingresar Stock a un producto</h1>
+<form [formGroup]="IngresarStockForm" (ngSubmit)="AgregarStock()" class="row">
   <div class="col-sm-3"></div>  
   <div id="AgregarStockForm" class='form-group col-sm-6'>
     <label>
       Producto:
     </label>
-    <select name="producto" id="producto" class="form-control" formControlName="producto">
+    <select name="producto" id="producto" class="form-control" formControlName="producto" (change)="ProductChanged($event.target.value)">
         <!--
             Se utiliza una directiva de angular (ngFor) para cargar los productos en un 
             select y de esta manera para que el usuario los pueda ingresar
         -->
-        <option *ngFor="let producto of Productos" value={{producto.id}}>
-          {{producto.nombre}}
+        <option *ngFor="let Producto of Productos" value={{Producto.ID}}>
+          {{Producto.NAME}}
         </option>
     </select>
+    <div class="alert alert-danger" role="alert" *ngIf="IngresarStockForm.controls.producto.errors != null">
+      Campo obligatorio
+    </div>
+
     <label for="cantidad">
       Cantidad:
     </label>
-    <input type="number"  class="form-control" formControlName="cantidad" name="cantidad" id="cantidad">
+    <input type="number"  class="form-control" formControlName="cantidad" name="cantidad" id="cantidad" min={{IngresarStockForm.controls.cantidad.value}} placeholder="Ingresar la nueva cantidad de stock del producto">
+    <div class="alert alert-danger" role="alert" *ngIf="IngresarStockForm.controls.cantidad.errors != null">
+      Campo obligatorio
+    </div>
+
     <br>
     <input type="submit" class="btn btn-warning" value="Guardar"> 
   </div>

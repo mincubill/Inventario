@@ -1,25 +1,44 @@
-<h1 class="h1">Devolución</h1>
-<form [formGroup]="IngresarDevolucionForm" class="row">
-    <div class="col-sm-3"></div>
-    <div id="AgregarDevolucionForm" class="form-group col-sm-6"> 
-        <label for="rut">
-            Rut:
+<form [formGroup]="BuscarPrestamoForm" (ngSubmit)="BuscarPrestamo()" id="AgregarDevolucionForm">
+    <div class="form-group">
+        <label for="prestamo">
+            Rut o codigo del pedido:
         </label>
-        <input type="text"  class="form-control" id="rut" name="rut" formControlName="rut" required>
-        <label for="producto">
-            Producto:
-        </label>
-        <select name="producto" id="producto" class="form-control" formControlName="producto">
-            <!--
-                Se utiliza una directiva de angular (ngFor) para cargar los productos en un 
-                select y de esta manera para que el usuario los pueda ingresar
-            -->
-            <option *ngFor="let producto of Productos" value={{producto.id}}>
-                {{producto.nombre}}
-            </option>
-        </select>
-        <br>
-        <input type="submit" class="btn btn-warning" value="Guardar"> 
+        <input type="text" class="form-control" id="prestamo" formControlName="prestamo" placeholder="Ingresar rut o codigo del pedido para buscar" autofocus required>
     </div>
-    <div class="col-sm-3"></div>
+    <button type="submit" class="btn btn-primary">Buscar</button>
+    <br> <br>
+    <div class="alert alert-success" role="alert" *ngIf="agregado">Prestamo devuelto exitosamente</div>
+    <div class="alert alert-warning" role="alert" *ngIf="validacion">Debe ingresar un rut o codigo valido</div>
+    <div class="alert alert-danger" role="alert" *ngIf="error">Ocurrio un error</div>
 </form>
+<br>
+
+<table class="table table-hover" id="AgregarDevolucionForm">
+    <thead>
+      <tr>
+        <th scope="col">Codigo</th>
+        <th scope="col">Fecha Pedido</th>
+        <th scope="col">Dias de prestamo</th>
+        <th scope="col">Descripción</th>
+        <th scope="col">Cantidad de productos</th>
+        <th scope="col">Deuda</th>
+        <th scope="col">Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let Prestamo of Prestamos">
+        <th scope="row">{{Prestamo.ID}}</th>
+        <td>{{Prestamo.DATE_BEGIN}}</td>
+        <td>{{Prestamo.DAYS}}</td>
+        <td>{{Prestamo.DESCRIPTION}}</td>
+        <td>{{Prestamo.PRODUCTS}}</td>
+        <td>{{Prestamo.DEBT}}</td>
+        <td><button type="button" class="btn btn-success" (click)="ConfirmDialog(Prestamo.ID)">Devolver</button></td>
+      </tr>
+      <tr *ngIf="Prestamos.length == 0">
+          <td colspan="6">
+              No se encontraron pedidos
+          </td>
+      </tr>
+    </tbody>
+</table>

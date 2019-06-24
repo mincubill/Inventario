@@ -3,16 +3,22 @@
   <thead class="thead-light">
     <tr class="table-light">
       <th scope="col">
-        #
+        Codigo prestamo
       </th>
       <th scope="col">
-        Rut
+        Rut usuario
       </th>
       <th scope="col">
-        Producto
+        Fecha de prestamo
       </th>
       <th scope="col">
-        Cantidad
+        Cantidad de dias de prestamo
+      </th>
+      <th scope="col">
+        Cantidad de productos
+      </th>
+      <th scope="col">
+        Monto de deuda
       </th>
     </tr>
   </thead>
@@ -23,22 +29,27 @@
     <tr *ngFor="let Prestamo of Prestamos" class="table-light">
       <!--Muestra la id del prestamo-->
       <th scope="row">
-        {{Prestamo.id}}
+        {{Prestamo.ID}}
       </th>
 
       <!--Muestra el rut de la persona asociado al prestamo ( El estudiante que solicito el material )-->
-      <th>
-        {{Prestamo.rut}}
+      <th (click)="PerfilUsuario(Prestamo.USER_M)">
+        {{Prestamo.USER_M}}
       </th>
-
       <!--Muestra el producto que fue prestado-->
       <th>
-        {{Prestamo.producto}}
+        {{Prestamo.DATE_BEGIN}}
       </th>
 
       <!--Muestra la cantidad de material prestado-->
       <th>
-        {{Prestamo.cantidad}}
+        {{Prestamo.DAYS}}
+      </th>
+      <th>
+        {{Prestamo.PRODUCTS}}
+      </th>
+      <th>
+        {{Prestamo.DEBT}}
       </th>
     </tr>
   </tbody>
