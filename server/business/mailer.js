@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 const hbs = require('nodemailer-express-handlebars');
 
 
-const sendEmail = function(req,res){
+const sendEmail = function(mail){
 let transporter = nodemailer.createTransport({
 service: 'gmail',
 auth:{
@@ -25,13 +25,13 @@ const handlebarOptions = {
 transporter.use('compile', hbs(handlebarOptions));
 let mailOptions = {
     from: 'noreplyPrestamoDuoc@gmail.com', 
-    to: req.body.mail,
+    to: mail.mail,
     subject: 'Pedido',
     text: 'Tu Pedio esta Listo',
     template: 'index',
     context: {
-        name: req.body.name,
-        code: req.body.code
+        name: mail.name,
+        code: mail.code
 
     } 
 };
@@ -41,7 +41,6 @@ transporter.sendMail(mailOptions, (err, data) => {
     }
     console.log('Email sent!!!');
 });
-res.send("1");
 }
 
 module.exports.sendEmail = sendEmail;

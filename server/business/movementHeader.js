@@ -2,6 +2,7 @@ const movementHeaderDao = require("../dao/movementHeaderDao.js");
 const movementBodyDao = require("../dao/movementBodyDao.js");
 const userDao = require("../dao/userDao.js");
 const productDao = require("../dao/productDao.js");
+const mailer = require("../business/mailer");
 
 const createMovementHeader = function(req, res){
     let movementHeader = 
@@ -35,7 +36,12 @@ const createMovementHeader = function(req, res){
                     rut : movementHeader.user
                };
                userDao.getUserByRut(user).then((success) => {
-                    console.log(success);
+                   let mail = {
+                       mail: success.MAIL,
+                       name: success.NAME,
+                       code: zfill(movementHeaderId,9)
+                   }
+                    mailer.sendEmail(mail);
                }).catch((error) => {
 
                });
@@ -162,6 +168,26 @@ const getMovementHeaderWithDebt = function(req, res){
     });
 };
 
+
+let  zfill = function (number, width) {
+    var numberOutput = Math.abs(number); /* Valor absoluto del número */
+    var length = number.toString().length; /* Largo del número */ 
+    var zero = "0"; /* String de cero */  
+    
+    if (width <= length) {
+        if (number < 0) {
+             return ("-" + numberOutput.toString()); 
+        } else {
+             return numberOutput.toString(); 
+        }
+    } else {
+        if (number < 0) {
+            return ("-" + (zero.repeat(width - length)) + numberOutput.toString()); 
+        } else {
+            return ((zero.repeat(width - length)) + numberOutput.toString()); 
+        }
+    }
+}
 module.exports.createMovementHeader = createMovementHeader;
 module.exports.changeStatusMovementHeader = changeStatusMovementHeader;
 module.exports.getMovementHeaders = getMovementHeaders;
