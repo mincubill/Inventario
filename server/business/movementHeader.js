@@ -1,5 +1,6 @@
 const movementHeaderDao = require("../dao/movementHeaderDao.js");
 const movementBodyDao = require("../dao/movementBodyDao.js");
+const userDao = require("../dao/userDao.js");
 const productDao = require("../dao/productDao.js");
 
 const createMovementHeader = function(req, res){
@@ -27,8 +28,16 @@ const createMovementHeader = function(req, res){
                         
                     }).catch((error) => {
                         console.log(error);
-                    });
-                   
+                    });  
+               });
+               let user = 
+               {
+                    rut : movementHeader.user
+               };
+               userDao.getUserByRut(user).then((success) => {
+                    console.log(success);
+               }).catch((error) => {
+
                });
             }).catch((error) => {
                 console.log(error);

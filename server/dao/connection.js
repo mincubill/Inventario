@@ -1,9 +1,9 @@
 var mysql = require( 'mysql' );
 
 var con = mysql.createConnection({
-  host: "192.168.1.134",
-  user: "weasdf",
-  password: "palito",
+  host: "192.168.96.3",
+  user: "higlord",
+  password: "Alchimis01.",
   database: "inventory",
   acquireTimeout: 1000000
 

@@ -24,10 +24,10 @@ const handlebarOptions = {
 
 transporter.use('compile', hbs(handlebarOptions));
 let mailOptions = {
-    from: 'tabbnabbers@gmail.com', 
+    from: 'noreplyPrestamoDuoc@gmail.com', 
     to: req.body.mail,
-    subject: 'Nodemailer - Test',
-    text: 'Wooohooo it works!!',
+    subject: 'Pedido',
+    text: 'Tu Pedio esta Listo',
     template: 'index',
     context: {
         name: req.body.name,
