@@ -25,6 +25,6 @@ export class VerPrestamoComponent implements OnInit {
   }
 
   PerfilUsuario(rutUsuario) {
-    this.router.navigate(['PerfilUsuario', {rut: rutUsuario}]);
+    this.router.navigate(['/PerfilUsuario', rutUsuario]);
   }
 }

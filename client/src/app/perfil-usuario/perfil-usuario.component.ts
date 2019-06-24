@@ -9,20 +9,30 @@ import { ActivatedRoute, Params } from '@angular/router'
 })
 export class PerfilUsuarioComponent implements OnInit {
 
-  user : any;
+  user : {
+    rut : string, 
+    nombre : string,
+    nombreUsuario : string,
+    correo : string,
+    carrera: number,
+    telefono : number,
+    direccion : string
+  };
   Prestamos = [];
+  Alumno : string;
 
   constructor( private http : HttpClient, private rutaActiva : ActivatedRoute) { 
 
   }
 
   ngOnInit() {
-    // this.CargarPerfil();
-    // this.CargarPrestamos();
+    this.Alumno = this.rutaActiva.snapshot.paramMap.get('rut');
+    this.CargarPerfil();
+    this.CargarPrestamos();
   }
 
   CargarPrestamos() {
-    this.http.post('http://127.0.0.1:3000/getMovementHeadersByUser', { user: this.rutaActiva.snapshot.paramMap.get('rut') }).subscribe( ( res : any[] ) => {
+    this.http.post('http://127.0.0.1:3000/getMovementHeadersByUser', { user: this.Alumno }).subscribe( ( res : any[] ) => {
       this.Prestamos = res;
     },
     ( error ) => {
@@ -31,7 +41,8 @@ export class PerfilUsuarioComponent implements OnInit {
   }
 
   CargarPerfil () {
-    this.http.post('http://127.0.0.1:3000/getUserByRut', { rut: this.rutaActiva.snapshot.paramMap.get('rut') }).subscribe( ( res : any ) => {
+    this.http.post('http://127.0.0.1:3000/getUserByRut', { rut: this.Alumno }).subscribe( ( res : any ) => {
+      res = res[0];
       this.user = {
         rut: res.RUT,
         nombre: res.NAME + ' ' + res.LASTNAME,
@@ -40,11 +51,10 @@ export class PerfilUsuarioComponent implements OnInit {
         carrera: res.CAREER,
         telefono: res.PHONE,
         direccion: res.ADDRESS
-      }
+      };
     },
     ( error ) => {
       console.log( error );
     });
   }
-
 }
