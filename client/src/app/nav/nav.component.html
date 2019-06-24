@@ -5,7 +5,7 @@
     Menu
   </button>
   <div class="collapse navbar-collapse" id="collapse_target" *ngIf="usuario != undefined && usuario != null">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav">
       <li class="nav-item dropdown">
         <!--
           Boton que despliega un sub-menu con las opciones disponibles sobre productos
@@ -23,7 +23,7 @@
             Ver Productos
           </a>
           <a class="dropdown-item" routerLink="/AgregarProducto">
-            Ingresar producto
+            Ingresar productos
           </a>
           <a class="dropdown-item" routerLink="/IngresarStock">
             Ingresar stock
@@ -38,16 +38,16 @@
           Boton que despliega un sub-menu con las opciones disponibles sobre los prestamos
         -->
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" 
-          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
           Movimientos
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <!--
             RouterLink que redirecciona a la pagina para ingresar un prestamo de producto
           -->
-          <a class="dropdown-item" routerLink="/IngresarPrestamo">
-            Ingresar Prestamo
-          </a>
+          <button class="dropdown-item" type="button" routerLink="/IngresarPrestamo">
+            Ingresar Prestamos
+          </button>
           <!--
             RouterLink que redirecciona a la pagina para ingresar una devolucion de producto
           -->

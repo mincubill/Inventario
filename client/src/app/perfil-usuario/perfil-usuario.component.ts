@@ -50,7 +50,7 @@ export class PerfilUsuarioComponent implements OnInit {
         correo: res.MAIL,
         carrera: res.CAREER,
         telefono: res.PHONE,
-        direccion: res.ADDRESS
+        direccion: res.ADDREES
       };
     },
     ( error ) => {
