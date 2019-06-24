@@ -22,6 +22,7 @@ const createUser = function(req, res){
         lastName: req.body.lastName,
         userName: req.body.userName,
         mail: req.body.mail,
+        type: req.body.type,
         career: req.body.career,
         phone: req.body.phone,
         address: req.body.address,
@@ -43,13 +44,13 @@ const updateUser = function(req, res){
         lastName: req.body.lastName,
         userName: req.body.userName,
         mail: req.body.mail,
+        type: req.body.type,
         career: req.body.career,
         phone: req.body.phone,
         address: req.body.address,
         pass: req.body.pass
     };
     userDao.updateUser(user).then((success) => {
-        console.log(success.toString());
         res.send(success.toString());
     }).catch((error) => {
         console.log(error);
@@ -106,6 +107,14 @@ const getUsers = function(req, res){
     });
 };
 
+const getCareers = function( req, res ) {
+    userDao.getCareers().then( ( success ) => {
+        res.send( success );
+    }).catch( ( error ) => {
+        console.log( error );
+    });
+};
+
 
 module.exports.login = login;
 module.exports.createUser = createUser;
@@ -114,4 +123,4 @@ module.exports.updateStatusUser = updateStatusUser;
 module.exports.updatePrivilegeUser = updatePrivilegeUser;
 module.exports.getUserByRut = getUserByRut;
 module.exports.getUsers = getUsers;
-
+module.exports.getCareers = getCareers;
