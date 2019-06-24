@@ -87,8 +87,8 @@ const getMovementHeaderById = function(movementHeader){
     });
 };
 
-const getMovementHeaderWithDebt = function(){
-    let query = "SELECT u.RUT, u.NAME, u.LASTNAME, h.DEBT FROM movement_header h JOIN users u on h.user_m = u.RUT WHERE DEBT > 0";
+const getMovementHeaderWithDebtTop3 = function(){
+    let query = "SELECT u.RUT, u.NAME, u.LASTNAME, h.DEBT FROM movement_header h JOIN users u on h.user_m = u.RUT WHERE h.DEBT > 0 and h.STATUS = 0 ORDER BY h.DEBT DESC LIMIT 3";
     return new Promise((resolve, reject) => {
         con.query(query,(error, result, fields) => {
             if(error){
@@ -100,10 +100,26 @@ const getMovementHeaderWithDebt = function(){
         });
     });
 };
+
+const getMovementHeaderWithDebt = function(){
+    let query = "SELECT u.RUT, u.NAME, u.LASTNAME, h.DEBT FROM movement_header h JOIN users u on h.user_m = u.RUT WHERE h.DEBT > 0 and h.STATUS = 0 ";
+    return new Promise((resolve, reject) => {
+        con.query(query,(error, result, fields) => {
+            if(error){
+                console.log(error);
+                reject(error);
+                return;
+            }
+            resolve(result); 
+        });
+    });
+};
+
 module.exports.createMovementHeader = createMovementHeader;
 module.exports.changeStatusMovementHeader = changeStatusMovementHeader;
 module.exports.getMovementHeaders = getMovementHeaders;
 module.exports.getMovementHeadersByUser = getMovementHeadersByUser;
 module.exports.getMovementHeaderById = getMovementHeaderById;
+module.exports.getMovementHeaderWithDebtTop3 = getMovementHeaderWithDebtTop3;
 module.exports.getMovementHeaderWithDebt = getMovementHeaderWithDebt;
 module.exports.getLatestId = getLatestId;

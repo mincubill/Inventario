@@ -4,6 +4,7 @@ import { FormBuilder, NgControlStatus, FormGroup } from '@angular/forms';
 import { PopupComponent, PopupModel } from '../popup/popup.component';
 import { HttpClient } from '@angular/common/http';
 import { TimeoutError } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class IngresarDevolucionComponent implements OnInit {
   validacion : boolean;
   user : any;
 
-  constructor(private formBuilder : FormBuilder , public dialog : MatDialog, private http : HttpClient) { 
+  constructor(private formBuilder : FormBuilder , public dialog : MatDialog, private http : HttpClient, private router:Router) { 
     this.BuscarPrestamoForm = this.formBuilder.group({
       prestamo: ['']
     });
@@ -78,6 +79,7 @@ export class IngresarDevolucionComponent implements OnInit {
       if(+res == 1) {
         this.agregado = true;
         this.RemoverPrestamoLocal(idPrestamo);
+        location.href = '/IngresarDevolucion';
       }
     },
     ( error ) => {

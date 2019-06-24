@@ -2,7 +2,7 @@
     <!--Directiva de angular que permite renderear solo la pagina de navegacion(nav)-->
     <app-nav></app-nav>
 </header>
-<div>
+<div *ngIf="user.type == 3">
     <app-alertas></app-alertas>
 </div>
 <main class="main">

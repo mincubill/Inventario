@@ -10,22 +10,23 @@ import { HttpClient } from '@angular/common/http';
 export class AlertasComponent implements OnInit {
 
   Morosos = [];
+  Cuenta = 0;
   constructor(private router : Router, private http : HttpClient) { }
 
   ngOnInit() {
     this.cargarMorosos();
-    console.log(this.Morosos);
   }
 
   cargarMorosos(){
     //Cambiar storage
-    this.http.get('http://127.0.0.1:3000/getMovementHeaderWithDebt')
+    this.http.get('http://127.0.0.1:3000/getMovementHeaderWithDebtTop3')
     .subscribe( ( res : any[] ) => {
-      this.Morosos = res;  
-      console.log(this.Morosos)    
+      this.Morosos = res;   
+      this.Cuenta = this.Morosos.length;     
     },
     ( error ) => {
       console.log( error );
     });
+    this.Cuenta = this.Morosos.length;
   }
 }

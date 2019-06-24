@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'inventario';
+  user = {
+    rut: localStorage.getItem('rut'),
+    type: localStorage.getItem('type'),
+    name: localStorage.getItem('name'),
+  }
 }

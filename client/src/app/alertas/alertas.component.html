@@ -1,8 +1,14 @@
-<div class="alert alert-danger" role="alert"> 
+<div class="alert alert-danger" role="alert" *ngIf="Cuenta != 0"> 
   <p>
     Alumnos moroso:
   </p>
   <ul *ngFor="let moroso of Morosos">
       <li>Alumnor RUT: {{moroso.RUT}} debe: ${{moroso.DEBT}}</li>
   </ul>
+</div>
+<div class="alert alert-warning" role="alert" > 
+  <p>
+    Productos con bajo stock:
+  </p>
+
 </div>

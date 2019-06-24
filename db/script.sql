@@ -13,7 +13,7 @@ CREATE TABLE USERS
     LASTNAME    VARCHAR(60) NOT NULL,
     USERNAME    VARCHAR(255) NOT NULL,
 	MAIL		VARCHAR(255) NOT NULL,
-	TYPE		INT NOT NULL,    /* 1)estudiante 2)profesor 3)administrador*/
+	TYPE		INT NOT NULL,    /* 1)estudiante 2)profesor 3)administrador 4)PF 5) punto */
 	STATUS		INT NOT NULL,	/*1)ACTIVO 0)INACTIVO*/
     CAREER      INT NOT NULL,	/*numero segun carrera*/
     PHONE       VARCHAR(12),

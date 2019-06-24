@@ -87,6 +87,10 @@ module.exports = function(app)
         movementHeader.getMovementHeaderById(req, res);
     });
 
+    app.get("/getMovementHeaderWithDebtTop3", (req, res) => {
+        movementHeader.getMovementHeaderWithDebtTop3(req, res);
+    });
+
     app.get("/getMovementHeaderWithDebt", (req, res) => {
         movementHeader.getMovementHeaderWithDebt(req, res);
     });

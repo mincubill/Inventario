@@ -145,6 +145,15 @@ const getMovementHeaderById = function(req, res){
     });
 };
 
+const getMovementHeaderWithDebtTop3 = function(req, res){
+    movementHeaderDao.getMovementHeaderWithDebtTop3().then((success) => {
+        res.send(success);
+        console.log(success)
+    }).catch((error) => {
+        console.log(error);
+    });
+};
+
 const getMovementHeaderWithDebt = function(req, res){
     movementHeaderDao.getMovementHeaderWithDebt().then((success) => {
         res.send(success);
@@ -159,4 +168,5 @@ module.exports.changeStatusMovementHeader = changeStatusMovementHeader;
 module.exports.getMovementHeaders = getMovementHeaders;
 module.exports.getMovementHeadersByUser = getMovementHeadersByUser;
 module.exports.getMovementHeaderById = getMovementHeaderById;
+module.exports.getMovementHeaderWithDebtTop3 = getMovementHeaderWithDebtTop3;
 module.exports.getMovementHeaderWithDebt = getMovementHeaderWithDebt;
