@@ -13,6 +13,7 @@ import { RetiroProductosComponent } from './retiro-productos/retiro-productos.co
 import { RegistroComponent } from './registro/registro.component';
 import { ActualizarProductoComponent } from './actualizar-producto/actualizar-producto.component';
 import { EstadisticasComponent } from './estadisticas/estadisticas.component';
+import { UsuarioComponent } from './usuario/usuario.component';
 
 const routes: Routes = [
   { path: 'AgregarProducto', component: AgregarProductoComponent },
@@ -27,7 +28,8 @@ const routes: Routes = [
   { path: '', component: RetiroProductosComponent },
   { path: 'Registro', component: RegistroComponent },
   { path: 'ActualizarProducto', component: ActualizarProductoComponent },
-  { path: 'Estadisticas', component: EstadisticasComponent }
+  { path: 'Estadisticas', component: EstadisticasComponent },
+  { path: 'Usuario', component: UsuarioComponent }
 ];
 
 @NgModule({

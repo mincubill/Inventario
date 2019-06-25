@@ -39,6 +39,10 @@ module.exports = function(app)
         user.getUserByRut(req, res);
     });
 
+    app.get("/getCareers", ( req, res ) => {
+        user.getCareers( req, res );
+    });
+
     app.post("/createProduct", (req, res) => {
         product.createProduct(req, res);
     });
