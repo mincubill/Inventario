@@ -1,7 +1,8 @@
 #test{
    color:#212529;
+
 }
 
-.dropdown-menu {
-    width: 500px;
+div ul li a {
+    padding: 10px;
 }
