@@ -17,7 +17,7 @@ export class UsuarioComponent implements OnInit {
   EliminarUsuarioForm : FormGroup;
   Opcion : number;
   Agregado = false;
-  error = false;
+  Error = false;
 
   constructor( private http : HttpClient, private formBuilder : FormBuilder, public dialog : MatDialog ) { 
     this.Opcion = 1;/*Opciones: 1) Agregar  2) Actualizar   3) Eliminar*/
@@ -67,7 +67,7 @@ export class UsuarioComponent implements OnInit {
     this.http.post('http://127.0.0.1:3000/createUser', {
       rut: this.AgregarUsuarioForm.controls.rut.value,
       name: this.AgregarUsuarioForm.controls.nombre.value,
-      latName:this.AgregarUsuarioForm.controls.apellido.value,
+      lastName:this.AgregarUsuarioForm.controls.apellido.value,
       userName:this.AgregarUsuarioForm.controls.nombreUsuario.value,
       mail: this.AgregarUsuarioForm.controls.correo.value,
       type:this.AgregarUsuarioForm.controls.tipoUsuario.value,
@@ -81,11 +81,11 @@ export class UsuarioComponent implements OnInit {
         this.LimpiarCampos();
       }
       else {
-        this.error = true;
+        this.Error = true;
       }
     },
     ( error ) => {
-      this.error = true;
+      this.Error = true;
       console.log( error );
     });
   }
@@ -94,7 +94,7 @@ export class UsuarioComponent implements OnInit {
     this.http.post('http://127.0.0.1:3000/updateUser', {
       rut: this.ActualizarUsuarioForm.controls.rut.value,
       name: this.ActualizarUsuarioForm.controls.nombre.value,
-      latName:this.ActualizarUsuarioForm.controls.apellido.value,
+      lastName:this.ActualizarUsuarioForm.controls.apellido.value,
       userName:this.ActualizarUsuarioForm.controls.nombreUsuario.value,
       mail: this.ActualizarUsuarioForm.controls.correo.value,
       type:this.ActualizarUsuarioForm.controls.tipoUsuario.value,
@@ -109,13 +109,13 @@ export class UsuarioComponent implements OnInit {
       }
     },
     ( error ) => {
-      this.error = true;
+      this.Error = true;
       console.log( error );
     });
   }
 
   EliminarUsuario() {
-    this.http.post('http://127.0.0.1:3000/updateUser', {
+    this.http.post('http://127.0.0.1:3000/updateStatusUser', {
       rut: this.EliminarUsuarioForm.controls.rut.value,
       status: 0
     }).subscribe( ( res : any ) => {
@@ -125,7 +125,7 @@ export class UsuarioComponent implements OnInit {
       }
     },
     ( error ) => {
-      this.error = true;
+      this.Error = true;
       console.log( error );
     });
   }
@@ -134,7 +134,7 @@ export class UsuarioComponent implements OnInit {
     this.Opcion = opcion;
     this.LimpiarCampos();
     this.Agregado = false;
-    this.error = false;
+    this.Error = false;
   }
 
   CargarCarreras() {
@@ -229,8 +229,8 @@ export class UsuarioComponent implements OnInit {
   }
 
   ConfirmDialog() {
-    this.error = false;
-    this.error = false;
+    this.Error = false;
+    this.Error = false;
     const dialogData = new PopupModel('Confirmacion', this.Opcion == 1? '¿Guardar nuevo usuario?' : 
                                                       this.Opcion == 2? '¿Seguro que desea actualizar al usuario' : 
                                                                         '¿Seguro de eliminar al usuario?');
@@ -249,7 +249,7 @@ export class UsuarioComponent implements OnInit {
           case 2:
               this.ActualizarUsuario();
             break;
-          case 2:
+          case 3:
               this.EliminarUsuario();
             break;
         }

@@ -19,7 +19,7 @@ const login = function(userName, pass){
 const createUser = function(user){
     let query = "select FN_CREATE_USER(?,?,?,?,?,?,?,?,?,?)";
     return new Promise((resolve, reject) => {
-        con.query(query, [user.rut,user.name,user,lastName,user.userName,user.mail,user.type,user.career,user.phone,user.address,user.pass], (error, result, fields) => {
+        con.query(query, [user.rut,user.name,user.lastName,user.userName,user.mail,user.type,user.career,user.phone,user.address,user.pass], (error, result, fields) => {
             if(error){
                 console.log(error);
                 reject(error);

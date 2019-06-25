@@ -28,6 +28,7 @@ const createUser = function(req, res){
         address: req.body.address,
         pass: req.body.pass
     };
+    console.log(user);
     userDao.createUser(user).then((success) => {
         console.log(success.toString());
         res.send(success.toString());
@@ -61,7 +62,7 @@ const updateStatusUser = function(req, res){
     let user = 
     {
         rut: parseInt(req.body.rut),
-        status: paseInt(req.body.status),
+        status: parseInt(req.body.status),
     };
     userDao.updateStatusUser(user).then((success) => {
         console.log(success.toString());
