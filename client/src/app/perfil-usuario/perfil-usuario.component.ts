@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DataManagerService } from '../data-manager.service'
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -9,13 +8,12 @@ import { DataManagerService } from '../data-manager.service'
 export class PerfilUsuarioComponent implements OnInit {
 
   user : any;
-  constructor(private data : DataManagerService) { 
+  constructor() { 
 
   }
 
   ngOnInit() {
-    this.user = this.data.user;
-    console.log(this.user);
+    
   }
 
 

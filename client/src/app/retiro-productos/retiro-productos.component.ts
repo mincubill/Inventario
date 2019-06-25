@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DataManagerService } from '../data-manager.service'
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,14 +9,13 @@ import { Router } from '@angular/router';
 export class RetiroProductosComponent implements OnInit {
 
   Productos = [];
-  constructor(private data : DataManagerService, private router:Router) { }
+  constructor( private router:Router) { }
 
   ngOnInit() {
     this.CargarProductos();
   }
 
   CargarProductos()
-  {
-    this.Productos = this.data.ObtenerProductos();
+  {    
   }
 }

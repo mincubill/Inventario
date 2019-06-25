@@ -16,5 +16,14 @@ const defaulter = function(req, res) {
     });
 };
 
+const activeLoans = function( req, res ) {
+    stadisticsDao.activeLoans().then( ( success ) => {        
+        res.send( success );
+    }).catch( ( error ) => {
+        console.log( error );
+    });
+};
+
 module.exports.loans = loans
 module.exports.defaulter = defaulter;
+module.exports.activeLoans = activeLoans;
