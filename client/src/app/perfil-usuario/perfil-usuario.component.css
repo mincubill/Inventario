@@ -1,0 +1,19 @@
+.perfil-container {
+    background-color: white;
+    padding: 10px;
+    border-radius: 6px;
+    width: 100%;
+}
+
+.foto-perfil-container {
+    width: 20%;
+}
+
+.informacion-personal-container {
+    width: 80%;
+}
+
+.pedidos-personal-container {
+    width: 100%;
+}
+

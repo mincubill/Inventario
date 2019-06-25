@@ -1,0 +1,232 @@
+<div class="crud-opcion">
+  <input type="button" class="btn btn-primary" value="Agregar usuario" (click)="CambiarMenu(1)">
+  <input type="button" class="btn btn-primary" value="Actualizar usuario" (click)="CambiarMenu(2)">
+  <input type="button" class="btn btn-primary" value="Eliminar usuario" (click)="CambiarMenu(3)">
+</div>
+
+<div class="alert alert-success" role="alert" *ngIf="Agregado && Opcion == 1">Usuario agregado exitosamente</div>
+<div class="alert alert-success" role="alert" *ngIf="Agregado && Opcion == 2">Usuario actualizado exitosamente</div>
+<div class="alert alert-success" role="alert" *ngIf="Agregado && Opcion == 3">Usuario eliminado exitosamente</div>
+<div class="alert alert-danger" role="alert" *ngIf="Error">Ocurrio un error</div>
+
+<div class="crud-formulario" *ngIf="Opcion == 1">
+  <h1>Agregar nuevo usuario</h1>
+  <form [formGroup]="AgregarUsuarioForm" (ngSubmit)="ConfirmDialog()">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="rut">Rut del usuario</label>
+        <input type="text" class="form-control" placeholder="Ingrese rut del nuevo usuario" formControlName="rut">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="nombre">Nomre del usuario</label>
+        <input type="text" class="form-control" placeholder="Ingrese nombre de usuario" formControlName="nombre">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="apellido">Apellido del usuario</label>
+        <input type="text" class="form-control" placeholder="Ingresar apellido del usuario" formControlName="apellido">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="">Nombre de usuario (Iniciar sesion)</label>
+        <input type="text" class="form-control" placeholder="Ingrese el nombre de usuario" formControlName="nombreUsuario">
+      </div>
+    </div>
+
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="correo">Correo del usuario</label>
+        <input type="text" class="form-control" placeholder="Ingrese el correo del usuario" formControlName="correo">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="tipoUsuario">Tipo de usuario</label>
+        <select name="tipoUsuario" id="tipoUsuario" formControlName="tipoUsuario" class="form-control">
+          <option value="1">Estudiante</option>
+          <option value="2">Profesor</option>
+          <option value="3">Pañol</option>
+          <option value="4">Punto estudiantil</option>
+          <option value="5">Administrador</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="carrera">Carrera del usuario</label>
+        <select name="carrera" id="carrera" formControlName="carrera" class="form-control">
+          <option *ngFor="let Carrera of Carreras" value={{Carrera.ID}}>{{Carrera.NAME}}</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="telefono">Telefono del usuario</label>
+        <input type="text" class="form-control" placeholder="Ingrese telefono del usuario" formControlName="telefono">
+      </div>
+    </div>
+
+    
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="direccion">Direccion del usuario</label>
+        <input type="text" class="form-control" placeholder="Ingrese la direccion del usuario" formControlName="direccion">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="contrasena">Contraseña del usuario</label>
+        <input type="password" class="form-control" placeholder="Ingrese la contraseña del usuario" formControlName="contrasena">
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="submit" class="btn btn-primary" value="Ingresar">
+    </div>
+  </form>
+</div>
+
+<div class="crud-formulario" *ngIf="Opcion == 2">
+  <h1>Actualizar usuario</h1>
+  <form [formGroup]="ActualizarUsuarioForm" (ngSubmit)="ConfirmDialog()">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="rut">Rut del usuario</label>
+        <input type="text" class="form-control" placeholder="Ingrese rut del nuevo usuario" formControlName="rut">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="nombre">Nomre del usuario</label>
+        <input type="text" class="form-control" placeholder="Ingrese nombre de usuario" formControlName="nombre">
+      </div>
+    </div>
+  
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="apellido">Apellido del usuario</label>
+        <input type="text" class="form-control" placeholder="Ingresar apellido del usuario" formControlName="apellido">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="">Nombre de usuario (Iniciar sesion)</label>
+        <input type="text" class="form-control" placeholder="Ingrese el nombre de usuario" formControlName="nombreUsuario">
+      </div>
+    </div>
+  
+  
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="correo">Correo del usuario</label>
+        <input type="text" class="form-control" placeholder="Ingrese el correo del usuario" formControlName="correo">
+      </div>
+      <div class="form-group col-md-6">
+          <label for="tipoUsuario">Tipo de usuario</label>
+          <select name="tipoUsuario" id="tipoUsuario" formControlName="tipoUsuario" class="form-control">
+            <option value="1">Estudiante</option>
+            <option value="2">Profesor</option>
+            <option value="3">Pañol</option>
+            <option value="4">Punto estudiantil</option>
+            <option value="5">Administrador</option>
+          </select>
+        </div>
+    </div>
+  
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="carrera">Carrera del usuario</label>
+        <select name="carrera" id="carrera" formControlName="carrera" class="form-control">
+          <option *ngFor="let Carrera of Carreras" value={{Carrera.ID}}>{{Carrera.NAME}}</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="telefono">Telefono del usuario</label>
+        <input type="text" class="form-control" placeholder="Ingrese telefono del usuario" formControlName="telefono">
+      </div>
+    </div>
+  
+      
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="direccion">Direccion del usuario</label>
+        <input type="text" class="form-control" placeholder="Ingrese la direccion del usuario" formControlName="direccion">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="contrasena">Contraseña del usuario</label>
+        <input type="password" class="form-control" placeholder="Ingrese la contraseña del usuario" formControlName="contrasena">
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="submit" class="btn btn-primary" value="Actualizar">
+      <input type="button" class="btn btn-primary" (click)="BuscarUsuario()" value="Buscar">
+    </div>
+  </form>
+</div>
+
+
+<div class="crud-formulario" *ngIf="Opcion == 3">
+  <h1>Eliminar usuario</h1>
+  <form [formGroup]="EliminarUsuarioForm" (ngSubmit)="ConfirmDialog()">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="rut">Rut del usuario</label>
+        <input type="text" class="form-control" placeholder="Ingrese rut del nuevo usuario" formControlName="rut">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="nombre">Nomre del usuario</label>
+        <input type="text" class="form-control" placeholder="Ingrese nombre de usuario" formControlName="nombre">
+      </div>
+    </div>
+  
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="apellido">Apellido del usuario</label>
+        <input type="text" class="form-control" placeholder="Ingresar apellido del usuario" formControlName="apellido">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="">Nombre de usuario (Iniciar sesion)</label>
+        <input type="text" class="form-control" placeholder="Ingrese el nombre de usuario" formControlName="nombreUsuario">
+      </div>
+    </div>
+  
+  
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="correo">Correo del usuario</label>
+        <input type="text" class="form-control" placeholder="Ingrese el correo del usuario" formControlName="correo">
+      </div>
+      <div class="form-group col-md-6">
+          <label for="tipoUsuario">Tipo de usuario</label>
+          <select name="tipoUsuario" id="tipoUsuario" formControlName="tipoUsuario" class="form-control">
+            <option value="1">Estudiante</option>
+            <option value="2">Profesor</option>
+            <option value="3">Pañol</option>
+            <option value="4">Punto estudiantil</option>
+            <option value="5">Administrador</option>
+          </select>
+        </div>
+    </div>
+  
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="carrera">Carrera del usuario</label>
+        <select name="carrera" id="carrera" formControlName="carrera" class="form-control">
+          <option *ngFor="let Carrera of Carreras" value={{Carrera.ID}}>{{Carrera.NAME}}</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="telefono">Telefono del usuario</label>
+        <input type="text" class="form-control" placeholder="Ingrese telefono del usuario" formControlName="telefono">
+      </div>
+    </div>
+  
+      
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="direccion">Direccion del usuario</label>
+        <input type="text" class="form-control" placeholder="Ingrese la direccion del usuario" formControlName="direccion">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="contrasena">Contraseña del usuario</label>
+        <input type="password" class="form-control" placeholder="Ingrese la contraseña del usuario" formControlName="contrasena">
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="submit" class="btn btn-primary" value="Eliminar">
+      <input type="button" class="btn btn-primary" (click)="BuscarUsuario()" value="Buscar">
+    </div>
+  </form>
+</div>
