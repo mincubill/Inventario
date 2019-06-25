@@ -8,6 +8,7 @@
 <div class="alert alert-success" role="alert" *ngIf="Agregado && Opcion == 2">Usuario actualizado exitosamente</div>
 <div class="alert alert-success" role="alert" *ngIf="Agregado && Opcion == 3">Usuario eliminado exitosamente</div>
 <div class="alert alert-danger" role="alert" *ngIf="Error">Ocurrio un error</div>
+<div class="alert alert-danger" role="alert" *ngIf="Invalido">Uno de los campos del formulario es incorrecto</div>
 
 <div class="crud-formulario" *ngIf="Opcion == 1">
   <h1>Agregar nuevo usuario</h1>

@@ -18,6 +18,7 @@ export class UsuarioComponent implements OnInit {
   Opcion : number;
   Agregado = false;
   Error = false;
+  Invalido = false;
 
   constructor( private http : HttpClient, private formBuilder : FormBuilder, public dialog : MatDialog ) { 
     this.Opcion = 1;/*Opciones: 1) Agregar  2) Actualizar   3) Eliminar*/
@@ -25,109 +26,124 @@ export class UsuarioComponent implements OnInit {
 
   ngOnInit() {
     this.AgregarUsuarioForm = this.formBuilder.group( {
-      rut: [''],
-      nombre: [''],
-      apellido: [''],
-      nombreUsuario: [''],
-      correo: [''],
-      tipoUsuario: [1],
-      carrera: [''],
-      telefono: [''],
-      direccion: [''],
-      contrasena: ['']
+      rut: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      apellido: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      nombreUsuario: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      correo: ['', [Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(255)]],
+      tipoUsuario: [1, [Validators.required, Validators.min(1), Validators.max(5)]],
+      carrera: ['', [Validators.required, Validators.min(0)]],
+      telefono: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
+      direccion: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      contrasena: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]]
     });
     this.ActualizarUsuarioForm = this.formBuilder.group( {
-      rut: [''],
-      nombre: [''],
-      apellido: [''],
-      nombreUsuario: [''],
-      correo: [''],
-      tipoUsuario: [1],
-      carrera: [''],
-      telefono: [''],
-      direccion: [''],
-      contrasena: ['']
+      rut: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      apellido: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      nombreUsuario: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      correo: ['', [Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(255)]],
+      tipoUsuario: [1, [Validators.required, Validators.min(1), Validators.max(5)]],
+      carrera: ['', [Validators.required, Validators.min(0)]],
+      telefono: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
+      direccion: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      contrasena: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]]
     });
     this.EliminarUsuarioForm = this.formBuilder.group( {
-      rut: [''],
-      nombre: [''],
-      apellido: [''],
-      nombreUsuario: [''],
-      correo: [''],
-      tipoUsuario: [1],
-      carrera: [''],
-      telefono: [''],
-      direccion: [''],
-      contrasena: ['']
+      rut: ['',[Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      apellido: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      nombreUsuario: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      correo: ['', [Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(255)]],
+      tipoUsuario: [1, [Validators.required, Validators.min(1), Validators.max(5)]],
+      carrera: ['', [Validators.required, Validators.min(0)]],
+      telefono: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
+      direccion: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      contrasena: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]]
     });
     this.CargarCarreras();
   }
 
   AgregarUsuario () {
-    this.http.post('http://127.0.0.1:3000/createUser', {
-      rut: this.AgregarUsuarioForm.controls.rut.value,
-      name: this.AgregarUsuarioForm.controls.nombre.value,
-      lastName:this.AgregarUsuarioForm.controls.apellido.value,
-      userName:this.AgregarUsuarioForm.controls.nombreUsuario.value,
-      mail: this.AgregarUsuarioForm.controls.correo.value,
-      type:this.AgregarUsuarioForm.controls.tipoUsuario.value,
-      career: this.AgregarUsuarioForm.controls.carrera.value,
-      phone: this.AgregarUsuarioForm.controls.telefono.value,
-      address:this.AgregarUsuarioForm.controls.direccion.value,
-      pass:this.AgregarUsuarioForm.controls.contrasena.value
-    }).subscribe( ( res : any ) => {
-      if( +res == 1 ) {
-        this.Agregado = true;
-        this.LimpiarCampos();
-      }
-      else {
+    if(!this.AgregarUsuarioForm.invalid) {
+      this.http.post('http://127.0.0.1:3000/createUser', {
+        rut: this.AgregarUsuarioForm.controls.rut.value,
+        name: this.AgregarUsuarioForm.controls.nombre.value,
+        lastName:this.AgregarUsuarioForm.controls.apellido.value,
+        userName:this.AgregarUsuarioForm.controls.nombreUsuario.value,
+        mail: this.AgregarUsuarioForm.controls.correo.value,
+        type:this.AgregarUsuarioForm.controls.tipoUsuario.value,
+        career: this.AgregarUsuarioForm.controls.carrera.value,
+        phone: this.AgregarUsuarioForm.controls.telefono.value,
+        address:this.AgregarUsuarioForm.controls.direccion.value,
+        pass:this.AgregarUsuarioForm.controls.contrasena.value
+      }).subscribe( ( res : any ) => {
+        if( +res == 1 ) {
+          this.Agregado = true;
+          this.LimpiarCampos();
+        }
+        else {
+          this.Error = true;
+        }
+      },
+      ( error ) => {
         this.Error = true;
-      }
-    },
-    ( error ) => {
-      this.Error = true;
-      console.log( error );
-    });
+        console.log( error );
+      });
+    }
+    else {
+      this.Invalido = true;
+    }
   }
 
   ActualizarUsuario () {
-    this.http.post('http://127.0.0.1:3000/updateUser', {
-      rut: this.ActualizarUsuarioForm.controls.rut.value,
-      name: this.ActualizarUsuarioForm.controls.nombre.value,
-      lastName:this.ActualizarUsuarioForm.controls.apellido.value,
-      userName:this.ActualizarUsuarioForm.controls.nombreUsuario.value,
-      mail: this.ActualizarUsuarioForm.controls.correo.value,
-      type:this.ActualizarUsuarioForm.controls.tipoUsuario.value,
-      career: this.ActualizarUsuarioForm.controls.carrera.value,
-      phone: this.ActualizarUsuarioForm.controls.telefono.value,
-      address:this.ActualizarUsuarioForm.controls.direccion.value,
-      pass:this.ActualizarUsuarioForm.controls.contrasena.value
-    }).subscribe( ( res : any ) => {
-      if( +res == 1 ) {
-        this.Agregado = true;
-        this.LimpiarCampos();
-      }
-    },
-    ( error ) => {
-      this.Error = true;
-      console.log( error );
-    });
+    if(!this.ActualizarUsuarioForm.invalid) {
+      this.http.post('http://127.0.0.1:3000/updateUser', {
+        rut: this.ActualizarUsuarioForm.controls.rut.value,
+        name: this.ActualizarUsuarioForm.controls.nombre.value,
+        lastName:this.ActualizarUsuarioForm.controls.apellido.value,
+        userName:this.ActualizarUsuarioForm.controls.nombreUsuario.value,
+        mail: this.ActualizarUsuarioForm.controls.correo.value,
+        type:this.ActualizarUsuarioForm.controls.tipoUsuario.value,
+        career: this.ActualizarUsuarioForm.controls.carrera.value,
+        phone: this.ActualizarUsuarioForm.controls.telefono.value,
+        address:this.ActualizarUsuarioForm.controls.direccion.value,
+        pass:this.ActualizarUsuarioForm.controls.contrasena.value
+      }).subscribe( ( res : any ) => {
+        if( +res == 1 ) {
+          this.Agregado = true;
+          this.LimpiarCampos();
+        }
+      },
+      ( error ) => {
+        this.Error = true;
+        console.log( error );
+      });
+    }
+    else {
+      this.Invalido = true;
+    }
   }
 
   EliminarUsuario() {
-    this.http.post('http://127.0.0.1:3000/updateStatusUser', {
-      rut: this.EliminarUsuarioForm.controls.rut.value,
-      status: 0
-    }).subscribe( ( res : any ) => {
-      if( +res == 1 ) {
-        this.Agregado = true;
-        this.LimpiarCampos();
-      }
-    },
-    ( error ) => {
-      this.Error = true;
-      console.log( error );
-    });
+    if(!this.EliminarUsuarioForm.invalid) {
+      this.http.post('http://127.0.0.1:3000/updateStatusUser', {
+        rut: this.EliminarUsuarioForm.controls.rut.value,
+        status: 0
+      }).subscribe( ( res : any ) => {
+        if( +res == 1 ) {
+          this.Agregado = true;
+          this.LimpiarCampos();
+        }
+      },
+      ( error ) => {
+        this.Error = true;
+        console.log( error );
+      });
+    }
+    else {
+      this.Invalido = true;
+    }
   }
 
   CambiarMenu( opcion : number) {

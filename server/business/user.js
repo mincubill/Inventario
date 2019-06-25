@@ -28,9 +28,7 @@ const createUser = function(req, res){
         address: req.body.address,
         pass: req.body.pass
     };
-    console.log(user);
     userDao.createUser(user).then((success) => {
-        console.log(success.toString());
         res.send(success.toString());
     }).catch((error) => {
         console.log(error);
@@ -65,7 +63,6 @@ const updateStatusUser = function(req, res){
         status: parseInt(req.body.status),
     };
     userDao.updateStatusUser(user).then((success) => {
-        console.log(success.toString());
         res.send(success.toString());
     }).catch((error) => {
         console.log(error);
@@ -79,7 +76,6 @@ const updatePrivilegeUser = function(req, res){
         type: paseInt(req.body.type),
     };
     userDao.updatePrivilegeUser(user).then((success) => {
-        console.log(success.toString());
         res.send(success.toString());
     }).catch((error) => {
         console.log(error);
@@ -101,7 +97,6 @@ const getUserByRut = function(req, res){
 
 const getUsers = function(req, res){
     userDao.getUsers().then((success) => {
-        console.log(success.toString());
         res.send(success.toString());
     }).catch((error) => {
         console.log(error);
