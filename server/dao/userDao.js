@@ -17,9 +17,9 @@ const login = function(userName, pass){
 
 
 const createUser = function(user){
-    let query = "select FN_CREATE_USER(?,?,?,?,?,?,?,?,?)";
+    let query = "select FN_CREATE_USER(?,?,?,?,?,?,?,?,?,?)";
     return new Promise((resolve, reject) => {
-        con.query(query, [user.rut,user.name,user,lastName,user.userName,user.mail,user.career,user.phone,user.address,user.pass], (error, result, fields) => {
+        con.query(query, [user.rut,user.name,user.lastName,user.userName,user.mail,user.type,user.career,user.phone,user.address,user.pass], (error, result, fields) => {
             if(error){
                 console.log(error);
                 reject(error);
@@ -32,9 +32,9 @@ const createUser = function(user){
 };
 
 const updateUser = function(user){
-    let query = "select FN_UPDATE_USER(?,?,?,?,?,?,?,?,?)";
+    let query = "select FN_UPDATE_USER(?,?,?,?,?,?,?,?,?,?)";
     return new Promise((resolve, reject) => {
-        con.query(query, [user.rut,user.name,user.userName,user.mail,user.career,user.phone,user.address,user.pass], (error, result, fields) => {
+        con.query(query, [user.rut,user.name,user.lastName,user.userName,user.mail,user.type,user.career,user.phone,user.address,user.pass], (error, result, fields) => {
             if(error){
                 console.log(error);
                 reject(error);
@@ -86,7 +86,7 @@ const getUserByRut = function(user){
                 reject(error);
                 return;
             }
-            resolve(result[0]);
+            resolve(result); 
         });
     });
 };
@@ -105,6 +105,20 @@ const getUsers = function(){
     });
 };
 
+const getCareers = function() {
+    let query = "select career.ID, career.NAME from career";
+    return new Promise( ( resolve, reject ) => {
+        con.query(query, ( error, result, fields) => {
+            if( error ) {
+                console.log( error );
+                reject( error );
+                return
+            }
+            resolve(result);
+        });
+    });
+}
+
 module.exports.login = login;
 module.exports.createUser = createUser;
 module.exports.updateUser = updateUser;
@@ -112,4 +126,5 @@ module.exports.updateStatusUser = updateStatusUser;
 module.exports.updatePrivilegeUser = updatePrivilegeUser;
 module.exports.getUserByRut = getUserByRut;
 module.exports.getUsers = getUsers;
+module.exports.getCareers = getCareers;
 

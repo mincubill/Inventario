@@ -14,10 +14,18 @@
           {{Producto.NAME}}
         </option>
     </select>
+    <div class="alert alert-danger" role="alert" *ngIf="IngresarStockForm.controls.producto.errors != null">
+      Campo obligatorio
+    </div>
+
     <label for="cantidad">
       Cantidad:
     </label>
     <input type="number"  class="form-control" formControlName="cantidad" name="cantidad" id="cantidad" min={{IngresarStockForm.controls.cantidad.value}} placeholder="Ingresar la nueva cantidad de stock del producto">
+    <div class="alert alert-danger" role="alert" *ngIf="IngresarStockForm.controls.cantidad.errors != null">
+      Campo obligatorio
+    </div>
+
     <br>
     <input type="submit" class="btn btn-warning" value="Guardar"> 
   </div>
