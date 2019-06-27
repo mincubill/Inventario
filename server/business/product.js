@@ -86,6 +86,35 @@ const getProductsByStorageStats = function (req, res) {
     });
 };
 
+
+const getProductsByStats = function (req, res) {
+    let storage = req.body.storage;
+    productDao.getProductsByStats(storage).then( (success) => {
+        res.send(success);
+    }).catch( (error) => {
+        console.log(error);
+    });
+};
+
+
+const getProductsWithLowStock = function (req, res) {
+    let storage = req.body.storage;
+    productDao.getProductsWithLowStock().then( (success) => {
+        res.send(success);
+    }).catch( (error) => {
+        console.log(error);
+    });
+};
+
+const getProductsWithLowStockByStorage = function (req, res) {
+    let storage = req.body.storage;
+    productDao.getProductsWithLowStockByStorage(storage).then( (success) => {
+        res.send(success);
+    }).catch( (error) => {
+        console.log(error);
+    });
+};
+
 module.exports.createProduct = createProduct;
 module.exports.updateProduct = updateProduct;
 module.exports.updateStatusProduct = updateStatusProduct;
@@ -93,5 +122,8 @@ module.exports.updateStockProduct = updateStockProduct;
 module.exports.getProducts = getProducts;
 module.exports.getProductsByStorage = getProductsByStorage;
 module.exports.getProductsByStorageStats = getProductsByStorageStats;
+module.exports.getProductsWithLowStock = getProductsWithLowStock;
+module.exports.getProductsWithLowStockByStorage = getProductsWithLowStockByStorage;
+module.exports.getProductsByStats = getProductsByStats;
 
 

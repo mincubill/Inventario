@@ -132,6 +132,20 @@ const getProductsByStorageStats = function ( storage ) {
     });
 };
 
+const getProductsByStats = function ( storage ) {
+    let query = "select product.ID, product.NAME, product.STOCK, product.AVAILABLESTOCK, movement.BORROWED from (select movement_body.PRODUCT_M as producto, sum(movement_body.QUANTITY) as BORROWED from movement_body join movement_header on movement_body.HEADER = movement_header.ID where movement_header.STATUS = 0 group by movement_body.PRODUCT_M) as movement RIGHT join (select product.ID as ID, product.NAME as NAME, product.STOCK as STOCK, product.AVAILABLESTOCK as AVAILABLESTOCK, product.STATUS as STATUS, product.STORE as STORE from product) as product on movement.producto = product.ID where product.STATUS = 1";
+    return new Promise( (resolve, reject) => {
+        con.query(query, [storage], (error, result, fields) => {
+            if(error) {
+                console.log(error);
+                reject(error);
+                return;
+            }
+            resolve(result);
+        });
+    });
+};
+
 const getProductsWithLowStock = function(){
     let query = "SELECT * FROM PRODUCT where stock < 5";
     return new Promise((resolve, reject) => {
@@ -169,4 +183,7 @@ module.exports.getProductsByStorage = getProductsByStorage;
 module.exports.getProductsByStorageStats = getProductsByStorageStats;
 module.exports.getProductById = getProductById;
 module.exports.updateAvailableStockProducts = updateAvailableStockProducts;
+module.exports.getProductsWithLowStock = getProductsWithLowStock;
+module.exports.getProductsWithLowStockByStorage = getProductsWithLowStockByStorage;
+module.exports.getProductsByStats = getProductsByStats;
 

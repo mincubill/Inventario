@@ -63,8 +63,20 @@ module.exports = function(app)
         product.getProductsByStorage(req, res);
     });
 
+    app.get("/getProductsWithLowStock", (req, res) => {
+        product.getProductsWithLowStock(req, res);
+    });
+
+    app.post("/getProductsWithLowStockByStorage", (req, res) => {
+        product.getProductsWithLowStockByStorage(req, res);
+    });
+
     app.post("/getProductsByStorageStats", (req, res) => {
         product.getProductsByStorageStats(req, res);
+    });
+
+    app.get("/getProductsByStats", (req, res) => {
+        product.getProductsByStats(req, res);
     });
 
     app.post("/createMovementHeader", (req, res) => {

@@ -16,20 +16,48 @@ export class VerProductoComponent implements OnInit {
   Productos = [];
   eliminado : boolean;
   error : boolean;
+  TipoUsuario = "";
   
   constructor(private router : Router, public dialog : MatDialog, private http : HttpClient)  {
 
   }
 
   ngOnInit() {
-    this.CargarProductos();
+    this.TipoUsuario = localStorage.getItem('type');
+    if(this.TipoUsuario == "3"){
+      this.CargarProductos();
+    }
+    else{
+      this.CargarProductosPorBodega()
+    }
   }
 
   CargarProductos () {
-    //Cambiar storage
+    this.http.get('http://127.0.0.1:3000/getProductsByStats')
+    .subscribe( ( res : any[] ) => {
+      this.Productos = res;
+      this.EliminarNull(this.Productos);
+    },
+    ( error ) => {
+      console.log( error );
+    });
+  }
+
+  CargarProductosPorBodega() {
+    let storage = 0;
+    if ( this.TipoUsuario  == "4" ){
+      storage = 1;
+    }
+    else if ( this.TipoUsuario  == "5"){
+      storage = 2;
+    }
+    else{
+      return;
+    }
     this.http.post('http://127.0.0.1:3000/getProductsByStorageStats', {
-      storage: 1
-    }).subscribe( ( res : any[] ) => {
+      storage: storage
+    })
+    .subscribe( ( res : any[] ) => {
       this.Productos = res;
       this.EliminarNull(this.Productos);
     },
