@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ChartModule } from 'angular-highcharts';
 // import { MatButtonModule, MatDialogModule } from '@angular/material';
 
 import { CustomMaterialModule } from './custom-material/custom-material.module';
@@ -51,7 +52,8 @@ import { UsuarioComponent } from './usuario/usuario.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     CustomMaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    ChartModule
   ],
   providers: [],
   entryComponents: [PopupComponent],
