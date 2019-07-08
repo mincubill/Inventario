@@ -31,5 +31,22 @@ const defaulter = function () {
     });
 };
 
+const activeLoans = function()
+{
+    let query = "SELECT DATE_FORMAT(DATE_BEGIN, '%d/%m/%Y') as FechaPedido, DATE_FORMAT(DATE_END, '%d/%m/%Y') as FechaTermino, USER_M as RutUsuario FROM movement_header WHERE STATUS = 0";
+    return new Promise( ( resolve, reject ) => {
+        con.query( query, ( error, result, fields ) => {
+            console.log(result);
+            if(error) {
+                console.log( error );
+                reject( error );
+                return;                
+            }
+            resolve(result); 
+        });
+    });
+};
+
 module.exports.loans = loans;
 module.exports.defaulter = defaulter;
+module.exports.activeLoans = activeLoans;

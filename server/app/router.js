@@ -114,4 +114,8 @@ module.exports = function(app)
     app.get("/defaulter", (req, res) => {
         stadistics.defaulter(req, res);
     });
+
+    app.get("/activeLoans", ( req, res ) => {
+        stadistics.activeLoans( req, res );
+    });
 }
