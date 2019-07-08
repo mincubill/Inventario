@@ -3,11 +3,11 @@ INSERT INTO CAREER VALUES(2,'ingenieria en administracio de recursos humanos');
 
 INSERT INTO USERS VALUES(18732997,'jorge corvalan','corvalan mendez','higlord','higlord@gmail.com',3,1,1,'+56985067877','andes 3755 casa 25','123');
 INSERT INTO USERS VALUES(19845227,'Ignacio','Donoso','iDonosof','nacho@correo.cl',3,1,1,'+569123456789','Algun lugar de maipu','asd123asd');
-INSERT INTO USERS VALUES(172187315,'Andres','Cubillos','mincubill','mincubill@gmail.com',3,1,1,'+5696666969','pora hi 123','123')
+INSERT INTO USERS VALUES(172187315,'Andres','Cubillos','mincubill','mincubill@gmail.com',3,1,1,'+5696666969','pora hi 123','123');
 INSERT INTO USERS VALUES(19954370,'Rigo','Manquel','ri.manquel','ri.manquel@gmail.com',3,1,1,'+56945047828','Portales','rigo1998');
 
-INSERT INTO PRODUCT (name,DESCRIPTION,STATUS,STOCK,price,STORE, AVAILABLESTOCK) VALUES ('pelota','es una pelota',1,10,30000,1 , 10);
-INSERT INTO PRODUCT (name,DESCRIPTION,STATUS,STOCK,price,STORE, AVAILABLESTOCK) VALUES ('pelota2','es una pelota',1,10,30000,1, 10);
+INSERT INTO PRODUCT (name,DESCRIPTION,STATUS,STOCK,price,STORE, AVAILABLESTOCK) VALUES ('pelota','es una pelota',1,20,30000,1 , 8);
+INSERT INTO PRODUCT (name,DESCRIPTION,STATUS,STOCK,price,STORE, AVAILABLESTOCK) VALUES ('pelota2','es una pelota',1,10,30000,1, 5);
 
 
 
