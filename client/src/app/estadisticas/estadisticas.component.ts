@@ -21,8 +21,7 @@ export class EstadisticasComponent implements OnInit {
     });
   }  
       
-  exportAsXLSX():void {  
-    console.log(this.excel)
+  exportAsXLSX(){
     this.service.exportAsExcelFile(this.excel, 'Pedidos Activos');  
   }
 
